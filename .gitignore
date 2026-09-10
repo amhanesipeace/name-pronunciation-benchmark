@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated audio + manifests (regenerate with run.py; can be large)
+outputs/
+outputs_*/
+
+# macOS
+.DS_Store

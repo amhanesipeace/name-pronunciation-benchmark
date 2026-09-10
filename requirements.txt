@@ -1,0 +1,7 @@
+# Python dependencies (pip)
+gTTS>=2.5            # Google Translate TTS (free, no API key, online)
+
+# --- System dependency (NOT pip-installable) ---
+# The 'espeak' engine calls the espeak-ng binary, which you install separately:
+#   macOS:          brew install espeak-ng
+#   Debian/Ubuntu:  sudo apt-get install espeak-ng
