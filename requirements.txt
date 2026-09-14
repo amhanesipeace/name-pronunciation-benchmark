@@ -1,6 +1,9 @@
 # Python dependencies (pip)
 gTTS>=2.5            # Google Translate TTS (free, no API key, online)
 
+# --- Scoring (heavier; only needed for score.py) ---
+faster-whisper>=1.0  # ASR back-transcription (CTranslate2; no torch/ffmpeg binary)
+
 # --- System dependency (NOT pip-installable) ---
 # The 'espeak' engine calls the espeak-ng binary, which you install separately:
 #   macOS:          brew install espeak-ng

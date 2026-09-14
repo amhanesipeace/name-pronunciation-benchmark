@@ -4,9 +4,9 @@ Measuring how accurately text-to-speech (TTS) systems pronounce personal names
 from African languages (**Yoruba, Igbo, Hausa**) compared to common **English**
 names — to surface and quantify bias in deployed speech systems.
 
-> **Status: v0.1 — synthesis only.** Right now the pipeline turns a small list
-> of names into audio with one TTS engine and records a manifest. Scoring
-> pronunciation accuracy comes later (see *Roadmap*).
+> **Status: v0.3 — synthesis + ASR scoring.** The pipeline synthesizes names
+> with a chosen TTS engine, records a manifest, and scores pronunciation by
+> transcribing the audio back with Whisper and comparing to the intended name.
 
 ## Why this matters
 
@@ -98,12 +98,45 @@ brew install espeak-ng          # macOS (needs Homebrew)
   back-transcription, phoneme distance vs IPA, human MOS ratings), the metric
   has its *own* biases — document and justify the choice.
 
+## Scoring
+
+```bash
+pip install faster-whisper                 # one-time (heavier dependency)
+python score.py --run outputs --model base # transcribe + score a synthesis run
+```
+
+Each clip is transcribed with Whisper and compared to the intended name via
+**Character Error Rate (CER)**; results are written to `<run>/scores.csv` and
+summarised per language.
+
+## Preliminary findings (v0.3, gTTS, English voice, n=16)
+
+| language | mean CER | exact-match rate |
+|----------|---------:|-----------------:|
+| english  | 0.00 | 100% |
+| hausa    | 0.14 | 50%  |
+| igbo     | 0.37 | 0%   |
+| yoruba   | 0.56 | 0%   |
+
+**English vs African CER gap: +0.36.** Every English name transcribed perfectly;
+no Yoruba or Igbo name did (e.g. *Oluwaseun* → "Alois Seyoon", *Folake* →
+"for locker"). Hausa scores better mostly because *Aisha*/*Ibrahim* are common
+globally. These are tiny-n, illustrative results — not yet a statistical claim.
+
+**Metric caveat.** ASR back-transcription mixes (1) TTS pronunciation quality and
+(2) how ASR-friendly the audio is. A clean English baseline (gTTS: 0.00) isolates
+the name-origin effect; a robotic voice (espeak-ng) inflates error for *all*
+names. Compare **within** an engine; treat the **gap** as more robust than
+absolute CER. Reference-based scoring (IPA / native-speaker) is the rigorous
+follow-up.
+
 ## Roadmap
 
 1. ✅ v0.1 — synthesis + manifest (gTTS)
 2. ✅ Second engine: espeak-ng (offline, deterministic, IPA-capable)
-3. Add reference pronunciations (IPA / native-speaker audio) to `data/names.csv`
-4. Scoring: transcribe synthesized audio (ASR) and/or phoneme-distance vs IPA
+3. ✅ Scoring v1: ASR back-transcription (Whisper) + CER, summarised by language
+4. Add reference pronunciations (IPA / native-speaker audio) to `data/names.csv`
 5. Analysis: per-language accuracy gaps + statistics + charts
 6. Expand the dataset (more names, balanced per language) with sources cited
+7. Add more engines (Coqui neural; cloud APIs for real deployed systems)
 ```
