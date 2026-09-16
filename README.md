@@ -4,9 +4,10 @@ Measuring how accurately text-to-speech (TTS) systems pronounce personal names
 from African languages (**Yoruba, Igbo, Hausa**) compared to common **English**
 names — to surface and quantify bias in deployed speech systems.
 
-> **Status: v0.3 — synthesis + ASR scoring.** The pipeline synthesizes names
-> with a chosen TTS engine, records a manifest, and scores pronunciation by
-> transcribing the audio back with Whisper and comparing to the intended name.
+> **Status: v0.4 — synthesis + ASR scoring + analysis.** The pipeline
+> synthesizes names with a chosen TTS engine, records a manifest, scores
+> pronunciation by transcribing the audio back with Whisper, and aggregates the
+> results into per-language statistics and a chart.
 
 ## Why this matters
 
@@ -109,7 +110,20 @@ Each clip is transcribed with Whisper and compared to the intended name via
 **Character Error Rate (CER)**; results are written to `<run>/scores.csv` and
 summarised per language.
 
-## Preliminary findings (v0.3, gTTS, English voice, n=16)
+## Analysis
+
+```bash
+pip install matplotlib
+python analyze.py --scores outputs/scores.csv --out outputs/analysis \
+                  --title "gTTS (English voice)"
+```
+
+Aggregates a `scores.csv` into per-language statistics (`summary.csv`) and a bar
+chart of mean CER by language (`cer_by_language.png`).
+
+## Preliminary findings (v0.4, gTTS, English voice, n=16)
+
+![Mean CER by name language](docs/cer_by_language.png)
 
 | language | mean CER | exact-match rate |
 |----------|---------:|-----------------:|
@@ -135,8 +149,8 @@ follow-up.
 1. ✅ v0.1 — synthesis + manifest (gTTS)
 2. ✅ Second engine: espeak-ng (offline, deterministic, IPA-capable)
 3. ✅ Scoring v1: ASR back-transcription (Whisper) + CER, summarised by language
-4. Add reference pronunciations (IPA / native-speaker audio) to `data/names.csv`
-5. Analysis: per-language accuracy gaps + statistics + charts
+4. ✅ Analysis: per-language stats + bar chart (`analyze.py`)
+5. Add reference pronunciations (IPA / native-speaker audio) to `data/names.csv`
 6. Expand the dataset (more names, balanced per language) with sources cited
 7. Add more engines (Coqui neural; cloud APIs for real deployed systems)
 ```
