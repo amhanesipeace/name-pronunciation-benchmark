@@ -4,10 +4,10 @@ Measuring how accurately text-to-speech (TTS) systems pronounce personal names
 from African languages (**Yoruba, Igbo, Hausa**) compared to common **English**
 names — to surface and quantify bias in deployed speech systems.
 
-> **Status: v0.4 — synthesis + ASR scoring + analysis.** The pipeline
-> synthesizes names with a chosen TTS engine, records a manifest, scores
-> pronunciation by transcribing the audio back with Whisper, and aggregates the
-> results into per-language statistics and a chart.
+> **Status: v0.5 — 80-name dataset + full pipeline.** 20 names per language
+> (English/Yoruba/Igbo/Hausa). The pipeline synthesizes with a chosen TTS
+> engine, records a manifest, scores pronunciation via Whisper back-
+> transcription, and aggregates the results into per-language stats and a chart.
 
 ## Why this matters
 
@@ -86,6 +86,10 @@ brew install espeak-ng          # macOS (needs Homebrew)
 
 - **Names are people.** Use common given names or documented name lists, and
   cite their source. Do **not** target or profile private individuals.
+  **Provenance of the current dataset:** the 80 names are common given names
+  compiled from general knowledge (not a cited corpus) and are *not yet*
+  validated by native speakers. Before any publication, replace/verify them with
+  a documented source and native-speaker review of spellings and diacritics.
 - **Ground truth needs native speakers.** Scoring "correct" pronunciation
   requires a reference (IPA and/or native-speaker recordings). Source this with
   the **informed consent and credit** of native speakers; treat it as human-
@@ -121,21 +125,26 @@ python analyze.py --scores outputs/scores.csv --out outputs/analysis \
 Aggregates a `scores.csv` into per-language statistics (`summary.csv`) and a bar
 chart of mean CER by language (`cer_by_language.png`).
 
-## Preliminary findings (v0.4, gTTS, English voice, n=16)
+## Preliminary findings (v0.5, gTTS, English voice, n=80 — 20 per language)
 
 ![Mean CER by name language](docs/cer_by_language.png)
 
 | language | mean CER | exact-match rate |
 |----------|---------:|-----------------:|
-| english  | 0.00 | 100% |
-| hausa    | 0.14 | 50%  |
-| igbo     | 0.37 | 0%   |
-| yoruba   | 0.56 | 0%   |
+| english  | 0.01 | 95% |
+| igbo     | 0.32 | 15% |
+| yoruba   | 0.37 | 10% |
+| hausa    | 0.42 | 25% |
 
-**English vs African CER gap: +0.36.** Every English name transcribed perfectly;
-no Yoruba or Igbo name did (e.g. *Oluwaseun* → "Alois Seyoon", *Folake* →
-"for locker"). Hausa scores better mostly because *Aisha*/*Ibrahim* are common
-globally. These are tiny-n, illustrative results — not yet a statistical claim.
+**English vs African CER gap: +0.36** (stable across the n=16 and n=80 runs).
+English names transcribe almost perfectly; African names show 30–40× higher
+error (e.g. *Oluwaseun* → "Alois Seyoon", *Folake* → "for locker").
+
+**Why the bigger sample mattered:** at n=16, Hausa looked *better* (0.14) than
+Igbo/Yoruba — but that small sample was dominated by globally-common pan-Islamic
+names (*Aisha*, *Ibrahim*). At n=80 the effect washes out and Hausa is 0.42.
+A textbook case of small-sample bias, and the reason for expanding the dataset.
+Still preliminary (n=80, one engine) — not yet a formal statistical claim.
 
 **Metric caveat.** ASR back-transcription mixes (1) TTS pronunciation quality and
 (2) how ASR-friendly the audio is. A clean English baseline (gTTS: 0.00) isolates
@@ -150,7 +159,8 @@ follow-up.
 2. ✅ Second engine: espeak-ng (offline, deterministic, IPA-capable)
 3. ✅ Scoring v1: ASR back-transcription (Whisper) + CER, summarised by language
 4. ✅ Analysis: per-language stats + bar chart (`analyze.py`)
-5. Add reference pronunciations (IPA / native-speaker audio) to `data/names.csv`
-6. Expand the dataset (more names, balanced per language) with sources cited
+5. ✅ Expand the dataset to 80 names (20 per language, balanced)
+6. Add reference pronunciations (IPA / native-speaker audio) + cite name sources
 7. Add more engines (Coqui neural; cloud APIs for real deployed systems)
+8. Statistical testing (e.g. significance of the per-language gap)
 ```
