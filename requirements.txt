@@ -6,6 +6,7 @@ faster-whisper>=1.0  # ASR back-transcription (CTranslate2; no torch/ffmpeg bina
 
 # --- Analysis (only needed for analyze.py) ---
 matplotlib>=3.8      # per-language bar charts
+scipy>=1.11          # Mann-Whitney U significance test
 
 # --- System dependency (NOT pip-installable) ---
 # The 'espeak' engine calls the espeak-ng binary, which you install separately:

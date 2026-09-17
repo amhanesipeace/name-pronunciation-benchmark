@@ -13,6 +13,7 @@ import csv
 from pathlib import Path
 
 from ttsbench.analyze import load_scores, summarize, plot_cer_by_language
+from ttsbench.stats import english_vs_african, per_language_vs_english
 
 
 def main():
@@ -41,15 +42,38 @@ def main():
     chart_path = plot_cer_by_language(summary, args.out / "cer_by_language.png",
                                      args.title)
 
-    eng = next((s for s in summary if s["language"] == "english"), None)
-    afr = [s for s in summary if s["language"] != "english"]
-    if eng and afr:
-        afr_mean = sum(s["mean_cer"] for s in afr) / len(afr)
-        print(f"\nEnglish mean CER {eng['mean_cer']:.2f} vs African "
-              f"{afr_mean:.2f}  (gap {afr_mean - eng['mean_cer']:+.2f})")
+    # --- Statistical significance ---------------------------------------
+    rows = load_scores(args.scores)
+    lines = ["Statistical test: African vs English name CER",
+             "(Mann-Whitney U, one-sided African>English; Cliff's delta effect size)",
+             ""]
+    overall = english_vs_african(rows)
+    if overall:
+        lines += [
+            f"English:  n={overall['english_n']:>3}  median CER={overall['english_median']:.3f}",
+            f"African:  n={overall['african_n']:>3}  median CER={overall['african_median']:.3f}",
+            f"Mann-Whitney U={overall['U']:.0f}  p={overall['p']:.2e}",
+            f"Cliff's delta={overall['cliffs_delta']:+.3f} ({overall['effect']} effect)",
+            "",
+            "Per-language vs English (Holm-corrected):",
+        ]
+        for r in per_language_vs_english(rows):
+            sig = "significant" if r["p_holm"] < 0.05 else "n.s."
+            lines.append(
+                f"  {r['language']:8} n={r['n']:>3} median={r['median']:.3f}  "
+                f"p={r['p']:.2e}  p_holm={r['p_holm']:.2e}  "
+                f"delta={r['cliffs_delta']:+.3f} ({r['effect']}, {sig})")
+    else:
+        lines.append("Not enough data (need both English and non-English names).")
+
+    report = "\n".join(lines)
+    print("\n" + report)
+    stats_path = args.out / "stats.txt"
+    stats_path.write_text(report + "\n", encoding="utf-8")
 
     print(f"\nSummary: {summary_path}")
     print(f"Chart:   {chart_path}")
+    print(f"Stats:   {stats_path}")
 
 
 if __name__ == "__main__":

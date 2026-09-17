@@ -144,7 +144,22 @@ error (e.g. *Oluwaseun* → "Alois Seyoon", *Folake* → "for locker").
 Igbo/Yoruba — but that small sample was dominated by globally-common pan-Islamic
 names (*Aisha*, *Ibrahim*). At n=80 the effect washes out and Hausa is 0.42.
 A textbook case of small-sample bias, and the reason for expanding the dataset.
-Still preliminary (n=80, one engine) — not yet a formal statistical claim.
+
+### Statistical significance
+
+CER is bounded and skewed, so we use the non-parametric **Mann-Whitney U** test
+(with **Cliff's delta** as a distribution-free effect size). African-name CER is
+significantly higher than English-name CER:
+
+- **Overall** (African n=60 vs English n=20): U=1094, **p ≈ 9.2×10⁻⁹**,
+  Cliff's **δ = +0.82 (large)**.
+- **Per language vs English** (Holm-corrected): Yoruba (δ=+0.89), Igbo (δ=+0.84),
+  and Hausa (δ=+0.74) are each significantly worse — all **p_holm ≤ 3.6×10⁻⁶**,
+  all **large** effects.
+
+Reproduce with `python analyze.py` (writes `outputs/analysis/stats.txt`).
+Caveat: this is one engine (gTTS) and one ASR scorer; it establishes the gap for
+*this* pipeline, not a universal claim across all TTS systems.
 
 **Metric caveat.** ASR back-transcription mixes (1) TTS pronunciation quality and
 (2) how ASR-friendly the audio is. A clean English baseline (gTTS: 0.00) isolates
@@ -160,7 +175,7 @@ follow-up.
 3. ✅ Scoring v1: ASR back-transcription (Whisper) + CER, summarised by language
 4. ✅ Analysis: per-language stats + bar chart (`analyze.py`)
 5. ✅ Expand the dataset to 80 names (20 per language, balanced)
-6. Add reference pronunciations (IPA / native-speaker audio) + cite name sources
-7. Add more engines (Coqui neural; cloud APIs for real deployed systems)
-8. Statistical testing (e.g. significance of the per-language gap)
+6. ✅ Statistical testing: Mann-Whitney U + Cliff's delta, Holm-corrected
+7. Add reference pronunciations (IPA / native-speaker audio) + cite name sources
+8. Add more engines (Coqui neural; cloud APIs for real deployed systems)
 ```
