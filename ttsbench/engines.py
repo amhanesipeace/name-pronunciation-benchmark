@@ -150,8 +150,78 @@ class EspeakNgEngine(TTSEngine):
         return meta
 
 
+class MMSTTSEngine(TTSEngine):
+    """Meta's MMS-TTS — a modern, open, neural (VITS) multilingual synthesizer,
+    run locally via Hugging Face transformers.
+
+    Why add this:
+      + a REAL modern neural TTS (the kind shipping in today's products),
+        unlike espeak's formant synthesis
+      + fully open, no API key, runs offline on CPU once the model is cached
+      + Meta ships per-language models — incl. Yoruba/Igbo/Hausa — so the same
+        engine can later test NATIVE-language voices, a whole new axis
+
+    For an apples-to-apples comparison with the other engines, v0.x uses the
+    ENGLISH model (facebook/mms-tts-eng) on every name.
+    """
+
+    name = "mms"
+    audio_ext = "wav"
+
+    # Map a language (code or full name) to an MMS model id. Meta ships models
+    # for the exact languages this benchmark studies, enabling a native-voice
+    # comparison: does a model built FOR the language pronounce its own names?
+    MODELS = {
+        "en": "facebook/mms-tts-eng", "english": "facebook/mms-tts-eng",
+        "yo": "facebook/mms-tts-yor", "yoruba": "facebook/mms-tts-yor",
+        "ig": "facebook/mms-tts-ibo", "igbo": "facebook/mms-tts-ibo",
+        "ha": "facebook/mms-tts-hau", "hausa": "facebook/mms-tts-hau",
+    }
+
+    def __init__(self, lang: str = "en", model_id: str | None = None):
+        self.lang = lang
+        self.model_id = model_id or self.MODELS.get(lang, "facebook/mms-tts-eng")
+        self._model = None
+        self._tokenizer = None
+
+    def _load(self):
+        # Loaded lazily and cached on the instance (first call downloads weights).
+        if self._model is None:
+            from transformers import VitsModel, AutoTokenizer
+            self._model = VitsModel.from_pretrained(self.model_id)
+            self._tokenizer = AutoTokenizer.from_pretrained(self.model_id)
+
+    def synthesize(self, text: str, out_path: Path) -> None:
+        import numpy as np
+        import torch
+        from scipy.io.wavfile import write as wav_write
+
+        self._load()
+        inputs = self._tokenizer(text, return_tensors="pt")
+        with torch.no_grad():
+            waveform = self._model(**inputs).waveform.squeeze().cpu().numpy()
+        # normalise float waveform to 16-bit PCM
+        peak = max(1e-9, float(np.max(np.abs(waveform))))
+        audio = (waveform / peak * 32767).astype(np.int16)
+        wav_write(str(out_path), self._model.config.sampling_rate, audio)
+
+    @property
+    def version(self) -> str:
+        try:
+            from importlib.metadata import version
+            return f"mms-tts (transformers {version('transformers')})"
+        except Exception:
+            return "mms-tts"
+
+    def describe(self) -> dict:
+        meta = super().describe()
+        meta.update({"tts_lang": self.lang, "model_id": self.model_id})
+        return meta
+
+
 # Registry so the CLI can select an engine by name. Add new engines here.
 ENGINES = {
     "gtts": GTTSEngine,
     "espeak": EspeakNgEngine,
+    "mms": MMSTTSEngine,
 }

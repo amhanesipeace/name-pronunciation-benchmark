@@ -8,6 +8,10 @@ faster-whisper>=1.0  # ASR back-transcription (CTranslate2; no torch/ffmpeg bina
 matplotlib>=3.8      # per-language bar charts
 scipy>=1.11          # Mann-Whitney U significance test
 
+# --- Neural engine (the 'mms' engine; heavy: pulls PyTorch) ---
+transformers>=4.40   # Meta MMS-TTS (VITS) via Hugging Face
+torch>=2.2
+
 # --- System dependency (NOT pip-installable) ---
 # The 'espeak' engine calls the espeak-ng binary, which you install separately:
 #   macOS:          brew install espeak-ng

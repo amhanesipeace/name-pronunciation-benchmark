@@ -1,0 +1,91 @@
+# Findings: how three open TTS systems handle African names
+
+*A preliminary study from the [name-pronunciation fairness benchmark](README.md).*
+*All numbers are from n=80 names (20 each: English, Yoruba, Igbo, Hausa),
+scored by Whisper back-transcription. Preliminary — one ASR scorer, small n.*
+
+## TL;DR
+
+1. **The mainstream system is measurably biased.** Google's gTTS pronounces
+   English names almost perfectly (CER 0.01) but African names far worse
+   (0.37) — a gap that is **statistically significant and large**
+   (Mann-Whitney p ≈ 9×10⁻⁹, Cliff's δ = +0.82).
+2. **"Newer/neural" does not mean "fairer" — and naive benchmarking hides that.**
+   Meta's neural MMS model scored *badly on everything*, including English
+   (0.87), so its gap looks tiny (+0.04, not significant). That is a **metric
+   artifact**, not fairness: MMS mumbles isolated names. Reading the small gap
+   as "fair" would be wrong.
+3. **Coverage gaps come before pronunciation.** Meta's "massively multilingual"
+   MMS ships Yoruba and Hausa TTS voices but **no Igbo voice at all**
+   (`facebook/mms-tts-ibo` does not exist). Some languages are excluded before
+   quality is even a question.
+
+![Engine comparison](docs/engine_comparison.png)
+
+## Method
+
+Each name is (1) synthesized with a TTS engine's **English** voice (so engines
+are compared on equal footing), (2) transcribed back with Whisper (`base`), and
+(3) scored by **Character Error Rate (CER)** between the intended name and the
+transcription. Per-language means are compared with the non-parametric
+**Mann-Whitney U** test and **Cliff's delta** effect size (see
+[README](README.md#statistical-significance)).
+
+**Why back-transcription:** if a TTS mispronounces a name, an English recognizer
+cannot recover it. It needs no human ground truth. **Its limitation** (central to
+these findings): it conflates *pronunciation quality* with *how ASR-friendly the
+audio is*, so it is only interpretable when the engine has a clean English
+baseline.
+
+## Results (English voice, n=80)
+
+| engine | English CER | African CER | gap | interpretable? |
+|--------|------------:|------------:|----:|----------------|
+| **gTTS** (Google) | **0.01** | 0.37 | **+0.36** | ✅ clean baseline → gap is real (p≈9e-9, δ=+0.82 large) |
+| **espeak-ng** (formant) | 0.64 | 0.90 | +0.26 | ⚠️ robotic audio inflates the baseline |
+| **MMS** (neural) | 0.87 | 0.90 | +0.04 | ❌ baseline saturated → gap uninformative |
+
+Per language (mean CER): gTTS — Igbo 0.32, Yoruba 0.37, Hausa 0.42.
+
+## The methodological lesson (the real result)
+
+**You cannot compare fairness across engines by comparing gap sizes.** An engine
+whose audio the ASR can barely read (espeak, MMS) pushes *every* name toward the
+error ceiling, shrinking the apparent gap. The gap is only meaningful relative to
+each engine's own English baseline:
+
+- gTTS: baseline 0.01 → the +0.36 gap is a genuine, large disparity.
+- MMS: baseline 0.87 → a +0.04 gap says nothing about fairness, only that the
+  metric is saturated.
+
+A benchmark that ignored this would have proudly (and wrongly) reported "the
+modern neural model is unbiased." Catching the confound is the point.
+
+## Native-voice observation (qualitative)
+
+MMS ships per-language voices (`mms-tts-yor`, `mms-tts-hau`; **no** `mms-tts-ibo`).
+Informal listening suggests the native models render their own names far more
+naturally than the English model does. But this axis **cannot** be scored with an
+English ASR — the honest evaluation is **native-speaker judgement**, which is the
+proper (and ethically correct) next step.
+
+## Limitations
+
+- One ASR scorer (Whisper `base`); ASR has its own biases folded into the metric.
+- Small n (20/language); results are illustrative, not a population claim.
+- Names are a general-knowledge list, **not** native-speaker validated (see
+  README ethics). Spellings/diacritics need review.
+- One English voice per engine; commercial systems (Polly, Azure, Google Cloud,
+  ElevenLabs — the ones actually in assistants/screen readers) are untested.
+
+## Reproduce
+
+```bash
+pip install -r requirements.txt        # includes gTTS, faster-whisper, matplotlib, scipy
+# transformers + torch for the neural (MMS) engine; espeak-ng binary for espeak
+for eng in gtts espeak mms; do
+  python run.py   --engine $eng --out outputs_$eng
+  python score.py --run outputs_$eng --model base
+  python analyze.py --scores outputs_$eng/scores.csv --out outputs_$eng/analysis
+done
+```

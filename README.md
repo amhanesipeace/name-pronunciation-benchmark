@@ -4,10 +4,14 @@ Measuring how accurately text-to-speech (TTS) systems pronounce personal names
 from African languages (**Yoruba, Igbo, Hausa**) compared to common **English**
 names — to surface and quantify bias in deployed speech systems.
 
-> **Status: v0.5 — 80-name dataset + full pipeline.** 20 names per language
-> (English/Yoruba/Igbo/Hausa). The pipeline synthesizes with a chosen TTS
-> engine, records a manifest, scores pronunciation via Whisper back-
-> transcription, and aggregates the results into per-language stats and a chart.
+> **Status: v0.7 — three engines + write-up.** 80 names (20 per language). The
+> pipeline synthesizes with a chosen TTS engine (gTTS, espeak-ng, or Meta's
+> neural MMS), scores pronunciation via Whisper back-transcription, and
+> aggregates into per-language stats, a chart, and significance tests.
+
+📄 **[Read the findings write-up →](FINDINGS.md)** — gTTS shows a large,
+significant bias against African names; "neural" MMS is not fairer (its metric
+just saturates); and MMS ships **no Igbo voice at all**.
 
 ## Why this matters
 
@@ -48,8 +52,10 @@ file. Use a separate `--out` dir per engine to keep runs side by side.
 |----|------------------|------|---------|--------------|-------|
 | `gtts`   | gTTS (pip)          | no | no  | weak   | real Google system; unofficial endpoint |
 | `espeak` | espeak-ng (binary)  | no | yes | strong | deterministic; can emit IPA phonemes |
+| `mms`    | transformers (pip)  | no | yes | strong | Meta MMS-TTS neural model; per-language voices (yor/hau; **no** ibo) |
 
-Install the espeak-ng binary separately (it is not pip-installable):
+The `mms` engine pulls PyTorch (heavy). Install the espeak-ng binary separately
+(it is not pip-installable):
 
 ```bash
 brew install espeak-ng          # macOS (needs Homebrew)
