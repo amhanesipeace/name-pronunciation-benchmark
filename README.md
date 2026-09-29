@@ -128,6 +128,35 @@ Each clip is transcribed with Whisper and compared to the intended name via
 **Character Error Rate (CER)**; results are written to `<run>/scores.csv` and
 summarised per language.
 
+## Phoneme scoring (ASR-independent) — experimental
+
+```bash
+pip install allosaurus av
+python phoneme_score.py --run outputs --names data/names.csv   # isolated-name run
+```
+
+The CER metric depends on an English **word** recogniser. This layer instead
+reads **phones directly from the audio** with a universal phoneme recogniser
+([allosaurus](https://github.com/xinjli/allosaurus)) — no word-level ASR — and
+measures a **Phoneme Error Rate (PER)** against a reference in the `ipa` column
+(`ttsbench/phonemes.py`).
+
+**Two honest limitations found while building it** (this is infrastructure, not
+yet a headline result):
+
+1. **No reference for the target languages.** espeak-ng has no Yoruba/Igbo/Hausa
+   voices, so references can't be auto-generated. English references are provided
+   (espeak-en G2P); African-name references require **native-speaker validation**
+   before PER is meaningful — the tool consumes them the moment they exist.
+2. **The universal recogniser is noisy on short single-word clips** (e.g. it may
+   reduce *James* to a couple of phones), so PER is currently dominated by
+   recogniser error, not pronunciation quality. Longer, carrier-phrase audio may
+   help — a promising direction, not a solved metric.
+
+So the value here is a **reproducible, ASR-independent phoneme pipeline** ready
+for native-speaker references, plus a documented, honest account of why
+phoneme-level bias measurement is genuinely hard.
+
 ## Analysis
 
 ```bash
