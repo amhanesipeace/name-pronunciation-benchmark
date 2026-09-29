@@ -19,8 +19,36 @@ scored by Whisper back-transcription. Preliminary — one ASR scorer, small n.*
    MMS ships Yoruba and Hausa TTS voices but **no Igbo voice at all**
    (`facebook/mms-tts-ibo` does not exist). Some languages are excluded before
    quality is even a question.
+4. **A fairer test unmasks hidden bias.** Evaluating names inside a **carrier
+   sentence** ("My name is X.") removes the isolated-word saturation. The neural
+   engine's fake "no gap" (§2) becomes a **large, significant gap** (English
+   0.21 vs African 0.61, Cliff's δ = +0.70, p ≈ 1.5×10⁻⁶) — the bias was real
+   all along, just hidden by the naive metric.
 
 ![Engine comparison](docs/engine_comparison.png)
+
+## Carrier-sentence result — the methodology matters
+
+Speaking each name inside "My name is **X**." (instead of in isolation) lets
+neural engines produce natural connected speech, fixing the saturation from §2.
+
+![Carrier effect](docs/carrier_effect.png)
+
+| engine | condition | English CER | African CER | gap | significance |
+|--------|-----------|------------:|------------:|----:|--------------|
+| gTTS | isolated | 0.01 | 0.37 | +0.36 | δ=+0.82, p≈9e-9 |
+| gTTS | +carrier | 0.01 | 0.24 | +0.24 | δ=+0.75, p≈1e-7 |
+| MMS  | isolated | 0.87 | 0.90 | +0.04 | *not sig. (saturated)* |
+| MMS  | +carrier | 0.21 | 0.61 | **+0.40** | **δ=+0.70, p≈1.5e-6** |
+
+**Takeaways:**
+- **The bias is robust**, not a scoring artifact: gTTS stays significantly biased
+  even with the fairer carrier test (African error drops as context helps, but
+  the gap persists).
+- **The neural engine is biased too** — and only the carrier test could show it.
+  Its isolated-word "no gap" was a measurement failure, not fairness. This is the
+  clearest lesson of the study: *how you evaluate determines whether you can even
+  see the bias.*
 
 ## Method
 
