@@ -7,6 +7,7 @@ else in the pipeline changes.
 """
 from __future__ import annotations
 
+import os
 from abc import ABC, abstractmethod
 from pathlib import Path
 
@@ -219,9 +220,65 @@ class MMSTTSEngine(TTSEngine):
         return meta
 
 
+class ElevenLabsEngine(TTSEngine):
+    """ElevenLabs — a leading commercial neural TTS (the kind embedded in real
+    products), via its REST API.
+
+    Requires an API key in the ``ELEVENLABS_API_KEY`` environment variable
+    (free tier available at https://elevenlabs.io). Benchmarking a *commercial,
+    deployed* system is the most real-world-relevant bias test — these are the
+    voices people actually hear.
+
+    Config via env (all optional except the key):
+      ELEVENLABS_API_KEY   your key (required)
+      ELEVENLABS_VOICE_ID  voice to use (default: Rachel, a stock English voice)
+      ELEVENLABS_MODEL_ID  model (default: eleven_multilingual_v2)
+    """
+
+    name = "elevenlabs"
+    audio_ext = "mp3"
+    API = "https://api.elevenlabs.io/v1/text-to-speech"
+
+    def __init__(self, lang: str = "en",
+                 voice_id: str | None = None, model_id: str | None = None):
+        self.lang = lang
+        self.api_key = os.environ.get("ELEVENLABS_API_KEY", "")
+        self.voice_id = voice_id or os.environ.get(
+            "ELEVENLABS_VOICE_ID", "21m00Tcm4TlvDq8ikWAM")  # "Rachel"
+        self.model_id = model_id or os.environ.get(
+            "ELEVENLABS_MODEL_ID", "eleven_multilingual_v2")
+
+    def synthesize(self, text: str, out_path: Path) -> None:
+        import requests
+        if not self.api_key:
+            raise RuntimeError(
+                "ELEVENLABS_API_KEY is not set. Get a key at elevenlabs.io and "
+                "export ELEVENLABS_API_KEY=... before running this engine.")
+        resp = requests.post(
+            f"{self.API}/{self.voice_id}",
+            headers={"xi-api-key": self.api_key,
+                     "Content-Type": "application/json"},
+            json={"text": text, "model_id": self.model_id},
+            timeout=30,
+        )
+        resp.raise_for_status()
+        out_path.write_bytes(resp.content)
+
+    @property
+    def version(self) -> str:
+        return f"elevenlabs ({self.model_id})"
+
+    def describe(self) -> dict:
+        meta = super().describe()
+        meta.update({"tts_lang": self.lang, "voice_id": self.voice_id,
+                     "model_id": self.model_id})
+        return meta
+
+
 # Registry so the CLI can select an engine by name. Add new engines here.
 ENGINES = {
     "gtts": GTTSEngine,
     "espeak": EspeakNgEngine,
     "mms": MMSTTSEngine,
+    "elevenlabs": ElevenLabsEngine,
 }

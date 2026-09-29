@@ -63,6 +63,7 @@ in the manifest) and isolates the name region before measuring error.
 | `gtts`   | gTTS (pip)          | no | no  | weak   | real Google system; unofficial endpoint |
 | `espeak` | espeak-ng (binary)  | no | yes | strong | deterministic; can emit IPA phonemes |
 | `mms`    | transformers (pip)  | no | yes | strong | Meta MMS-TTS neural model; per-language voices (yor/hau; **no** ibo) |
+| `elevenlabs` | ElevenLabs REST | **yes** | no | versioned | commercial neural TTS (a real product voice); set `ELEVENLABS_API_KEY` |
 
 The `mms` engine pulls PyTorch (heavy). Install the espeak-ng binary separately
 (it is not pip-installable):
