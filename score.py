@@ -14,7 +14,8 @@ from collections import defaultdict
 from pathlib import Path
 from statistics import mean
 
-from ttsbench.scoring import Transcriber, char_error_rate, normalize
+from ttsbench.scoring import (Transcriber, char_error_rate, normalize,
+                              strip_carrier)
 
 
 def main():
@@ -36,7 +37,10 @@ def main():
     scored = []
     for r in rows:
         audio = args.run / r["audio_path"]
-        heard = transcriber.transcribe(audio)
+        heard_full = transcriber.transcribe(audio)
+        # If a carrier sentence was used, isolate the name region before scoring.
+        carrier = r.get("carrier", "")
+        heard = strip_carrier(heard_full, carrier) if carrier else heard_full
         cer = char_error_rate(r["name"], heard)
         match = int(normalize(heard) == normalize(r["name"]))
         scored.append({

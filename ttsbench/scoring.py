@@ -30,6 +30,23 @@ def normalize(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", text.lower())
 
 
+def strip_carrier(transcription: str, carrier: str) -> str:
+    """Remove the carrier words from an ASR transcription, leaving the name.
+
+    Given carrier ``"My name is {name}."`` and a heard sentence like
+    ``"My name is Oluwaseon."`` this returns ``"Oluwaseon"``. It drops any
+    leading/trailing words that belong to the carrier template, so what remains
+    is the recognised name region, which we then score against the target.
+    """
+    carrier_words = {re.sub(r"[^a-z0-9]", "", w.lower())
+                     for w in carrier.replace("{name}", " ").split()}
+    carrier_words.discard("")
+    words = [w for w in re.split(r"\s+", transcription.strip()) if w]
+    kept = [w for w in words
+            if re.sub(r"[^a-z0-9]", "", w.lower()) not in carrier_words]
+    return " ".join(kept).strip()
+
+
 def edit_distance(a: str, b: str) -> int:
     """Levenshtein edit distance (min single-char insert/delete/substitute edits
     to turn `a` into `b`). Classic dynamic-programming implementation, no deps."""

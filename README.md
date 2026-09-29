@@ -41,10 +41,18 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python run.py                              # gTTS, English voice
 python run.py --engine espeak --out outputs_espeak   # espeak-ng (needs the binary)
+python run.py --engine mms --carrier --out outputs_mms_carrier   # carrier sentence
 ```
 
 Outputs land in `outputs/audio/*` with `outputs/manifest.csv` describing every
 file. Use a separate `--out` dir per engine to keep runs side by side.
+
+**Carrier sentences** (`--carrier`): speak each name inside a sentence
+(`"My name is {name}."`) instead of in isolation. Neural engines (e.g. MMS) are
+trained on connected speech and mangle lone words, which *saturates* the metric
+and hides real differences; a carrier gives them natural speech to synthesize,
+making cross-engine comparison fair. Scoring auto-detects the carrier (recorded
+in the manifest) and isolates the name region before measuring error.
 
 ## Engines
 

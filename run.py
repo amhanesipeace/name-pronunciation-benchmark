@@ -26,14 +26,22 @@ def main():
                         help="TTS voice language code (default: en)")
     parser.add_argument("--out", type=Path, default="outputs",
                         help="output directory (default: outputs)")
+    parser.add_argument("--carrier", nargs="?", const="My name is {name}.",
+                        default=None,
+                        help="speak each name inside a carrier sentence "
+                             "(default template: 'My name is {name}.'); pass a "
+                             "custom template containing {name}. Helps neural "
+                             "engines produce natural speech.")
     args = parser.parse_args()
 
     names = load_names(args.names)
     engine = ENGINES[args.engine](lang=args.lang)
 
+    carrier_note = f" | carrier={args.carrier!r}" if args.carrier else ""
     print(f"Synthesizing {len(names)} names | engine={engine.name} "
-          f"({engine.version}) | lang={args.lang}\n")
-    manifest_path, rows = synthesize_all(names, engine, args.out)
+          f"({engine.version}) | lang={args.lang}{carrier_note}\n")
+    manifest_path, rows = synthesize_all(names, engine, args.out,
+                                         carrier=args.carrier)
 
     ok = sum(r["status"] == "ok" for r in rows)
     print(f"\nDone: {ok}/{len(rows)} succeeded.")
