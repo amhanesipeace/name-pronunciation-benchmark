@@ -8,5 +8,8 @@ venv/
 outputs/
 outputs_*/
 
+# Testing
+.pytest_cache/
+
 # macOS
 .DS_Store

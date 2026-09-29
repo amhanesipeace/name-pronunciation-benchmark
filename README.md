@@ -1,5 +1,7 @@
 # AI Name-Pronunciation Fairness Benchmark
 
+[![CI](https://github.com/amhanesipeace/name-pronunciation-benchmark/actions/workflows/ci.yml/badge.svg)](https://github.com/amhanesipeace/name-pronunciation-benchmark/actions/workflows/ci.yml)
+
 Measuring how accurately text-to-speech (TTS) systems pronounce personal names
 from African languages (**Yoruba, Igbo, Hausa**) compared to common **English**
 names — to surface and quantify bias in deployed speech systems.
