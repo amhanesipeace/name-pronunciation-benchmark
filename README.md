@@ -11,9 +11,10 @@ names — to surface and quantify bias in deployed speech systems.
 > neural MMS), scores pronunciation via Whisper back-transcription, and
 > aggregates into per-language stats, a chart, and significance tests.
 
-📄 **[Read the findings write-up →](FINDINGS.md)** — gTTS shows a large,
-significant bias against African names; "neural" MMS is not fairer (its metric
-just saturates); and MMS ships **no Igbo voice at all**.
+📄 **[Paper-style writeup →](PAPER.md)** (abstract · method · results ·
+limitations · ethics) — or the detailed **[findings →](FINDINGS.md)**: gTTS shows
+a large, significant bias against African names; "neural" MMS is not fairer (its
+metric just saturates); and MMS ships **no Igbo voice at all**.
 
 ## Why this matters
 
