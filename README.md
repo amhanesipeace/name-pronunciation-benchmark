@@ -49,6 +49,16 @@ python run.py --engine mms --carrier --out outputs_mms_carrier   # carrier sente
 Outputs land in `outputs/audio/*` with `outputs/manifest.csv` describing every
 file. Use a separate `--out` dir per engine to keep runs side by side.
 
+**One-command pipeline** — a `Makefile` runs synthesize → score → analyze for
+each engine so the whole study reproduces from scratch:
+
+```bash
+make setup PYTHON=.venv/bin/python          # install deps
+make all   PYTHON=.venv/bin/python          # gTTS + carrier runs + error tables
+make test  PYTHON=.venv/bin/python          # unit tests
+# individual: make gtts | gtts-carrier | espeak | mms | mms-carrier | errors | clean
+```
+
 **Carrier sentences** (`--carrier`): speak each name inside a sentence
 (`"My name is {name}."`) instead of in isolation. Neural engines (e.g. MMS) are
 trained on connected speech and mangle lone words, which *saturates* the metric
