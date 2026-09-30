@@ -27,7 +27,9 @@ turns "this feels biased" into measurable evidence.
 
 ```
 name-pronunciation-benchmark/
-  data/names.csv        input dataset: names + language + provenance (+ IPA later)
+  data/names.csv          studied dataset — 80 names (20/language); results use this
+  data/names_extended.csv larger set — 120 names (30/language) for bigger runs
+  data/SOURCES.md         dataset provenance, sourcing + validation notes
   ttsbench/
     dataset.py          load names from CSV  -> list[Name]
     engines.py          TTSEngine interface + GTTSEngine (add more here)
@@ -114,10 +116,11 @@ brew install espeak-ng          # macOS (needs Homebrew)
 
 - **Names are people.** Use common given names or documented name lists, and
   cite their source. Do **not** target or profile private individuals.
-  **Provenance of the current dataset:** the 80 names are common given names
-  compiled from general knowledge (not a cited corpus) and are *not yet*
-  validated by native speakers. Before any publication, replace/verify them with
-  a documented source and native-speaker review of spellings and diacritics.
+  **Provenance:** the names are common given names compiled from general
+  knowledge (not a cited corpus) and are *not yet* validated by native speakers —
+  see [`data/SOURCES.md`](data/SOURCES.md) for the full provenance, sourcing, and
+  validation notes. Before any publication, replace/verify them with documented
+  sources and native-speaker review of spellings and diacritics.
 - **Ground truth needs native speakers.** Scoring "correct" pronunciation
   requires a reference (IPA and/or native-speaker recordings). Source this with
   the **informed consent and credit** of native speakers; treat it as human-

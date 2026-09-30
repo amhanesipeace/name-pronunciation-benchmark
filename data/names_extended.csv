@@ -1,0 +1,121 @@
+id,name,language,origin,ipa
+n001,James,english,Common English given name,d ʒ ˈ e ɪ m z
+n002,Emily,english,Common English given name,ˈ ɛ m ɪ l i
+n003,Michael,english,Common English given name,m ˈ a ɪ k ə l
+n004,Sarah,english,Common English given name,s ˈ e ə ɹ ə
+n005,David,english,Common English given name,d ˈ e ɪ v ɪ d
+n006,Jessica,english,Common English given name,d ʒ ˈ ɛ s ɪ k ə
+n007,John,english,Common English given name,d ʒ ˈ ɒ n
+n008,Emma,english,Common English given name,ˈ ɛ m ə
+n009,Robert,english,Common English given name,ɹ ˈ ɒ b ə t
+n010,Olivia,english,Common English given name,ɒ l ˈ ɪ v i ə
+n011,William,english,Common English given name,w ˈ ɪ l i ə m
+n012,Sophia,english,Common English given name,s ə ʊ f ˈ i ə
+n013,Thomas,english,Common English given name,t ˈ ɒ m ə s
+n014,Grace,english,Common English given name,ɡ ɹ ˈ e ɪ s
+n015,Daniel,english,Common English given name,d ˈ a n j ə l
+n016,Hannah,english,Common English given name,h ˈ a n ə
+n017,Matthew,english,Common English given name,m ˈ a θ j u ː
+n018,Laura,english,Common English given name,l ˈ ɔ ː ɹ ə
+n019,Andrew,english,Common English given name,ˈ a n d ɹ u ː
+n020,Katherine,english,Common English given name,k ˈ a θ ɹ ɪ n
+n021,Oluwaseun,yoruba,Common Yoruba given name,
+n022,Adebayo,yoruba,Common Yoruba given name,
+n023,Folake,yoruba,Common Yoruba given name,
+n024,Babatunde,yoruba,Common Yoruba given name,
+n025,Olumide,yoruba,Common Yoruba given name,
+n026,Adenike,yoruba,Common Yoruba given name,
+n027,Temitope,yoruba,Common Yoruba given name,
+n028,Oluwafemi,yoruba,Common Yoruba given name,
+n029,Bukola,yoruba,Common Yoruba given name,
+n030,Ayodele,yoruba,Common Yoruba given name,
+n031,Damilola,yoruba,Common Yoruba given name,
+n032,Funmilayo,yoruba,Common Yoruba given name,
+n033,Oluwatobi,yoruba,Common Yoruba given name,
+n034,Adeola,yoruba,Common Yoruba given name,
+n035,Kehinde,yoruba,Common Yoruba given name,
+n036,Taiwo,yoruba,Common Yoruba given name,
+n037,Yetunde,yoruba,Common Yoruba given name,
+n038,Segun,yoruba,Common Yoruba given name,
+n039,Bolanle,yoruba,Common Yoruba given name,
+n040,Titilayo,yoruba,Common Yoruba given name,
+n041,Chukwuemeka,igbo,Common Igbo given name,
+n042,Ngozi,igbo,Common Igbo given name,
+n043,Obinna,igbo,Common Igbo given name,
+n044,Adaeze,igbo,Common Igbo given name,
+n045,Chinedu,igbo,Common Igbo given name,
+n046,Ifeoma,igbo,Common Igbo given name,
+n047,Emeka,igbo,Common Igbo given name,
+n048,Chidinma,igbo,Common Igbo given name,
+n049,Nnamdi,igbo,Common Igbo given name,
+n050,Uchenna,igbo,Common Igbo given name,
+n051,Chioma,igbo,Common Igbo given name,
+n052,Ikenna,igbo,Common Igbo given name,
+n053,Amarachi,igbo,Common Igbo given name,
+n054,Kelechi,igbo,Common Igbo given name,
+n055,Chinonso,igbo,Common Igbo given name,
+n056,Obiageli,igbo,Common Igbo given name,
+n057,Nkechi,igbo,Common Igbo given name,
+n058,Chukwudi,igbo,Common Igbo given name,
+n059,Chinelo,igbo,Common Igbo given name,
+n060,Obiora,igbo,Common Igbo given name,
+n061,Abubakar,hausa,Common Hausa given name,
+n062,Aisha,hausa,Common Hausa (Arabic-origin) given name,
+n063,Ibrahim,hausa,Common Hausa (Arabic-origin) given name,
+n064,Zainab,hausa,Common Hausa (Arabic-origin) given name,
+n065,Musa,hausa,Common Hausa (Arabic-origin) given name,
+n066,Hauwa,hausa,Common Hausa given name,
+n067,Usman,hausa,Common Hausa given name,
+n068,Fatima,hausa,Common Hausa (Arabic-origin) given name,
+n069,Sani,hausa,Common Hausa given name,
+n070,Amina,hausa,Common Hausa (Arabic-origin) given name,
+n071,Yusuf,hausa,Common Hausa (Arabic-origin) given name,
+n072,Halima,hausa,Common Hausa given name,
+n073,Bello,hausa,Common Hausa given name,
+n074,Maryam,hausa,Common Hausa (Arabic-origin) given name,
+n075,Sulaiman,hausa,Common Hausa (Arabic-origin) given name,
+n076,Hadiza,hausa,Common Hausa given name,
+n077,Aliyu,hausa,Common Hausa given name,
+n078,Rukayya,hausa,Common Hausa given name,
+n079,Nasir,hausa,Common Hausa given name,
+n080,Zubaida,hausa,Common Hausa given name,
+n081,Christopher,english,Common English given name,k ɹ ˈ ɪ s t ə f ə
+n082,Jennifer,english,Common English given name,d ʒ ˈ ɛ n ɪ f ə
+n083,Elizabeth,english,Common English given name,ɪ l ˈ ɪ z ə b ə θ
+n084,Joseph,english,Common English given name,d ʒ ˈ ə ʊ s ə f
+n085,Margaret,english,Common English given name,m ˈ ɑ ː ɡ ɹ ə t
+n086,Benjamin,english,Common English given name,b ˈ ɛ n d ʒ ə m ɪ n
+n087,Charlotte,english,Common English given name,ʃ ˈ ɑ ː l ə t
+n088,Samuel,english,Common English given name,s ˈ a m j u ː l
+n089,Rebecca,english,Common English given name,ɹ ɪ b ˈ ɛ k ə
+n090,Nicholas,english,Common English given name,n ˈ ɪ k ə l ə s
+n091,Abiodun,yoruba,Common Yoruba given name,
+n092,Iyabo,yoruba,Common Yoruba given name,
+n093,Olubunmi,yoruba,Common Yoruba given name,
+n094,Oluwatosin,yoruba,Common Yoruba given name,
+n095,Ayotunde,yoruba,Common Yoruba given name,
+n096,Morenike,yoruba,Common Yoruba given name,
+n097,Olusegun,yoruba,Common Yoruba given name,
+n098,Ifeoluwa,yoruba,Common Yoruba given name,
+n099,Adewale,yoruba,Common Yoruba given name,
+n100,Modupe,yoruba,Common Yoruba given name,
+n101,Chukwuma,igbo,Common Igbo given name,
+n102,Ebere,igbo,Common Igbo given name,
+n103,Chibueze,igbo,Common Igbo given name,
+n104,Nneka,igbo,Common Igbo given name,
+n105,Ikechukwu,igbo,Common Igbo given name,
+n106,Adaobi,igbo,Common Igbo given name,
+n107,Chinwe,igbo,Common Igbo given name,
+n108,Nnenna,igbo,Common Igbo given name,
+n109,Onyeka,igbo,Common Igbo given name,
+n110,Uche,igbo,Common Igbo given name,
+n111,Umar,hausa,Common Hausa given name,
+n112,Khadija,hausa,Common Hausa given name,
+n113,Aminu,hausa,Common Hausa given name,
+n114,Habiba,hausa,Common Hausa given name,
+n115,Garba,hausa,Common Hausa given name,
+n116,Safiya,hausa,Common Hausa given name,
+n117,Lawal,hausa,Common Hausa given name,
+n118,Jamila,hausa,Common Hausa given name,
+n119,Idris,hausa,Common Hausa given name,
+n120,Balkisu,hausa,Common Hausa given name,
