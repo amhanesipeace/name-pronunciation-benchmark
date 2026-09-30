@@ -224,6 +224,28 @@ names. Compare **within** an engine; treat the **gap** as more robust than
 absolute CER. Reference-based scoring (IPA / native-speaker) is the rigorous
 follow-up.
 
+## Citing & archiving
+
+If you use this benchmark or its findings, please cite it. A
+[`CITATION.cff`](CITATION.cff) is included, so GitHub shows a **"Cite this
+repository"** button (top-right of the repo) with ready-made APA/BibTeX.
+
+```bibtex
+@software{amhanesi_name_pronunciation_benchmark,
+  author  = {Amhanesi, Peace},
+  title   = {AI Name-Pronunciation Fairness Benchmark},
+  year    = {2026},
+  url     = {https://github.com/amhanesipeace/name-pronunciation-benchmark},
+  license = {MIT}
+}
+```
+
+**Archiving for reproducibility:** code is versioned here; the generated audio is
+git-ignored (large/binary). To make results permanently citable, archive a fixed
+snapshot — the code plus a run's `audio/`, `manifest.csv` and `scores.csv` — to
+**[Zenodo](https://zenodo.org)** or **[OSF](https://osf.io)** for a DOI. Zenodo
+can import a tagged GitHub release automatically. Licensed under [MIT](LICENSE).
+
 ## Roadmap
 
 1. ✅ v0.1 — synthesis + manifest (gTTS)

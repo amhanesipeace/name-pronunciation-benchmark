@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this benchmark or its findings, please cite it."
+title: "AI Name-Pronunciation Fairness Benchmark"
+abstract: >-
+  An open, reproducible benchmark measuring how accurately text-to-speech
+  systems pronounce personal names from African languages (Yoruba, Igbo, Hausa)
+  compared to common English names, using ASR back-transcription and an
+  ASR-independent phoneme layer, with statistical significance testing.
+type: software
+authors:
+  - family-names: Amhanesi
+    given-names: Peace
+repository-code: "https://github.com/amhanesipeace/name-pronunciation-benchmark"
+license: MIT
+version: "0.9"
+date-released: "2026-09-30"
+keywords:
+  - text-to-speech
+  - speech synthesis
+  - fairness
+  - bias
+  - responsible AI
+  - African languages
+  - Yoruba
+  - Igbo
+  - Hausa
+  - name pronunciation
