@@ -114,6 +114,11 @@ correction. The effect is not an artifact of the small sample.
 
 ![CER by language, n=120](docs/cer_by_language_ext120.png)
 
+**Carrier replication (n=120) holds too:** gTTS+carrier English 0.00 / African
+0.25 (p≈1.9×10⁻¹¹); MMS+carrier English 0.20 / African 0.58 (p≈7×10⁻⁸) — the
+neural engine's bias, unmasked by the carrier, replicates at the larger scale.
+See [RESULTS.md](RESULTS.md) for all runs side by side.
+
 ## The methodological lesson (the real result)
 
 **You cannot compare fairness across engines by comparing gap sizes.** An engine
