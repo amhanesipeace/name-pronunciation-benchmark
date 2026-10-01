@@ -12,9 +12,10 @@ names — to surface and quantify bias in deployed speech systems.
 > aggregates into per-language stats, a chart, and significance tests.
 
 📄 **[Paper-style writeup →](PAPER.md)** (abstract · method · results ·
-limitations · ethics) — or the detailed **[findings →](FINDINGS.md)**: gTTS shows
-a large, significant bias against African names; "neural" MMS is not fairer (its
-metric just saturates); and MMS ships **no Igbo voice at all**.
+limitations · ethics) · **[master results table →](RESULTS.md)** · detailed
+**[findings →](FINDINGS.md)**: gTTS shows a large, significant bias against
+African names; "neural" MMS is not fairer (its metric just saturates until a
+carrier test unmasks it); and MMS ships **no Igbo voice at all**.
 
 ## Why this matters
 
