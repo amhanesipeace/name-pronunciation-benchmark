@@ -4,7 +4,9 @@ Every scored run, side by side. Lower CER = better; the **gap** (African − Eng
 
 | engine | condition | n | English CER | African CER | gap | Cliff's δ | p |
 |--------|-----------|--:|------------:|------------:|----:|----------|---|
+| espeak | carrier | 120 | 0.13 | 0.59 | **+0.46** | +0.74 (large) | 6.4e-10 |
 | espeak | isolated | 80 | 0.64 | 0.90 | **+0.26** | +0.28 (small) | 3.0e-02 |
+| espeak | isolated | 120 | 0.59 | 0.88 | **+0.29** | +0.31 (small) | 5.4e-03 |
 | gtts | carrier | 80 | 0.01 | 0.24 | **+0.24** | +0.75 (large) | 9.6e-08 |
 | gtts | carrier | 120 | 0.00 | 0.25 | **+0.25** | +0.78 (large) | 1.9e-11 |
 | gtts | isolated | 80 | 0.01 | 0.37 | **+0.36** | +0.82 (large) | 9.2e-09 |

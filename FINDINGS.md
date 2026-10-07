@@ -117,7 +117,13 @@ correction. The effect is not an artifact of the small sample.
 **Carrier replication (n=120) holds too:** gTTS+carrier English 0.00 / African
 0.25 (p≈1.9×10⁻¹¹); MMS+carrier English 0.20 / African 0.58 (p≈7×10⁻⁸) — the
 neural engine's bias, unmasked by the carrier, replicates at the larger scale.
-See [RESULTS.md](RESULTS.md) for all runs side by side.
+
+**The pattern holds across all three engines.** espeak also saturates in
+isolation (English baseline 0.59–0.64, small effect) but, under the carrier test,
+cleans up (English 0.13) and shows a **large, significant gap (+0.46, δ=+0.74,
+p≈6×10⁻¹⁰)**. So for gTTS, MMS *and* espeak, the fairer carrier protocol reveals a
+large, significant bias — the effect is a property of the systems, not of one
+engine or one scoring quirk. See [RESULTS.md](RESULTS.md) for all runs side by side.
 
 ## The methodological lesson (the real result)
 
