@@ -1,20 +1,22 @@
-# Python dependencies (pip)
-gTTS>=2.5            # Google Translate TTS (free, no API key, online)
+# Python dependencies — pinned to exact versions for reproducibility.
+# (Loosen to >= if you just want to try the tools; keep pinned to reproduce the
+#  published results bit-for-bit.)
+gTTS==2.5.4            # Google Translate TTS (free, no API key, online)
 
 # --- Scoring (heavier; only needed for score.py) ---
-faster-whisper>=1.0  # ASR back-transcription (CTranslate2; no torch/ffmpeg binary)
+faster-whisper==1.2.1  # ASR back-transcription (CTranslate2; no torch/ffmpeg binary)
 
 # --- Analysis (only needed for analyze.py) ---
-matplotlib>=3.8      # per-language bar charts
-scipy>=1.11          # Mann-Whitney U significance test
+matplotlib==3.11.2     # per-language bar charts
+scipy==1.18.1          # Mann-Whitney U significance test
 
 # --- Neural engine (the 'mms' engine; heavy: pulls PyTorch) ---
-transformers>=4.40   # Meta MMS-TTS (VITS) via Hugging Face
-torch>=2.2
+transformers==5.17.0   # Meta MMS-TTS (VITS) via Hugging Face
+torch==2.14.0
 
 # --- Phoneme scoring (only needed for phoneme_score.py) ---
-allosaurus>=1.0      # universal phoneme recogniser (ASR-independent)
-av>=11               # PyAV, to transcode mp3 -> wav for the recogniser
+allosaurus==1.0.2      # universal phoneme recogniser (ASR-independent)
+av==18.1.0             # PyAV, to transcode mp3 -> wav for the recogniser
 
 # --- System dependency (NOT pip-installable) ---
 # The 'espeak' engine calls the espeak-ng binary, which you install separately:

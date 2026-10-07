@@ -1,4 +1,4 @@
-# Test dependencies (lightweight — CI installs only these, not the heavy TTS/ASR
-# stack). The tested modules import scipy (stats) but not torch/allosaurus.
-pytest>=8.0
-scipy>=1.11
+# Test dependencies — pinned. CI installs only these (not the heavy TTS/ASR
+# stack); the tested modules import scipy (stats) but not torch/allosaurus.
+pytest==9.1.1
+scipy==1.18.1

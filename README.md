@@ -108,7 +108,9 @@ brew install espeak-ng          # macOS (needs Homebrew)
 - **Archive audio outside git.** `outputs/` is git-ignored because raw audio is
   large and binary. For a paper, archive a fixed snapshot (zipped release, Git
   LFS, or a data repository like **Zenodo / OSF**) and cite it.
-- **Pin versions** in `requirements.txt` when you freeze an experiment.
+- **Pinned versions.** `requirements.txt` and `requirements-dev.txt` pin exact
+  versions so the pipeline reproduces bit-for-bit; loosen to `>=` only if you
+  just want to try the tools.
 - **Prefer open, versioned models** (Coqui/Piper/espeak-ng) or **documented
   cloud APIs** (Google Cloud TTS, Amazon Polly, Azure) for results you intend
   to publish — they can be pinned to a model/voice version.
