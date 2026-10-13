@@ -56,8 +56,12 @@ Each name is (1) synthesized with a TTS engine's **English** voice (so engines
 are compared on equal footing), (2) transcribed back with Whisper (`base`), and
 (3) scored by **Character Error Rate (CER)** between the intended name and the
 transcription. Per-language means are compared with the non-parametric
-**Mann-Whitney U** test and **Cliff's delta** effect size (see
-[README](README.md#statistical-significance)).
+**Mann-Whitney U** test and **Cliff's delta** effect size, and every gap is
+reported with a **95% bootstrap confidence interval** (see
+[README](README.md#statistical-significance) and the CI column in
+[RESULTS.md](RESULTS.md)). Reassuringly, the only gaps whose CI crosses zero are
+exactly the saturated isolated-word runs flagged below — the uncertainty
+quantification independently confirms which gaps are real.
 
 **Why back-transcription:** if a TTS mispronounces a name, an English recognizer
 cannot recover it. It needs no human ground truth. **Its limitation** (central to

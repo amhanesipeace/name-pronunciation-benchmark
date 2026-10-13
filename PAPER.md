@@ -49,7 +49,11 @@ tracked and acted on.
   against a reference `ipa` column.
 - **Statistics.** Non-parametric **Mann-Whitney U** (CER is bounded/skewed) with
   **Cliff's delta** effect size and **Holm-Bonferroni** correction across the
-  three per-language comparisons.
+  three per-language comparisons. We additionally report **95% percentile
+  bootstrap confidence intervals** (2,000 seeded resamples) for the mean-CER gap
+  and for Cliff's delta, so each effect is reported with its uncertainty rather
+  than a point estimate alone; an interval clear of zero is the interval-based
+  counterpart to a significant one-sided test.
 
 ## 3. Results
 

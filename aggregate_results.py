@@ -11,7 +11,7 @@ import glob
 from pathlib import Path
 from statistics import mean
 
-from ttsbench.stats import english_vs_african
+from ttsbench.stats import english_vs_african, mean_gap_ci
 
 
 def summarise(run_dir: Path) -> dict | None:
@@ -36,6 +36,7 @@ def summarise(run_dir: Path) -> dict | None:
         return None
 
     stat = english_vs_african(scores)   # Mann-Whitney U + Cliff's delta
+    gap_ci = mean_gap_ci(afr, eng)      # 95% bootstrap CI for the mean gap
     return {
         "run": run_dir.name,
         "engine": engine,
@@ -44,6 +45,8 @@ def summarise(run_dir: Path) -> dict | None:
         "english_cer": mean(eng),
         "african_cer": mean(afr),
         "gap": mean(afr) - mean(eng),
+        "gap_lo": gap_ci["lo"],
+        "gap_hi": gap_ci["hi"],
         "delta": stat["cliffs_delta"] if stat else 0.0,
         "effect": stat["effect"] if stat else "-",
         "p": stat["p"] if stat else 1.0,
@@ -64,22 +67,26 @@ def main():
         "`aggregate_results.py`.",
         "",
         "| engine | condition | n | English CER | African CER | gap | "
-        "Cliff's δ | p |",
+        "gap 95% CI | Cliff's δ | p |",
         "|--------|-----------|--:|------------:|------------:|----:|"
-        "----------|---|",
+        "-----------|----------|---|",
     ]
     for r in rows:
         lines.append(
             f"| {r['engine']} | {r['condition']} | {r['n']} "
             f"| {r['english_cer']:.2f} | {r['african_cer']:.2f} "
-            f"| **+{r['gap']:.2f}** | {r['delta']:+.2f} ({r['effect']}) "
+            f"| **+{r['gap']:.2f}** | [{r['gap_lo']:.2f}, {r['gap_hi']:.2f}] "
+            f"| {r['delta']:+.2f} ({r['effect']}) "
             f"| {r['p']:.1e} |")
     lines += [
         "",
         "Notes: a *clean* English baseline (near 0) makes the gap interpretable; "
         "engines whose isolated audio the ASR can't read (espeak, MMS) saturate "
         "the metric — compare **within** an engine and prefer the carrier rows. "
-        "See [FINDINGS.md](FINDINGS.md) for significance tests and discussion.",
+        "The **gap 95% CI** is a seeded percentile bootstrap (2,000 resamples) of "
+        "the mean-CER gap; an interval clear of 0 is the interval-based counterpart "
+        "to a significant test. See [FINDINGS.md](FINDINGS.md) for the significance "
+        "tests and discussion.",
     ]
     report = "\n".join(lines)
     Path("RESULTS.md").write_text(report + "\n", encoding="utf-8")

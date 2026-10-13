@@ -13,7 +13,8 @@ import csv
 from pathlib import Path
 
 from ttsbench.analyze import load_scores, summarize, plot_cer_by_language
-from ttsbench.stats import english_vs_african, per_language_vs_english
+from ttsbench.stats import (english_vs_african, english_vs_african_ci,
+                            per_language_vs_english)
 
 
 def main():
@@ -54,6 +55,17 @@ def main():
             f"African:  n={overall['african_n']:>3}  median CER={overall['african_median']:.3f}",
             f"Mann-Whitney U={overall['U']:.0f}  p={overall['p']:.2e}",
             f"Cliff's delta={overall['cliffs_delta']:+.3f} ({overall['effect']} effect)",
+        ]
+        ci = english_vs_african_ci(rows)
+        if ci:
+            g, d = ci["gap_ci"], ci["cliffs_delta_ci"]
+            lines += [
+                f"Mean-CER gap={g['point']:+.3f}  "
+                f"95% CI [{g['lo']:+.3f}, {g['hi']:+.3f}] "
+                f"(bootstrap, {g['n_boot']} resamples)",
+                f"Cliff's delta 95% CI [{d['lo']:+.3f}, {d['hi']:+.3f}]",
+            ]
+        lines += [
             "",
             "Per-language vs English (Holm-corrected):",
         ]

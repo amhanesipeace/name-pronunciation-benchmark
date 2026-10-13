@@ -220,6 +220,12 @@ significantly higher than English-name CER:
   and Hausa (δ=+0.74) are each significantly worse — all **p_holm ≤ 3.6×10⁻⁶**,
   all **large** effects.
 
+We also report **95% bootstrap confidence intervals** (2,000 seeded resamples)
+for the mean-CER gap and Cliff's delta, so each effect carries its uncertainty.
+Across every run the gap CI stays clear of zero except for the two saturated
+isolated-word baselines — the interval estimates independently confirm which
+gaps are real (see the `gap 95% CI` column in [RESULTS.md](RESULTS.md)).
+
 Reproduce with `python analyze.py` (writes `outputs/analysis/stats.txt`).
 Caveat: this is one engine (gTTS) and one ASR scorer; it establishes the gap for
 *this* pipeline, not a universal claim across all TTS systems.
