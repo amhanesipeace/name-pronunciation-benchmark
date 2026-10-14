@@ -1,5 +1,9 @@
 # Dataset provenance & sources
 
+> See also [`DATASHEET.md`](DATASHEET.md) — a full *Datasheets for Datasets*
+> (Gebru et al., 2021) record of this dataset's motivation, composition,
+> collection, uses, and maintenance.
+
 Two name lists are provided:
 
 | file | size | role |

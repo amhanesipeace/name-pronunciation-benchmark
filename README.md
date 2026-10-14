@@ -31,6 +31,7 @@ name-pronunciation-benchmark/
   data/names.csv          studied dataset — 80 names (20/language); results use this
   data/names_extended.csv larger set — 120 names (30/language) for bigger runs
   data/SOURCES.md         dataset provenance, sourcing + validation notes
+  data/DATASHEET.md       Datasheets for Datasets (Gebru et al.) record
   ttsbench/
     dataset.py          load names from CSV  -> list[Name]
     engines.py          TTSEngine interface + GTTSEngine (add more here)
@@ -121,9 +122,10 @@ brew install espeak-ng          # macOS (needs Homebrew)
   cite their source. Do **not** target or profile private individuals.
   **Provenance:** the names are common given names compiled from general
   knowledge (not a cited corpus) and are *not yet* validated by native speakers —
-  see [`data/SOURCES.md`](data/SOURCES.md) for the full provenance, sourcing, and
-  validation notes. Before any publication, replace/verify them with documented
-  sources and native-speaker review of spellings and diacritics.
+  see [`data/SOURCES.md`](data/SOURCES.md) and the full
+  [`data/DATASHEET.md`](data/DATASHEET.md) (Gebru et al.) for the provenance,
+  sourcing, and validation notes. Before any publication, replace/verify them
+  with documented sources and native-speaker review of spellings and diacritics.
 - **Ground truth needs native speakers.** Scoring "correct" pronunciation
   requires a reference (IPA and/or native-speaker recordings). Source this with
   the **informed consent and credit** of native speakers; treat it as human-
