@@ -79,6 +79,11 @@ tracked and acted on.
   auto-generated; the phoneme layer is built and waiting for this data.
 - **ASR metric is not neutral.** Back-transcription folds in the recognizer's own
   biases and is only interpretable when the engine has a clean English baseline.
+  A sensitivity analysis mitigates the "single scorer" concern: re-scoring the
+  same gTTS audio with Whisper `tiny`/`base`/`small` leaves the gap large and
+  significant at every size (Cliff's δ = +0.75 to +0.84, all p < 10⁻⁷), with a
+  better recognizer narrowing but not closing it — the gap is not an artefact of
+  one ASR model (`docs/sensitivity_whisper.md`).
 - **Recognizer noise.** The universal phoneme recognizer is unreliable on short
   single-word clips, so PER is not yet a dependable standalone metric.
 - **Scale and provenance.** Small n; names compiled from general knowledge, not a

@@ -47,6 +47,9 @@ errors:
 	$(PYTHON) error_analysis.py --scores outputs/scores.csv --top 5 \
 		--out docs/error_analysis_gtts.md
 
+sensitivity:
+	$(PYTHON) sensitivity.py --run outputs --models tiny base small
+
 test:
 	$(PYTHON) -m pytest
 

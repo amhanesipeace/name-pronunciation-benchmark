@@ -37,6 +37,7 @@ name-pronunciation-benchmark/
     engines.py          TTSEngine interface + GTTSEngine (add more here)
     synth.py            run names through an engine, write audio + manifest.csv
   run.py                CLI entry point
+  sensitivity.py        robustness check: re-score a run across Whisper sizes
   outputs/              generated audio + manifest (git-ignored; see below)
   requirements.txt
 ```
@@ -229,8 +230,12 @@ isolated-word baselines — the interval estimates independently confirm which
 gaps are real (see the `gap 95% CI` column in [RESULTS.md](RESULTS.md)).
 
 Reproduce with `python analyze.py` (writes `outputs/analysis/stats.txt`).
-Caveat: this is one engine (gTTS) and one ASR scorer; it establishes the gap for
-*this* pipeline, not a universal claim across all TTS systems.
+Caveat: this establishes the gap for *this* pipeline, not a universal claim across
+all TTS systems. The gap is, however, **robust to the ASR scorer**: re-scoring the
+same audio with Whisper `tiny`/`base`/`small` keeps it large and significant at
+every size (δ = +0.75 to +0.84, all p < 10⁻⁷) — a better recognizer narrows the
+gap but does not close it, as expected if the bias lives in the TTS. See
+[`docs/sensitivity_whisper.md`](docs/sensitivity_whisper.md) (`python sensitivity.py`).
 
 **Metric caveat.** ASR back-transcription mixes (1) TTS pronunciation quality and
 (2) how ASR-friendly the audio is. A clean English baseline (gTTS: 0.00) isolates

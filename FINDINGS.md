@@ -154,6 +154,11 @@ proper (and ethically correct) next step.
 ## Limitations
 
 - One ASR scorer (Whisper `base`); ASR has its own biases folded into the metric.
+  *Checked:* re-scoring the same gTTS audio with Whisper `tiny`/`base`/`small`
+  keeps the gap large and significant at every size (δ +0.75 to +0.84, all
+  p < 10⁻⁷) — see [docs/sensitivity_whisper.md](docs/sensitivity_whisper.md). A
+  better recognizer shrinks the gap but does not close it, so the bias is not an
+  artefact of one recognizer.
 - Small n (20/language); results are illustrative, not a population claim.
 - Names are a general-knowledge list, **not** native-speaker validated (see
   README ethics). Spellings/diacritics need review.
