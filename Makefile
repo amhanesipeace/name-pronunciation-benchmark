@@ -50,6 +50,9 @@ errors:
 sensitivity:
 	$(PYTHON) sensitivity.py --run outputs --models tiny base small
 
+forest:
+	$(PYTHON) forest_plot.py
+
 test:
 	$(PYTHON) -m pytest
 

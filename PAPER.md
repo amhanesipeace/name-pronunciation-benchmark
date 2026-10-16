@@ -57,6 +57,14 @@ tracked and acted on.
 
 ## 3. Results
 
+![Forest plot: the African−English mean-CER gap with 95% bootstrap confidence
+intervals, one row per engine×condition run. Intervals clear of zero are real
+gaps; the two that cross zero are the metric-saturated isolated-word baselines.](docs/forest_plot.png)
+
+*Figure 1. The gap with 95% bootstrap CIs across all runs. The bias is real
+(CI clear of zero) wherever the English baseline is clean; only the saturated
+isolated-word baselines are indistinguishable from zero.*
+
 1. **A mainstream system is measurably biased.** gTTS: English CER 0.01 vs
    African 0.37; gap significant and large (δ = +0.82, p ≈ 9×10⁻⁹). Every
    per-language gap is significant after correction.

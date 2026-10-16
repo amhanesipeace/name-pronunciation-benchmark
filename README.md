@@ -38,6 +38,7 @@ name-pronunciation-benchmark/
     synth.py            run names through an engine, write audio + manifest.csv
   run.py                CLI entry point
   sensitivity.py        robustness check: re-score a run across Whisper sizes
+  forest_plot.py        forest plot: per-run gap + 95% CI (docs/forest_plot.png)
   outputs/              generated audio + manifest (git-ignored; see below)
   requirements.txt
 ```
@@ -228,6 +229,13 @@ for the mean-CER gap and Cliff's delta, so each effect carries its uncertainty.
 Across every run the gap CI stays clear of zero except for the two saturated
 isolated-word baselines — the interval estimates independently confirm which
 gaps are real (see the `gap 95% CI` column in [RESULTS.md](RESULTS.md)).
+
+The forest plot below shows this across every run at a glance — each engine ×
+condition as a gap estimate with its 95% CI. Blue intervals clear zero (a real
+gap); the two grey ones that straddle zero are exactly the metric-saturated
+isolated-word baselines (`python forest_plot.py`):
+
+![Forest plot of the African−English mean-CER gap with 95% bootstrap confidence intervals, one row per engine×condition run; blue intervals clear zero, grey ones cross it](docs/forest_plot.png)
 
 Reproduce with `python analyze.py` (writes `outputs/analysis/stats.txt`).
 Caveat: this establishes the gap for *this* pipeline, not a universal claim across
