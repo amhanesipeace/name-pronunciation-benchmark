@@ -4,9 +4,11 @@ __pycache__/
 .venv/
 venv/
 
-# Generated audio + manifests (regenerate with run.py; can be large)
-outputs/
-outputs_*/
+# Generated outputs. Keep the small derived tables (scores.csv + manifest.csv)
+# so the statistics and figures are reproducible from the repo without the heavy
+# TTS/ASR stack; ignore the large regenerable audio and per-run analysis charts.
+outputs*/audio/
+outputs*/analysis/
 
 # Testing
 .pytest_cache/

@@ -1,0 +1,121 @@
+id,name,language,engine,transcription,cer,exact_match
+n001,James,english,mms,Gamers.,0.4,0
+n002,Emily,english,mms,Anai.,1.0,0
+n003,Michael,english,mms,Mikael.,0.286,0
+n004,Sarah,english,mms,Sarah.,0.0,1
+n005,David,english,mms,David.,0.0,1
+n006,Jessica,english,mms,Jessica.,0.0,1
+n007,John,english,mms,John.,0.0,1
+n008,Emma,english,mms,Emma.,0.0,1
+n009,Robert,english,mms,Robert.,0.0,1
+n010,Olivia,english,mms,Oliver.,0.333,0
+n011,William,english,mms,William.,0.0,1
+n012,Sophia,english,mms,Sophia.,0.0,1
+n013,Thomas,english,mms,Damas.,0.5,0
+n014,Grace,english,mms,Grace.,0.0,1
+n015,Daniel,english,mms,Daniel.,0.0,1
+n016,Hannah,english,mms,Lane Hanna.,0.833,0
+n017,Matthew,english,mms,Line Matthew.,0.571,0
+n018,Laura,english,mms,Lair.,0.4,0
+n019,Andrew,english,mms,Adru.,0.5,0
+n020,Katherine,english,mms,Gathering.,0.222,0
+n021,Oluwaseun,yoruba,mms,always sin.,0.556,0
+n022,Adebayo,yoruba,mms,AirBail.,0.571,0
+n023,Folake,yoruba,mms,Fully.,0.667,0
+n024,Babatunde,yoruba,mms,Badatton.,0.556,0
+n025,Olumide,yoruba,mms,Alamed.,0.571,0
+n026,Adenike,yoruba,mms,Aidenite.,0.286,0
+n027,Temitope,yoruba,mms,Demetub.,0.625,0
+n028,Oluwafemi,yoruba,mms,all the way from there.,1.444,0
+n029,Bukola,yoruba,mms,Bicola.,0.333,0
+n030,Ayodele,yoruba,mms,Aoto.,0.714,0
+n031,Damilola,yoruba,mms,Demelor.,0.5,0
+n032,Funmilayo,yoruba,mms,Fun Malayu.,0.222,0
+n033,Oluwatobi,yoruba,mms,Alwater Bayer.,0.889,0
+n034,Adeola,yoruba,mms,Eddie Eola.,0.667,0
+n035,Kehinde,yoruba,mms,Kain.,0.571,0
+n036,Taiwo,yoruba,mms,Dale.,0.8,0
+n037,Yetunde,yoruba,mms,Yitan.,0.571,0
+n038,Segun,yoruba,mms,San.,0.6,0
+n039,Bolanle,yoruba,mms,Bologna.,0.571,0
+n040,Titilayo,yoruba,mms,Tateleo.,0.5,0
+n041,Chukwuemeka,igbo,mms,Kubwulmika.,0.455,0
+n042,Ngozi,igbo,mms,Nioze.,0.4,0
+n043,Obinna,igbo,mms,Obena.,0.333,0
+n044,Adaeze,igbo,mms,Edith.,0.833,0
+n045,Chinedu,igbo,mms,Changdue.,0.429,0
+n046,Ifeoma,igbo,mms,I.P.M.N.A.,0.667,0
+n047,Emeka,igbo,mms,Incadent.,1.4,0
+n048,Chidinma,igbo,mms,Kyrdanah.,0.75,0
+n049,Nnamdi,igbo,mms,Nhadde.,0.5,0
+n050,Uchenna,igbo,mms,Atena.,0.571,0
+n051,Chioma,igbo,mms,Chiama.,0.167,0
+n052,Ikenna,igbo,mms,Aikana.,0.5,0
+n053,Amarachi,igbo,mms,America.,0.5,0
+n054,Kelechi,igbo,mms,Gilechat.,0.571,0
+n055,Chinonso,igbo,mms,Jinnonser.,0.625,0
+n056,Obiageli,igbo,mms,Rebecca Leyer.,1.125,0
+n057,Nkechi,igbo,mms,in Kitscher.,1.0,0
+n058,Chukwudi,igbo,mms,Chuk Worley.,0.625,0
+n059,Chinelo,igbo,mms,Chen Naloo.,0.571,0
+n060,Obiora,igbo,mms,HoBeer.,0.667,0
+n061,Abubakar,hausa,mms,Abibiker.,0.375,0
+n062,Aisha,hausa,mms,Aisha.,0.0,1
+n063,Ibrahim,hausa,mms,Abraham.,0.286,0
+n064,Zainab,hausa,mms,Zinnah.,0.5,0
+n065,Musa,hausa,mms,Mewza.,0.75,0
+n066,Hauwa,hausa,mms,Hewe.,0.6,0
+n067,Usman,hausa,mms,Osman.,0.2,0
+n068,Fatima,hausa,mms,Bayama.,0.5,0
+n069,Sani,hausa,mms,Senna.,0.75,0
+n070,Amina,hausa,mms,Emmana.,0.6,0
+n071,Yusuf,hausa,mms,Yusuf.,0.0,1
+n072,Halima,hausa,mms,Hal.,0.5,0
+n073,Bello,hausa,mms,Bello.,0.0,1
+n074,Maryam,hausa,mms,Marion.,0.5,0
+n075,Sulaiman,hausa,mms,Silweman.,0.375,0
+n076,Hadiza,hausa,mms,Hedazza.,0.5,0
+n077,Aliyu,hausa,mms,Eli.,0.6,0
+n078,Rukayya,hausa,mms,Ruby.,0.571,0
+n079,Nasir,hausa,mms,Nizzer.,0.8,0
+n080,Zubaida,hausa,mms,Avid.,0.714,0
+n081,Christopher,english,mms,Christopher.,0.0,1
+n082,Jennifer,english,mms,Jennifer.,0.0,1
+n083,Elizabeth,english,mms,Elizabeth.,0.0,1
+n084,Joseph,english,mms,Joseph.,0.0,1
+n085,Margaret,english,mms,Margaress.,0.25,0
+n086,Benjamin,english,mms,Benjamin.,0.0,1
+n087,Charlotte,english,mms,Charlotte.,0.0,1
+n088,Samuel,english,mms,Sergio.,0.833,0
+n089,Rebecca,english,mms,Rebecca.,0.0,1
+n090,Nicholas,english,mms,Nicholas.,0.0,1
+n091,Abiodun,yoruba,mms,Abedem.,0.571,0
+n092,Iyabo,yoruba,mms,Ibo.,0.4,0
+n093,Olubunmi,yoruba,mms,Al-Bunna.,0.5,0
+n094,Oluwatosin,yoruba,mms,All Wowson.,0.6,0
+n095,Ayotunde,yoruba,mms,Euren.,0.875,0
+n096,Morenike,yoruba,mms,Moranike,0.125,0
+n097,Olusegun,yoruba,mms,Oluzen.,0.375,0
+n098,Ifeoluwa,yoruba,mms,I feel you.,0.5,0
+n099,Adewale,yoruba,mms,Adriel.,0.571,0
+n100,Modupe,yoruba,mms,Modu.,0.333,0
+n101,Chukwuma,igbo,mms,Kil'Woo-ma.,0.75,0
+n102,Ebere,igbo,mms,Abert.,0.4,0
+n103,Chibueze,igbo,mms,Chibbias.,0.5,0
+n104,Nneka,igbo,mms,Nega.,0.4,0
+n105,Ikechukwu,igbo,mms,Ayyachubu.,0.667,0
+n106,Adaobi,igbo,mms,Zadal Barre.,1.0,0
+n107,Chinwe,igbo,mms,May the end of this channel.,3.0,0
+n108,Nnenna,igbo,mms,Nan.,0.667,0
+n109,Onyeka,igbo,mms,Onika.,0.333,0
+n110,Uche,igbo,mms,Arch.,0.75,0
+n111,Umar,hausa,mms,Amar.,0.25,0
+n112,Khadija,hausa,mms,Kedigia.,0.571,0
+n113,Aminu,hausa,mms,Emming.,0.6,0
+n114,Habiba,hausa,mms,Habibi.,0.167,0
+n115,Garba,hausa,mms,Garb.,0.2,0
+n116,Safiya,hausa,mms,Sephire.,0.833,0
+n117,Lawal,hausa,mms,Lowell.,0.6,0
+n118,Jamila,hausa,mms,Gemmo.,0.833,0
+n119,Idris,hausa,mms,Idris.,0.0,1
+n120,Balkisu,hausa,mms,Batesha.,0.714,0

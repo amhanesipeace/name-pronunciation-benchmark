@@ -1,0 +1,81 @@
+id,name,language,engine,transcription,cer,exact_match
+n001,James,english,gtts,James.,0.0,1
+n002,Emily,english,gtts,Emily.,0.0,1
+n003,Michael,english,gtts,Michael.,0.0,1
+n004,Sarah,english,gtts,Sarah.,0.0,1
+n005,David,english,gtts,David.,0.0,1
+n006,Jessica,english,gtts,Jessica.,0.0,1
+n007,John,english,gtts,John.,0.0,1
+n008,Emma,english,gtts,Emma.,0.0,1
+n009,Robert,english,gtts,Robert.,0.0,1
+n010,Olivia,english,gtts,Olivia.,0.0,1
+n011,William,english,gtts,William.,0.0,1
+n012,Sophia,english,gtts,Sophia.,0.0,1
+n013,Thomas,english,gtts,Thomas.,0.0,1
+n014,Grace,english,gtts,Grace.,0.0,1
+n015,Daniel,english,gtts,Daniel.,0.0,1
+n016,Hannah,english,gtts,Hannah.,0.0,1
+n017,Matthew,english,gtts,Matthew.,0.0,1
+n018,Laura,english,gtts,Laura.,0.0,1
+n019,Andrew,english,gtts,Andrew.,0.0,1
+n020,Katherine,english,gtts,Catherine.,0.111,0
+n021,Oluwaseun,yoruba,gtts,Oluo Sayun.,0.444,0
+n022,Adebayo,yoruba,gtts,Ada Bale.,0.429,0
+n023,Folake,yoruba,gtts,Fulacca.,0.667,0
+n024,Babatunde,yoruba,gtts,Baba Tundi.,0.111,0
+n025,Olumide,yoruba,gtts,Aloumide.,0.286,0
+n026,Adenike,yoruba,gtts,Adanike.,0.143,0
+n027,Temitope,yoruba,gtts,Tematope.,0.125,0
+n028,Oluwafemi,yoruba,gtts,Oluwa Femi.,0.0,1
+n029,Bukola,yoruba,gtts,Bacola.,0.333,0
+n030,Ayodele,yoruba,gtts,Aadel.,0.429,0
+n031,Damilola,yoruba,gtts,Damia Lola.,0.125,0
+n032,Funmilayo,yoruba,gtts,FunMalayo.,0.111,0
+n033,Oluwatobi,yoruba,gtts,Ella Watobi.,0.333,0
+n034,Adeola,yoruba,gtts,Adiola.,0.167,0
+n035,Kehinde,yoruba,gtts,Kahinde.,0.143,0
+n036,Taiwo,yoruba,gtts,Tywo.,0.4,0
+n037,Yetunde,yoruba,gtts,Yatunde.,0.143,0
+n038,Segun,yoruba,gtts,Segen.,0.2,0
+n039,Bolanle,yoruba,gtts,Bolonli.,0.286,0
+n040,Titilayo,yoruba,gtts,Tidolio.,0.5,0
+n041,Chukwuemeka,igbo,gtts,Chiquemica.,0.455,0
+n042,Ngozi,igbo,gtts,Ingozy.,0.4,0
+n043,Obinna,igbo,gtts,Abina.,0.333,0
+n044,Adaeze,igbo,gtts,Adays.,0.5,0
+n045,Chinedu,igbo,gtts,Chinadu.,0.143,0
+n046,Ifeoma,igbo,gtts,EFOMA.,0.333,0
+n047,Emeka,igbo,gtts,Amaka.,0.4,0
+n048,Chidinma,igbo,gtts,Chadeen Ma.,0.375,0
+n049,Nnamdi,igbo,gtts,Namdi.,0.167,0
+n050,Uchenna,igbo,gtts,Uchana.,0.286,0
+n051,Chioma,igbo,gtts,Kiyoma.,0.5,0
+n052,Ikenna,igbo,gtts,Akena.,0.333,0
+n053,Amarachi,igbo,gtts,Amarachi.,0.0,1
+n054,Kelechi,igbo,gtts,Kolechi.,0.143,0
+n055,Chinonso,igbo,gtts,Channonso.,0.25,0
+n056,Obiageli,igbo,gtts,Obia Jelly.,0.375,0
+n057,Nkechi,igbo,gtts,Neketchi.,0.333,0
+n058,Chukwudi,igbo,gtts,Chakuri.,0.375,0
+n059,Chinelo,igbo,gtts,Chinello.,0.143,0
+n060,Obiora,igbo,gtts,Obiora.,0.0,1
+n061,Abubakar,hausa,gtts,Abu Bakar.,0.0,1
+n062,Aisha,hausa,gtts,Aisha.,0.0,1
+n063,Ibrahim,hausa,gtts,Ibrahim.,0.0,1
+n064,Zainab,hausa,gtts,Zainab.,0.0,1
+n065,Musa,hausa,gtts,Mooza.,0.75,0
+n066,Hauwa,hausa,gtts,Haohua.,0.6,0
+n067,Usman,hausa,gtts,Usman.,0.0,1
+n068,Fatima,hausa,gtts,Fatima.,0.0,1
+n069,Sani,hausa,gtts,Sanny.,0.5,0
+n070,Amina,hausa,gtts,Amina.,0.0,1
+n071,Yusuf,hausa,gtts,Yusuf.,0.0,1
+n072,Halima,hausa,gtts,Helima.,0.167,0
+n073,Bello,hausa,gtts,Bello.,0.0,1
+n074,Maryam,hausa,gtts,Mariam.,0.167,0
+n075,Sulaiman,hausa,gtts,Suleiman.,0.125,0
+n076,Hadiza,hausa,gtts,Hadiza.,0.0,1
+n077,Aliyu,hausa,gtts,Aliyu.,0.0,1
+n078,Rukayya,hausa,gtts,Rukiah.,0.571,0
+n079,Nasir,hausa,gtts,Nossir.,0.4,0
+n080,Zubaida,hausa,gtts,Zubayda.,0.143,0

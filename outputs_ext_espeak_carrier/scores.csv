@@ -1,0 +1,121 @@
+id,name,language,engine,transcription,cer,exact_match
+n001,James,english,espeak,James.,0.0,1
+n002,Emily,english,espeak,Emily.,0.0,1
+n003,Michael,english,espeak,Michael.,0.0,1
+n004,Sarah,english,espeak,Sarah.,0.0,1
+n005,David,english,espeak,David.,0.0,1
+n006,Jessica,english,espeak,Jessica.,0.0,1
+n007,John,english,espeak,John.,0.0,1
+n008,Emma,english,espeak,Emma,0.0,1
+n009,Robert,english,espeak,Robert.,0.0,1
+n010,Olivia,english,espeak,Olivier.,0.333,0
+n011,William,english,espeak,William.,0.0,1
+n012,Sophia,english,espeak,Sophia.,0.0,1
+n013,Thomas,english,espeak,Thomas.,0.0,1
+n014,Grace,english,espeak,Praise.,0.6,0
+n015,Daniel,english,espeak,Daniel.,0.0,1
+n016,Hannah,english,espeak,Ha-E.,0.667,0
+n017,Matthew,english,espeak,Matthew.,0.0,1
+n018,Laura,english,espeak,Laura.,0.0,1
+n019,Andrew,english,espeak,Anru.,0.5,0
+n020,Katherine,english,espeak,Kaplan.,0.667,0
+n021,Oluwaseun,yoruba,espeak,Oluway Son.,0.333,0
+n022,Adebayo,yoruba,espeak,MMO.,0.857,0
+n023,Folake,yoruba,espeak,Foreake.,0.333,0
+n024,Babatunde,yoruba,espeak,Baba Tundh.,0.111,0
+n025,Olumide,yoruba,espeak,Otto Maid.,0.714,0
+n026,Adenike,yoruba,espeak,Arthur Ike.,0.714,0
+n027,Temitope,yoruba,espeak,Tamitope.,0.125,0
+n028,Oluwafemi,yoruba,espeak,Motu Waifu.,0.667,0
+n029,Bukola,yoruba,espeak,Yuko Roku.,0.833,0
+n030,Ayodele,yoruba,espeak,IO DORL.,0.714,0
+n031,Damilola,yoruba,espeak,Mamelola,0.25,0
+n032,Funmilayo,yoruba,espeak,Fernbillio.,0.556,0
+n033,Oluwatobi,yoruba,espeak,Oliver Tobye.,0.667,0
+n034,Adeola,yoruba,espeak,Adiola.,0.167,0
+n035,Kehinde,yoruba,espeak,Katyn.,0.714,0
+n036,Taiwo,yoruba,espeak,Tewo.,0.4,0
+n037,Yetunde,yoruba,espeak,Yettons.,0.571,0
+n038,Segun,yoruba,espeak,Saturn.,0.6,0
+n039,Bolanle,yoruba,espeak,Pogano.,0.571,0
+n040,Titilayo,yoruba,espeak,Titeo.,0.5,0
+n041,Chukwuemeka,igbo,espeak,Chuck Umecker.,0.545,0
+n042,Ngozi,igbo,espeak,Angolo,0.6,0
+n043,Obinna,igbo,espeak,Robin Hood.,0.833,0
+n044,Adaeze,igbo,espeak,life up to you.,1.667,0
+n045,Chinedu,igbo,espeak,Chin Boo.,0.429,0
+n046,Ifeoma,igbo,espeak,iPhone.,0.667,0
+n047,Emeka,igbo,espeak,Rebecca.,0.8,0
+n048,Chidinma,igbo,espeak,Kevin Moore.,1.0,0
+n049,Nnamdi,igbo,espeak,I might not be the one to harm this.,3.667,0
+n050,Uchenna,igbo,espeak,a channel.,0.571,0
+n051,Chioma,igbo,espeak,Kilomer.,0.833,0
+n052,Ikenna,igbo,espeak,icon.,0.667,0
+n053,Amarachi,igbo,espeak,Amalachi.,0.125,0
+n054,Kelechi,igbo,espeak,Kelley.,0.571,0
+n055,Chinonso,igbo,espeak,Tiononso.,0.375,0
+n056,Obiageli,igbo,espeak,Obey Blue.,0.75,0
+n057,Nkechi,igbo,espeak,Enker Chai.,0.5,0
+n058,Chukwudi,igbo,espeak,Chuck WooD,0.5,0
+n059,Chinelo,igbo,espeak,Chimelow.,0.286,0
+n060,Obiora,igbo,espeak,Obeiro.,0.5,0
+n061,Abubakar,hausa,espeak,Uber Car.,0.625,0
+n062,Aisha,hausa,espeak,Nayshur,0.8,0
+n063,Ibrahim,hausa,espeak,Abrahan.,0.429,0
+n064,Zainab,hausa,espeak,Mayhub.,0.667,0
+n065,Musa,hausa,espeak,Nusa.,0.25,0
+n066,Hauwa,hausa,espeak,Hort Worth.,1.4,0
+n067,Usman,hausa,espeak,Osman,0.2,0
+n068,Fatima,hausa,espeak,Fatima.,0.0,1
+n069,Sani,hausa,espeak,Saad,0.5,0
+n070,Amina,hausa,espeak,R.M.E.,0.8,0
+n071,Yusuf,hausa,espeak,Yusuf.,0.0,1
+n072,Halima,hausa,espeak,Thalima.,0.167,0
+n073,Bello,hausa,espeak,Matlow.,0.8,0
+n074,Maryam,hausa,espeak,Maryam.,0.0,1
+n075,Sulaiman,hausa,espeak,Sue Raymond.,0.625,0
+n076,Hadiza,hausa,espeak,Hardiver.,0.667,0
+n077,Aliyu,hausa,espeak,Marley Oom.,1.2,0
+n078,Rukayya,hausa,espeak,Rookayer.,0.571,0
+n079,Nasir,hausa,espeak,Asia.,0.4,0
+n080,Zubaida,hausa,espeak,Ubeider.,0.571,0
+n081,Christopher,english,espeak,Christopher.,0.0,1
+n082,Jennifer,english,espeak,Jennifer.,0.0,1
+n083,Elizabeth,english,espeak,Elizabeth.,0.0,1
+n084,Joseph,english,espeak,Joseph.,0.0,1
+n085,Margaret,english,espeak,Margaret.,0.0,1
+n086,Benjamin,english,espeak,Man Jummin,0.5,0
+n087,Charlotte,english,espeak,Charlotte.,0.0,1
+n088,Samuel,english,espeak,Sam Yule.,0.5,0
+n089,Rebecca,english,espeak,Rebecca.,0.0,1
+n090,Nicholas,english,espeak,Nicholas.,0.0,1
+n091,Abiodun,yoruba,espeak,R. B. Rotten.,0.714,0
+n092,Iyabo,yoruba,espeak,Iarbou.,0.6,0
+n093,Olubunmi,yoruba,espeak,Oli Bhanmi.,0.375,0
+n094,Oluwatosin,yoruba,espeak,Oli Watasin.,0.2,0
+n095,Ayotunde,yoruba,espeak,Ayotun.,0.25,0
+n096,Morenike,yoruba,espeak,Morike.,0.25,0
+n097,Olusegun,yoruba,espeak,OluFedon.,0.375,0
+n098,Ifeoluwa,yoruba,espeak,Ifelouwer.,0.5,0
+n099,Adewale,yoruba,espeak,AdWail.,0.429,0
+n100,Modupe,yoruba,espeak,Modu.,0.333,0
+n101,Chukwuma,igbo,espeak,Chuck Wimmer.,0.625,0
+n102,Ebere,igbo,espeak,Aber.,0.4,0
+n103,Chibueze,igbo,espeak,Kibyu.,0.75,0
+n104,Nneka,igbo,espeak,Anker,0.8,0
+n105,Ikechukwu,igbo,espeak,Mike Chakwu.,0.222,0
+n106,Adaobi,igbo,espeak,Bye bye.,1.0,0
+n107,Chinwe,igbo,espeak,Chinwit.,0.333,0
+n108,Nnenna,igbo,espeak,Anner,0.667,0
+n109,Onyeka,igbo,espeak,Audia Kerr.,1.333,0
+n110,Uche,igbo,espeak,Merch.,1.0,0
+n111,Umar,hausa,espeak,Uma.,0.25,0
+n112,Khadija,hausa,espeak,Cardinger.,1.0,0
+n113,Aminu,hausa,espeak,Armin U.,0.2,0
+n114,Habiba,hausa,espeak,Habibir.,0.333,0
+n115,Garba,hausa,espeak,Darmer.,0.8,0
+n116,Safiya,hausa,espeak,Safelio.,0.667,0
+n117,Lawal,hausa,espeak,Aval.,0.4,0
+n118,Jamila,hausa,espeak,Tamirr,0.5,0
+n119,Idris,hausa,espeak,Idris.,0.0,1
+n120,Balkisu,hausa,espeak,Paul Kissu.,0.429,0

@@ -1,0 +1,121 @@
+id,name,language,engine,transcription,cer,exact_match
+n001,James,english,gtts,James,0.0,1
+n002,Emily,english,gtts,Emily,0.0,1
+n003,Michael,english,gtts,Michael,0.0,1
+n004,Sarah,english,gtts,Sarah,0.0,1
+n005,David,english,gtts,David,0.0,1
+n006,Jessica,english,gtts,Jessica,0.0,1
+n007,John,english,gtts,John,0.0,1
+n008,Emma,english,gtts,Emma,0.0,1
+n009,Robert,english,gtts,Robert,0.0,1
+n010,Olivia,english,gtts,Olivia,0.0,1
+n011,William,english,gtts,William,0.0,1
+n012,Sophia,english,gtts,Sophia,0.0,1
+n013,Thomas,english,gtts,Thomas,0.0,1
+n014,Grace,english,gtts,Grace.,0.0,1
+n015,Daniel,english,gtts,Daniel,0.0,1
+n016,Hannah,english,gtts,Hannah,0.0,1
+n017,Matthew,english,gtts,Matthew,0.0,1
+n018,Laura,english,gtts,Laura,0.0,1
+n019,Andrew,english,gtts,Andrew,0.0,1
+n020,Katherine,english,gtts,Catherine,0.111,0
+n021,Oluwaseun,yoruba,gtts,Alois Seyoon,0.778,0
+n022,Adebayo,yoruba,gtts,At a bail.,0.571,0
+n023,Folake,yoruba,gtts,for locker,0.667,0
+n024,Babatunde,yoruba,gtts,Boba Tundee,0.222,0
+n025,Olumide,yoruba,gtts,All you might.,1.0,0
+n026,Adenike,yoruba,gtts,Arunike,0.286,0
+n027,Temitope,yoruba,gtts,Tema tope,0.125,0
+n028,Oluwafemi,yoruba,gtts,Aloo family.,0.778,0
+n029,Bukola,yoruba,gtts,Bacola,0.333,0
+n030,Ayodele,yoruba,gtts,Airdell,0.429,0
+n031,Damilola,yoruba,gtts,Dammy Lola,0.25,0
+n032,Funmilayo,yoruba,gtts,Fun Malayo,0.111,0
+n033,Oluwatobi,yoruba,gtts,Aloitobi,0.444,0
+n034,Adeola,yoruba,gtts,Adiola,0.167,0
+n035,Kehinde,yoruba,gtts,KAHINDAE,0.286,0
+n036,Taiwo,yoruba,gtts,Taiwo,0.0,1
+n037,Yetunde,yoruba,gtts,Yutande.,0.286,0
+n038,Segun,yoruba,gtts,Second,0.6,0
+n039,Bolanle,yoruba,gtts,Belonly.,0.429,0
+n040,Titilayo,yoruba,gtts,Tidolio,0.5,0
+n041,Chukwuemeka,igbo,gtts,Chiquemica,0.455,0
+n042,Ngozi,igbo,gtts,Ingozy.,0.4,0
+n043,Obinna,igbo,gtts,Abina,0.333,0
+n044,Adaeze,igbo,gtts,A days,0.5,0
+n045,Chinedu,igbo,gtts,China Do,0.286,0
+n046,Ifeoma,igbo,gtts,e-former.,0.833,0
+n047,Emeka,igbo,gtts,America,0.8,0
+n048,Chidinma,igbo,gtts,Chidinma,0.0,1
+n049,Nnamdi,igbo,gtts,Namdi,0.167,0
+n050,Uchenna,igbo,gtts,channel,0.571,0
+n051,Chioma,igbo,gtts,Kiyoma,0.5,0
+n052,Ikenna,igbo,gtts,a canner,0.833,0
+n053,Amarachi,igbo,gtts,Amarachi,0.0,1
+n054,Kelechi,igbo,gtts,Kalechi.,0.143,0
+n055,Chinonso,igbo,gtts,Chennonso,0.25,0
+n056,Obiageli,igbo,gtts,Obey a jelly,0.625,0
+n057,Nkechi,igbo,gtts,Neketchi,0.333,0
+n058,Chukwudi,igbo,gtts,Chakuri,0.375,0
+n059,Chinelo,igbo,gtts,Chinello,0.143,0
+n060,Obiora,igbo,gtts,Obiora.,0.0,1
+n061,Abubakar,hausa,gtts,a boob a car.,0.375,0
+n062,Aisha,hausa,gtts,Aisha,0.0,1
+n063,Ibrahim,hausa,gtts,Ibrahim,0.0,1
+n064,Zainab,hausa,gtts,Zaynab,0.167,0
+n065,Musa,hausa,gtts,Moose.,0.75,0
+n066,Hauwa,hausa,gtts,How are you?,1.4,0
+n067,Usman,hausa,gtts,Usman,0.0,1
+n068,Fatima,hausa,gtts,Fatima.,0.0,1
+n069,Sani,hausa,gtts,Sammy,0.75,0
+n070,Amina,hausa,gtts,Amina,0.0,1
+n071,Yusuf,hausa,gtts,"You, sir.",0.6,0
+n072,Halima,hausa,gtts,Helima,0.167,0
+n073,Bello,hausa,gtts,Bellow,0.2,0
+n074,Maryam,hausa,gtts,Meriam,0.333,0
+n075,Sulaiman,hausa,gtts,Suell Aiman,0.25,0
+n076,Hadiza,hausa,gtts,Hadesa,0.333,0
+n077,Aliyu,hausa,gtts,I'll leave you.,1.6,0
+n078,Rukayya,hausa,gtts,Rukaya,0.143,0
+n079,Nasir,hausa,gtts,Nauseer,0.6,0
+n080,Zubaida,hausa,gtts,so better,1.0,0
+n081,Christopher,english,gtts,Christopher,0.0,1
+n082,Jennifer,english,gtts,Jennifer,0.0,1
+n083,Elizabeth,english,gtts,Elizabeth,0.0,1
+n084,Joseph,english,gtts,Joseph,0.0,1
+n085,Margaret,english,gtts,Margaret,0.0,1
+n086,Benjamin,english,gtts,Benjamin,0.0,1
+n087,Charlotte,english,gtts,Charlotte,0.0,1
+n088,Samuel,english,gtts,Samuel,0.0,1
+n089,Rebecca,english,gtts,Rebecca,0.0,1
+n090,Nicholas,english,gtts,Nicholas,0.0,1
+n091,Abiodun,yoruba,gtts,I'll be o' doon.,0.857,0
+n092,Iyabo,yoruba,gtts,Iaba,0.4,0
+n093,Olubunmi,yoruba,gtts,All upon me.,0.625,0
+n094,Oluwatosin,yoruba,gtts,Aloitocin,0.5,0
+n095,Ayotunde,yoruba,gtts,I attune day.,0.75,0
+n096,Morenike,yoruba,gtts,more in EK,0.375,0
+n097,Olusegun,yoruba,gtts,Olushigan,0.375,0
+n098,Ifeoluwa,yoruba,gtts,E-Fail Lua,0.625,0
+n099,Adewale,yoruba,gtts,Adawalee,0.286,0
+n100,Modupe,yoruba,gtts,Madupe.,0.167,0
+n101,Chukwuma,igbo,gtts,Shakuma,0.375,0
+n102,Ebere,igbo,gtts,Ever.,0.4,0
+n103,Chibueze,igbo,gtts,Chibwezae,0.25,0
+n104,Nneka,igbo,gtts,Neck-a,0.4,0
+n105,Ikechukwu,igbo,gtts,EK Chuku,0.333,0
+n106,Adaobi,igbo,gtts,Adobe,0.333,0
+n107,Chinwe,igbo,gtts,Chen Wei,0.333,0
+n108,Nnenna,igbo,gtts,Nana,0.5,0
+n109,Onyeka,igbo,gtts,Unique,0.833,0
+n110,Uche,igbo,gtts,Uchi,0.25,0
+n111,Umar,hausa,gtts,Umar,0.0,1
+n112,Khadija,hausa,gtts,Cottage,1.0,0
+n113,Aminu,hausa,gtts,Amino,0.2,0
+n114,Habiba,hausa,gtts,Habiba,0.0,1
+n115,Garba,hausa,gtts,Garba,0.0,1
+n116,Safiya,hausa,gtts,Sophia,0.667,0
+n117,Lawal,hausa,gtts,Lowell,0.6,0
+n118,Jamila,hausa,gtts,Jamila,0.0,1
+n119,Idris,hausa,gtts,Idris,0.0,1
+n120,Balkisu,hausa,gtts,Balkeesu,0.286,0

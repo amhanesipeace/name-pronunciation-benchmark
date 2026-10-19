@@ -1,0 +1,81 @@
+id,name,language,engine,transcription,cer,exact_match
+n001,James,english,mms,Yes,0.6,0
+n002,Emily,english,mms,Guy.,0.8,0
+n003,Michael,english,mms,Make sure you're all right.,2.571,0
+n004,Sarah,english,mms,Surround,1.2,0
+n005,David,english,mms,Neither.,1.4,0
+n006,Jessica,english,mms,He's safer.,0.714,0
+n007,John,english,mms,Then,0.75,0
+n008,Emma,english,mms,,1.0,0
+n009,Robert,english,mms,That's it!,1.0,0
+n010,Olivia,english,mms,Do you hear?,1.167,0
+n011,William,english,mms,Wollin,0.429,0
+n012,Sophia,english,mms,So I'll feed you.,1.667,0
+n013,Thomas,english,mms,Thomas,0.0,1
+n014,Grace,english,mms,I,1.0,0
+n015,Daniel,english,mms,Daniel,0.0,1
+n016,Hannah,english,mms,Anode.,0.667,0
+n017,Matthew,english,mms,Matter.,0.286,0
+n018,Laura,english,mms,Nailed.,1.0,0
+n019,Andrew,english,mms,and root.,0.5,0
+n020,Katherine,english,mms,ad-earing,0.556,0
+n021,Oluwaseun,yoruba,mms,that it was seen.,0.889,0
+n022,Adebayo,yoruba,mms,AdDU,0.714,0
+n023,Folake,yoruba,mms,Hi,1.0,0
+n024,Babatunde,yoruba,mms,But by him.,0.889,0
+n025,Olumide,yoruba,mms,Who made?,0.571,0
+n026,Adenike,yoruba,mms,and me.,0.571,0
+n027,Temitope,yoruba,mms,And we show.,1.125,0
+n028,Oluwafemi,yoruba,mms,fully with the knife.,1.444,0
+n029,Bukola,yoruba,mms,And hold.,0.833,0
+n030,Ayodele,yoruba,mms,They all do.,1.143,0
+n031,Damilola,yoruba,mms,Demelua,0.5,0
+n032,Funmilayo,yoruba,mms,Un the way you.,0.778,0
+n033,Oluwatobi,yoruba,mms,"I'll be with you, babe.",1.222,0
+n034,Adeola,yoruba,mms,Eguila.,0.667,0
+n035,Kehinde,yoruba,mms,Hain!,0.714,0
+n036,Taiwo,yoruba,mms,"Hey, you.",1.0,0
+n037,Yetunde,yoruba,mms,Eat in me.,0.571,0
+n038,Segun,yoruba,mms,See you.,0.8,0
+n039,Bolanle,yoruba,mms,Bono!,0.571,0
+n040,Titilayo,yoruba,mms,Need a mayu.,0.875,0
+n041,Chukwuemeka,igbo,mms,Good morning.,1.0,0
+n042,Ngozi,igbo,mms,No.,0.6,0
+n043,Obinna,igbo,mms,"So, Vinna.",0.333,0
+n044,Adaeze,igbo,mms,At ease.,0.667,0
+n045,Chinedu,igbo,mms,K-Ninu,0.571,0
+n046,Ifeoma,igbo,mms,that film.,1.167,0
+n047,Emeka,igbo,mms,The...,0.8,0
+n048,Chidinma,igbo,mms,"Till then, ma'am.",1.125,0
+n049,Nnamdi,igbo,mms,Nanan,0.667,0
+n050,Uchenna,igbo,mms,to the channel.,1.143,0
+n051,Chioma,igbo,mms,Camera,0.667,0
+n052,Ikenna,igbo,mms,to end.,0.667,0
+n053,Amarachi,igbo,mms,An air issue,0.875,0
+n054,Kelechi,igbo,mms,and delete it.,1.0,0
+n055,Chinonso,igbo,mms,Get done so.,0.625,0
+n056,Obiageli,igbo,mms,Where you go?,1.25,0
+n057,Nkechi,igbo,mms,new.,0.667,0
+n058,Chukwudi,igbo,mms,Timur,0.875,0
+n059,Chinelo,igbo,mms,See you next time!,1.714,0
+n060,Obiora,igbo,mms,and we are a...,1.167,0
+n061,Abubakar,hausa,mms,the hair.,0.75,0
+n062,Aisha,hausa,mms,Hey,1.0,0
+n063,Ibrahim,hausa,mms,You're in.,0.857,0
+n064,Zainab,hausa,mms,Change them.,1.5,0
+n065,Musa,hausa,mms,is.,0.75,0
+n066,Hauwa,hausa,mms,"Hey, I've got...",1.6,0
+n067,Usman,hausa,mms,Let's go.,1.2,0
+n068,Fatima,hausa,mms,There.,1.0,0
+n069,Sani,hausa,mms,Synod,0.75,0
+n070,Amina,hausa,mms,limit there.,1.6,0
+n071,Yusuf,hausa,mms,is of,0.6,0
+n072,Halima,hausa,mms,and in it.,1.0,0
+n073,Bello,hausa,mms,Yo,0.8,0
+n074,Maryam,hausa,mms,Here again.,1.167,0
+n075,Sulaiman,hausa,mms,She layman.,0.375,0
+n076,Hadiza,hausa,mms,Here is it.,1.0,0
+n077,Aliyu,hausa,mms,Erie!,0.8,0
+n078,Rukayya,hausa,mms,Do you really?,1.286,0
+n079,Nasir,hausa,mms,Desert.,0.8,0
+n080,Zubaida,hausa,mms,The beta,0.857,0

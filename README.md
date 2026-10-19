@@ -42,7 +42,7 @@ name-pronunciation-benchmark/
   sensitivity.py        robustness check: re-score a run across Whisper sizes
   forest_plot.py        forest plot: per-run gap + 95% CI (docs/forest_plot.png)
   per_language_forest.py  per-language gap vs English for one run, with CIs
-  outputs/              generated audio + manifest (git-ignored; see below)
+  outputs*/             per-run scores.csv + manifest.csv (tracked); audio ignored
   requirements.txt
 ```
 
@@ -111,9 +111,14 @@ brew install espeak-ng          # macOS (needs Homebrew)
   endpoint whose output can change silently. Treat generated audio as a
   **primary artifact to archive**, not something you can always regenerate
   identically. Always record the date and library version (the manifest does).
-- **Archive audio outside git.** `outputs/` is git-ignored because raw audio is
-  large and binary. For a paper, archive a fixed snapshot (zipped release, Git
-  LFS, or a data repository like **Zenodo / OSF**) and cite it.
+- **The scored tables are committed; the audio is not.** Each run's `scores.csv`
+  and `manifest.csv` are small text and are tracked, so every statistic and
+  figure regenerates from the repo with just `pip install -r requirements-dev.txt`
+  — no TTS/ASR stack. `tests/test_reproducibility.py` recomputes the headline
+  numbers from those tables and asserts the documented findings, so they can't
+  silently drift. Only the large regenerable `outputs*/audio/` is git-ignored;
+  for a paper, archive a fixed audio snapshot (zipped release, Git LFS, or
+  **Zenodo / OSF**) and cite it.
 - **Pinned versions.** `requirements.txt` and `requirements-dev.txt` pin exact
   versions so the pipeline reproduces bit-for-bit; loosen to `>=` only if you
   just want to try the tools.

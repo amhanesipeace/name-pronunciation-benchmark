@@ -1,0 +1,81 @@
+id,name,language,engine,transcription,cer,exact_match
+n001,James,english,mms,James.,0.0,1
+n002,Emily,english,mms,Inai.,1.0,0
+n003,Michael,english,mms,Maccheele.,0.571,0
+n004,Sarah,english,mms,Sarah.,0.0,1
+n005,David,english,mms,Deird.,0.6,0
+n006,Jessica,english,mms,Jessica.,0.0,1
+n007,John,english,mms,John.,0.0,1
+n008,Emma,english,mms,Emma.,0.0,1
+n009,Robert,english,mms,Why Robert?,0.5,0
+n010,Olivia,english,mms,Oliver.,0.333,0
+n011,William,english,mms,Willam.,0.143,0
+n012,Sophia,english,mms,Sophia.,0.0,1
+n013,Thomas,english,mms,Thomas.,0.0,1
+n014,Grace,english,mms,Grace.,0.0,1
+n015,Daniel,english,mms,Daniel.,0.0,1
+n016,Hannah,english,mms,Hannah.,0.0,1
+n017,Matthew,english,mms,Matil.,0.571,0
+n018,Laura,english,mms,Lara.,0.2,0
+n019,Andrew,english,mms,Andrew.,0.0,1
+n020,Katherine,english,mms,Gathering.,0.222,0
+n021,Oluwaseun,yoruba,mms,Oliver Sin.,0.667,0
+n022,Adebayo,yoruba,mms,Ebeo.,0.571,0
+n023,Folake,yoruba,mms,Fulic.,0.667,0
+n024,Babatunde,yoruba,mms,Bad Attent.,0.556,0
+n025,Olumide,yoruba,mms,Olamid.,0.286,0
+n026,Adenike,yoruba,mms,Ait Knight.,0.857,0
+n027,Temitope,yoruba,mms,Tabratup.,0.75,0
+n028,Oluwafemi,yoruba,mms,By all the way from it.,1.222,0
+n029,Bukola,yoruba,mms,Bukola.,0.0,1
+n030,Ayodele,yoruba,mms,Seattle.,0.714,0
+n031,Damilola,yoruba,mms,Demerua.,0.625,0
+n032,Funmilayo,yoruba,mms,Fundalio.,0.444,0
+n033,Oluwatobi,yoruba,mms,Alwood Aboe.,0.889,0
+n034,Adeola,yoruba,mms,Adela.,0.167,0
+n035,Kehinde,yoruba,mms,Gagged.,0.857,0
+n036,Taiwo,yoruba,mms,Theo.,0.6,0
+n037,Yetunde,yoruba,mms,Eden.,0.714,0
+n038,Segun,yoruba,mms,Sam.,0.8,0
+n039,Bolanle,yoruba,mms,Boa Mu.,0.571,0
+n040,Titilayo,yoruba,mms,Ted the Leo.,0.75,0
+n041,Chukwuemeka,igbo,mms,Kibul Mick.,0.818,0
+n042,Ngozi,igbo,mms,Nozev.,0.6,0
+n043,Obinna,igbo,mms,Lining open.,1.333,0
+n044,Adaeze,igbo,mms,at his.,0.833,0
+n045,Chinedu,igbo,mms,Chengdu.,0.286,0
+n046,Ifeoma,igbo,mms,Ithem.,0.667,0
+n047,Emeka,igbo,mms,game a mika.,1.0,0
+n048,Chidinma,igbo,mms,Chirna.,0.375,0
+n049,Nnamdi,igbo,mms,Nader.,0.667,0
+n050,Uchenna,igbo,mms,Achenna.,0.143,0
+n051,Chioma,igbo,mms,Kierna.,0.833,0
+n052,Ikenna,igbo,mms,Eikene.,0.5,0
+n053,Amarachi,igbo,mms,Ameerichir.,0.5,0
+n054,Kelechi,igbo,mms,Kilecta.,0.429,0
+n055,Chinonso,igbo,mms,Ken and so.,0.625,0
+n056,Obiageli,igbo,mms,ObeGillert.,0.75,0
+n057,Nkechi,igbo,mms,Enkikir.,0.833,0
+n058,Chukwudi,igbo,mms,Chip Good.,0.75,0
+n059,Chinelo,igbo,mms,Genolo,0.571,0
+n060,Obiora,igbo,mms,Obure.,0.5,0
+n061,Abubakar,hausa,mms,Abdubuker.,0.375,0
+n062,Aisha,hausa,mms,Esha.,0.4,0
+n063,Ibrahim,hausa,mms,Abraham.,0.286,0
+n064,Zainab,hausa,mms,Zena.,0.5,0
+n065,Musa,hausa,mms,Mizz.,0.75,0
+n066,Hauwa,hausa,mms,Howard.,0.8,0
+n067,Usman,hausa,mms,Esman.,0.2,0
+n068,Fatima,hausa,mms,Peter Mat.,0.833,0
+n069,Sani,hausa,mms,Senna.,0.75,0
+n070,Amina,hausa,mms,Emana.,0.4,0
+n071,Yusuf,hausa,mms,He of,0.8,0
+n072,Halima,hausa,mms,Herman.,0.667,0
+n073,Bello,hausa,mms,Bello.,0.0,1
+n074,Maryam,hausa,mms,Merrim.,0.5,0
+n075,Sulaiman,hausa,mms,Soh Women.,0.625,0
+n076,Hadiza,hausa,mms,Head It?,0.5,0
+n077,Aliyu,hausa,mms,Eli.,0.6,0
+n078,Rukayya,hausa,mms,Ruby.,0.571,0
+n079,Nasir,hausa,mms,Nizzer.,0.8,0
+n080,Zubaida,hausa,mms,Zabede.,0.571,0

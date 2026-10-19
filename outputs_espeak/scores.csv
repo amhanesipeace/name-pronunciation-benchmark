@@ -1,0 +1,81 @@
+id,name,language,engine,transcription,cer,exact_match
+n001,James,english,espeak,James,0.0,1
+n002,Emily,english,espeak,Ability.,0.8,0
+n003,Michael,english,espeak,Michael,0.0,1
+n004,Sarah,english,espeak,Hello,1.0,0
+n005,David,english,espeak,my video,0.8,0
+n006,Jessica,english,espeak,Jessica,0.0,1
+n007,John,english,espeak,,1.0,0
+n008,Emma,english,espeak,and move.,1.5,0
+n009,Robert,english,espeak,Robert.,0.0,1
+n010,Olivia,english,espeak,all they have here.,2.167,0
+n011,William,english,espeak,William.,0.0,1
+n012,Sophia,english,espeak,So here.,0.667,0
+n013,Thomas,english,espeak,Thomas,0.0,1
+n014,Grace,english,espeak,Race,0.2,0
+n015,Daniel,english,espeak,I'm yours.,1.167,0
+n016,Hannah,english,espeak,HANA,0.333,0
+n017,Matthew,english,espeak,Bye.,0.857,0
+n018,Laura,english,espeak,Lore.,0.6,0
+n019,Andrew,english,espeak,,1.0,0
+n020,Katherine,english,espeak,Coffin,0.778,0
+n021,Oluwaseun,yoruba,espeak,all the way son.,0.889,0
+n022,Adebayo,yoruba,espeak,There may go.,0.857,0
+n023,Folake,yoruba,espeak,for like,0.333,0
+n024,Babatunde,yoruba,espeak,Boba Tund.,0.222,0
+n025,Olumide,yoruba,espeak,all you might.,1.0,0
+n026,Adenike,yoruba,espeak,"Ah, the hike.",0.571,0
+n027,Temitope,yoruba,espeak,and it's open.,0.625,0
+n028,Oluwafemi,yoruba,espeak,all the way from here.,1.333,0
+n029,Bukola,yoruba,espeak,You co-learn.,1.0,0
+n030,Ayodele,yoruba,espeak,I hope all.,0.714,0
+n031,Damilola,yoruba,espeak,"No, no, no.",0.875,0
+n032,Funmilayo,yoruba,espeak,fun video,0.444,0
+n033,Oluwatobi,yoruba,espeak,I'll be back.,0.889,0
+n034,Adeola,yoruba,espeak,Thank you very much.,2.333,0
+n035,Kehinde,yoruba,espeak,Cut it.,0.857,0
+n036,Taiwo,yoruba,espeak,"Hey, whoa.",1.0,0
+n037,Yetunde,yoruba,espeak,"Yeah, it's on.",1.0,0
+n038,Segun,yoruba,espeak,and on,0.8,0
+n039,Bolanle,yoruba,espeak,Bye bye.,0.714,0
+n040,Titilayo,yoruba,espeak,to LAO,0.5,0
+n041,Chukwuemeka,igbo,espeak,Chocolumacus,0.818,0
+n042,Ngozi,igbo,espeak,and go there.,1.4,0
+n043,Obinna,igbo,espeak,have been heard.,1.667,0
+n044,Adaeze,igbo,espeak,Dean,0.667,0
+n045,Chinedu,igbo,espeak,Time to...,0.714,0
+n046,Ifeoma,igbo,espeak,I-O-Murts,1.0,0
+n047,Emeka,igbo,espeak,it back up.,1.4,0
+n048,Chidinma,igbo,espeak,Kidding mo,0.625,0
+n049,Nnamdi,igbo,espeak,L-A-B.,0.833,0
+n050,Uchenna,igbo,espeak,,1.0,0
+n051,Chioma,igbo,espeak,You know what I mean?,2.167,0
+n052,Ikenna,igbo,espeak,I can hurt.,1.0,0
+n053,Amarachi,igbo,espeak,I'm a lot of shit.,1.0,0
+n054,Kelechi,igbo,espeak,color 2,0.857,0
+n055,Chinonso,igbo,espeak,Kinnonso,0.375,0
+n056,Obiageli,igbo,espeak,"Oh, behind the roof.",1.375,0
+n057,Nkechi,igbo,espeak,and get tied.,1.167,0
+n058,Chukwudi,igbo,espeak,We'll do,0.875,0
+n059,Chinelo,igbo,espeak,time load,0.714,0
+n060,Obiora,igbo,espeak,Obeiro.,0.5,0
+n061,Abubakar,hausa,espeak,a muber car.,0.5,0
+n062,Aisha,hausa,espeak,"Hey, sure.",1.2,0
+n063,Ibrahim,hausa,espeak,A-Block-M.,0.714,0
+n064,Zainab,hausa,espeak,There you have it.,2.167,0
+n065,Musa,hausa,espeak,news.,1.0,0
+n066,Hauwa,hausa,espeak,Hardware,0.8,0
+n067,Usman,hausa,espeak,Asmen.,0.4,0
+n068,Fatima,hausa,espeak,Fatimo,0.167,0
+n069,Sani,hausa,espeak,I,0.75,0
+n070,Amina,hausa,espeak,Amen.,0.4,0
+n071,Yusuf,hausa,espeak,you,0.6,0
+n072,Halima,hausa,espeak,Alim.,0.333,0
+n073,Bello,hausa,espeak,Hello,0.2,0
+n074,Maryam,hausa,espeak,I'm very hungry.,1.5,0
+n075,Sulaiman,hausa,espeak,Swayman.,0.375,0
+n076,Hadiza,hausa,espeak,Have a good day.,1.5,0
+n077,Aliyu,hausa,espeak,I'll see you later.,2.2,0
+n078,Rukayya,hausa,espeak,Rue Kaya.,0.286,0
+n079,Nasir,hausa,espeak,See ya!,1.0,0
+n080,Zubaida,hausa,espeak,you pay the...,1.0,0
