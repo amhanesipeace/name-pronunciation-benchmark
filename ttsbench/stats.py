@@ -139,8 +139,16 @@ def english_vs_african_ci(rows: list[dict], **kw) -> dict | None:
     }
 
 
-def per_language_vs_english(rows: list[dict]) -> list[dict]:
-    """Each African language vs English, with Holm-Bonferroni corrected p."""
+def per_language_vs_english(rows: list[dict], *, ci: bool = True,
+                            **boot_kw) -> list[dict]:
+    """Each African language vs English, with Holm-Bonferroni corrected p.
+
+    When ``ci`` is true (the default) each result also carries a 95% bootstrap
+    confidence interval for its Cliff's delta (``delta_lo``/``delta_hi``), so a
+    per-language effect is reported with its uncertainty — consistent with the
+    pooled comparison in :func:`english_vs_african_ci`. Pass ``ci=False`` (or
+    bootstrap knobs such as ``n_boot``) through ``boot_kw`` to skip or tune it.
+    """
     by = cers_by_language(rows)
     eng = by.get("english", [])
     results = []
@@ -148,9 +156,14 @@ def per_language_vs_english(rows: list[dict]) -> list[dict]:
         cers = by[lang]
         u, p = mannwhitneyu(cers, eng, alternative="greater")
         delta = cliffs_delta(cers, eng)
-        results.append({"language": lang, "n": len(cers), "median": median(cers),
-                        "U": float(u), "p": float(p), "cliffs_delta": delta,
-                        "effect": effect_label(delta)})
+        row = {"language": lang, "n": len(cers), "median": median(cers),
+               "U": float(u), "p": float(p), "cliffs_delta": delta,
+               "effect": effect_label(delta)}
+        if ci and cers and eng:
+            dci = cliffs_delta_ci(cers, eng, **boot_kw)
+            row["delta_lo"] = dci["lo"]
+            row["delta_hi"] = dci["hi"]
+        results.append(row)
 
     # Holm-Bonferroni: sort by p ascending, scale by (m - rank), keep monotonic.
     order = sorted(results, key=lambda r: r["p"])

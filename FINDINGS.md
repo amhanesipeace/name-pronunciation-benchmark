@@ -79,6 +79,16 @@ baseline.
 
 Per language (mean CER): gTTS — Igbo 0.32, Yoruba 0.37, Hausa 0.42.
 
+**No single language is driving the gap.** On the clean-baseline gTTS run, each
+of the three African languages is pronounced significantly worse than English,
+with a *large* Cliff's δ whose 95% bootstrap CI stays well clear of zero —
+Yoruba δ=+0.89, Igbo δ=+0.84, Hausa δ=+0.74, all significant after
+Holm-Bonferroni correction. The bias is broad, not one outlier language
+(`per_language_forest.py`):
+
+![Per-language gap vs English (gTTS, isolated): Yoruba, Igbo and Hausa each with
+Cliff's δ and a 95% bootstrap CI clear of zero.](docs/per_language_forest.png)
+
 ## What it actually sounds like (gTTS, isolated)
 
 The numbers show *that* there's bias; these show *what it sounds like*. English

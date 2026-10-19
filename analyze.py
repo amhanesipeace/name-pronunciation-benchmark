@@ -71,10 +71,12 @@ def main():
         ]
         for r in per_language_vs_english(rows):
             sig = "significant" if r["p_holm"] < 0.05 else "n.s."
+            ci_txt = (f"  95% CI [{r['delta_lo']:+.3f}, {r['delta_hi']:+.3f}]"
+                      if "delta_lo" in r else "")
             lines.append(
                 f"  {r['language']:8} n={r['n']:>3} median={r['median']:.3f}  "
                 f"p={r['p']:.2e}  p_holm={r['p_holm']:.2e}  "
-                f"delta={r['cliffs_delta']:+.3f} ({r['effect']}, {sig})")
+                f"delta={r['cliffs_delta']:+.3f} ({r['effect']}, {sig}){ci_txt}")
     else:
         lines.append("Not enough data (need both English and non-English names).")
 

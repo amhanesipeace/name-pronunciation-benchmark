@@ -6,6 +6,8 @@
 #   make espeak           espeak-ng (needs the espeak-ng binary)
 #   make mms              Meta MMS neural (needs torch/transformers)
 #   make mms-carrier      MMS with carrier sentences
+#   make forest           forest plot of the gap (all runs, 95% CIs)
+#   make per-language-forest   per-language gap vs English for the gTTS run
 #   make errors           qualitative error tables from the gTTS run
 #   make test             run the unit tests
 #   make all              gtts + gtts-carrier + mms-carrier + errors
@@ -23,7 +25,8 @@ define pipeline
 	$(PYTHON) analyze.py --scores $(2)/scores.csv --out $(2)/analysis --title "$(1) $(3)"
 endef
 
-.PHONY: setup gtts gtts-carrier espeak mms mms-carrier errors test all clean
+.PHONY: setup gtts gtts-carrier espeak mms mms-carrier errors test all clean \
+        sensitivity forest per-language-forest
 
 setup:
 	$(PYTHON) -m pip install -r requirements.txt
@@ -52,6 +55,9 @@ sensitivity:
 
 forest:
 	$(PYTHON) forest_plot.py
+
+per-language-forest:
+	$(PYTHON) per_language_forest.py --run outputs
 
 test:
 	$(PYTHON) -m pytest

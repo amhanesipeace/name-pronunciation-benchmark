@@ -39,6 +39,7 @@ name-pronunciation-benchmark/
   run.py                CLI entry point
   sensitivity.py        robustness check: re-score a run across Whisper sizes
   forest_plot.py        forest plot: per-run gap + 95% CI (docs/forest_plot.png)
+  per_language_forest.py  per-language gap vs English for one run, with CIs
   outputs/              generated audio + manifest (git-ignored; see below)
   requirements.txt
 ```

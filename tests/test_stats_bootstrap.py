@@ -2,7 +2,8 @@
 from statistics import mean
 
 from ttsbench.stats import (_percentile, bootstrap_ci, cliffs_delta_ci,
-                            english_vs_african_ci, mean_gap_ci)
+                            english_vs_african_ci, mean_gap_ci,
+                            per_language_vs_english)
 
 
 def test_percentile_endpoints_and_midpoint():
@@ -76,3 +77,24 @@ def test_english_vs_african_ci_from_rows():
 def test_english_vs_african_ci_needs_both_groups():
     rows = [{"language": "english", "cer": 0.0}]
     assert english_vs_african_ci(rows) is None
+
+
+def test_per_language_ci_attaches_delta_interval():
+    rows = (
+        [{"language": "english", "cer": 0.0} for _ in range(6)]
+        + [{"language": "yoruba", "cer": 0.6} for _ in range(6)]
+        + [{"language": "igbo", "cer": 0.5} for _ in range(6)]
+    )
+    out = per_language_vs_english(rows, n_boot=300)
+    assert {r["language"] for r in out} == {"yoruba", "igbo"}
+    for r in out:
+        assert r["delta_lo"] <= r["cliffs_delta"] <= r["delta_hi"]
+
+
+def test_per_language_ci_can_be_skipped():
+    rows = (
+        [{"language": "english", "cer": 0.0} for _ in range(4)]
+        + [{"language": "hausa", "cer": 0.6} for _ in range(4)]
+    )
+    out = per_language_vs_english(rows, ci=False)
+    assert out and "delta_lo" not in out[0]
