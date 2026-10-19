@@ -1,4 +1,6 @@
 # Test dependencies — pinned. CI installs only these (not the heavy TTS/ASR
-# stack); the tested modules import scipy (stats) but not torch/allosaurus.
+# stack); the tested modules import scipy (stats) and matplotlib (forest plots)
+# but not torch/allosaurus.
 pytest==9.1.1
 scipy==1.18.1
+matplotlib==3.11.2
