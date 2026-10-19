@@ -12,8 +12,8 @@ authors:
     given-names: Peace
 repository-code: "https://github.com/amhanesipeace/name-pronunciation-benchmark"
 license: MIT
-version: "0.9"
-date-released: "2026-09-30"
+version: "1.0.0"
+date-released: "2026-10-19"
 keywords:
   - text-to-speech
   - speech synthesis

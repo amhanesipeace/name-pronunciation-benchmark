@@ -6,10 +6,12 @@ Measuring how accurately text-to-speech (TTS) systems pronounce personal names
 from African languages (**Yoruba, Igbo, Hausa**) compared to common **English**
 names — to surface and quantify bias in deployed speech systems.
 
-> **Status: v0.7 — three engines + write-up.** 80 names (20 per language). The
+> **Status: v1.0.0 — first archival release.** 80 names (20 per language). The
 > pipeline synthesizes with a chosen TTS engine (gTTS, espeak-ng, or Meta's
 > neural MMS), scores pronunciation via Whisper back-transcription, and
-> aggregates into per-language stats, a chart, and significance tests.
+> aggregates into per-language stats, charts, significance tests, and
+> bootstrap confidence intervals (forest plots + an ASR-scorer sensitivity
+> analysis). See [`CHANGELOG.md`](CHANGELOG.md) for what each version added.
 
 📄 **[Paper-style writeup →](PAPER.md)** (abstract · method · results ·
 limitations · ethics) · **[master results table →](RESULTS.md)** · detailed
@@ -269,11 +271,21 @@ repository"** button (top-right of the repo) with ready-made APA/BibTeX.
 }
 ```
 
-**Archiving for reproducibility:** code is versioned here; the generated audio is
-git-ignored (large/binary). To make results permanently citable, archive a fixed
-snapshot — the code plus a run's `audio/`, `manifest.csv` and `scores.csv` — to
-**[Zenodo](https://zenodo.org)** or **[OSF](https://osf.io)** for a DOI. Zenodo
-can import a tagged GitHub release automatically. Licensed under [MIT](LICENSE).
+**Archiving for a DOI (Zenodo).** Code is versioned here; the generated audio is
+git-ignored (large/binary). To mint a permanent, citable DOI from a tagged
+release:
+
+1. Sign in at **[zenodo.org](https://zenodo.org)** with GitHub and, under
+   *Settings → GitHub*, flip this repository **On**. (Do this **before** step 2 —
+   Zenodo only archives releases created after the switch is on.)
+2. Publish a GitHub release for the tag (`v1.0.0`): `gh release create v1.0.0
+   --title "v1.0.0" --notes-file CHANGELOG.md`.
+3. Zenodo auto-archives the release and issues a DOI; add its badge here and the
+   `doi:` field to [`CITATION.cff`](CITATION.cff).
+
+For a fully reproducible snapshot, attach one run's `audio/`, `manifest.csv` and
+`scores.csv` to the Zenodo record (the repo ships only code + results). Licensed
+under [MIT](LICENSE).
 
 ## Roadmap
 
