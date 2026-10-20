@@ -42,6 +42,7 @@ name-pronunciation-benchmark/
   sensitivity.py        robustness check: re-score a run across Whisper sizes
   forest_plot.py        forest plot: per-run gap + 95% CI (docs/forest_plot.png)
   per_language_forest.py  per-language gap vs English for one run, with CIs
+  cross_engine.py       per-name CER agreement between two engines (Spearman)
   outputs*/             per-run scores.csv + manifest.csv (tracked); audio ignored
   requirements.txt
 ```

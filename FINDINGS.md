@@ -153,6 +153,28 @@ each engine's own English baseline:
 A benchmark that ignored this would have proudly (and wrongly) reported "the
 modern neural model is unbiased." Catching the confound is the point.
 
+## Is it the name, or the vendor? (cross-engine agreement)
+
+If the difficulty were just one vendor's quirk, two unrelated systems would fail
+on *different* names. They don't. Correlating the per-name CER of the two engines
+under the fair carrier protocol (gTTS vs MMS, same 80 names) shows a **moderate,
+highly significant** rank agreement — the names that trip one engine tend to trip
+the other (`cross_engine.py`):
+
+![Per-name CER, gTTS carrier vs MMS carrier: African names cluster above the
+equal-difficulty diagonal (MMS is the weaker engine), and difficulty rises
+together across both engines.](docs/cross_engine_carrier.png)
+
+- **All names:** Spearman ρ = **0.54** (p ≈ 2×10⁻⁷, n=80).
+- **African names only:** ρ = **0.39** (p ≈ 2×10⁻³, n=60) — weaker once the easy
+  English names are removed, but still significant.
+
+Read honestly, this cuts both ways: a name's difficulty is **substantially
+intrinsic** (shared across independent systems, so not a single vendor's bug),
+yet the drop from 0.54 to 0.39 shows **engine-specific factors also matter** — the
+two systems don't rank the African names identically. The bias is systemic, not
+anecdotal, but it is not fully explained by the names alone.
+
 ## Native-voice observation (qualitative)
 
 MMS ships per-language voices (`mms-tts-yor`, `mms-tts-hau`; **no** `mms-tts-ibo`).

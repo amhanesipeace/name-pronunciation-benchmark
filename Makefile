@@ -8,6 +8,7 @@
 #   make mms-carrier      MMS with carrier sentences
 #   make forest           forest plot of the gap (all runs, 95% CIs)
 #   make per-language-forest   per-language gap vs English for the gTTS run
+#   make cross-engine     per-name CER agreement between two engines (carrier)
 #   make errors           qualitative error tables from the gTTS run
 #   make test             run the unit tests
 #   make all              gtts + gtts-carrier + mms-carrier + errors
@@ -26,7 +27,7 @@ define pipeline
 endef
 
 .PHONY: setup gtts gtts-carrier espeak mms mms-carrier errors test all clean \
-        sensitivity forest per-language-forest
+        sensitivity forest per-language-forest cross-engine
 
 setup:
 	$(PYTHON) -m pip install -r requirements.txt
@@ -58,6 +59,9 @@ forest:
 
 per-language-forest:
 	$(PYTHON) per_language_forest.py --run outputs
+
+cross-engine:
+	$(PYTHON) cross_engine.py --run-a outputs_gtts_carrier --run-b outputs_mms_carrier
 
 test:
 	$(PYTHON) -m pytest
