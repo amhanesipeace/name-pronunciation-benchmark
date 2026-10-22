@@ -32,6 +32,7 @@ turns "this feels biased" into measurable evidence.
 name-pronunciation-benchmark/
   data/names.csv          studied dataset — 80 names (20/language); results use this
   data/names_extended.csv larger set — 120 names (30/language) for bigger runs
+  CONTRIBUTING-DATA.md    how native-speaker pronunciation data would be contributed
   data/SOURCES.md         dataset provenance, sourcing + validation notes
   data/DATASHEET.md       Datasheets for Datasets (Gebru et al.) record
   ttsbench/
@@ -302,5 +303,13 @@ under [MIT](LICENSE).
 5. ✅ Expand the dataset to 80 names (20 per language, balanced)
 6. ✅ Statistical testing: Mann-Whitney U + Cliff's delta, Holm-corrected
 7. Add reference pronunciations (IPA / native-speaker audio) + cite name sources
+   — see [`CONTRIBUTING-DATA.md`](CONTRIBUTING-DATA.md) for how this would be
+   collected responsibly (consent, credit, licensing, ethics review)
 8. Add more engines (Coqui neural; cloud APIs for real deployed systems)
 ```
+
+**Want to help?** Native-speaker pronunciation data is the single most valuable
+thing this project is missing. If you speak Yoruba, Igbo, Hausa (or another
+language whose names get mangled), see
+[`CONTRIBUTING-DATA.md`](CONTRIBUTING-DATA.md) and open an issue — collection is
+done under a documented consent/credit/licensing and ethics process.
