@@ -77,7 +77,11 @@ isolated-word baselines are indistinguishable from zero.*
    before pronunciation quality is even a question.
 4. **What it sounds like.** African names are turned into unrelated English
    words: *Aliyu* → "I'll leave you", *Emeka* → "America", *Oluwaseun* → "Alois
-   Seyoon", *Folake* → "For Locker".
+   Seyoon", *Folake* → "For Locker". Quantified (`error_taxonomy.py`): English
+   names are recovered 100% of the time vs 28% for African names, and of the
+   African failures **at least 30%** are substitutions by ordinary English
+   words/phrases rather than novel approximations (a conservative lower bound, as
+   only the ~10k most common words count) — see `docs/error_taxonomy.md`.
 
 ## 4. Limitations
 

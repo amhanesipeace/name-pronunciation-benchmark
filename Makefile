@@ -10,6 +10,7 @@
 #   make per-language-forest   per-language gap vs English for the gTTS run
 #   make cross-engine     per-name CER agreement between two engines (carrier)
 #   make length-check     robustness: is the gap just a name-length effect?
+#   make taxonomy         how names fail: recovered / English-sub / garbled
 #   make errors           qualitative error tables from the gTTS run
 #   make test             run the unit tests
 #   make all              gtts + gtts-carrier + mms-carrier + errors
@@ -28,7 +29,7 @@ define pipeline
 endef
 
 .PHONY: setup gtts gtts-carrier espeak mms mms-carrier errors test all clean \
-        sensitivity forest per-language-forest cross-engine length-check
+        sensitivity forest per-language-forest cross-engine length-check taxonomy
 
 setup:
 	$(PYTHON) -m pip install -r requirements.txt
@@ -66,6 +67,9 @@ cross-engine:
 
 length-check:
 	$(PYTHON) length_confound.py --run outputs
+
+taxonomy:
+	$(PYTHON) error_taxonomy.py --run outputs
 
 test:
 	$(PYTHON) -m pytest

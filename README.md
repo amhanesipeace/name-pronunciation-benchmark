@@ -33,6 +33,7 @@ name-pronunciation-benchmark/
   data/names.csv          studied dataset — 80 names (20/language); results use this
   data/names_extended.csv larger set — 120 names (30/language) for bigger runs
   CONTRIBUTING-DATA.md    how native-speaker pronunciation data would be contributed
+  data/common_english_words.txt  ~10k most common English words (public domain)
   data/SOURCES.md         dataset provenance, sourcing + validation notes
   data/DATASHEET.md       Datasheets for Datasets (Gebru et al.) record
   ttsbench/
@@ -45,6 +46,7 @@ name-pronunciation-benchmark/
   per_language_forest.py  per-language gap vs English for one run, with CIs
   cross_engine.py       per-name CER agreement between two engines (Spearman)
   length_confound.py    robustness check: is the gap just a name-length effect?
+  error_taxonomy.py     how names fail: recovered / English-substitution / garble
   outputs*/             per-run scores.csv + manifest.csv (tracked); audio ignored
   requirements.txt
 ```

@@ -44,6 +44,18 @@ per-name citations are not attached. Treat them as a reasonable working sample,
   encode the *anglicised* pronunciation, defeating the purpose; these must come
   from native speakers.
 
+## The `common_english_words.txt` lexicon
+
+Used by `error_taxonomy.py` to decide whether an ASR transcription is an ordinary
+English word (vs the name or a novel non-word). It is the
+[`google-10000-english`](https://github.com/first20hours/google-10000-english)
+`usa-no-swears` list — the ~10k most frequent English words, derived from the
+Google Web Trillion Word Corpus. **Public domain** (the n-gram frequency data is
+not copyrightable; the repository places the list in the public domain). It is a
+*common*-words list by design, so it under-counts valid substitutions (e.g.
+"locker"), making the reported English-substitution rate a conservative lower
+bound.
+
 ## Ethics
 
 Names refer to people. Use common given names or documented lists; never target
