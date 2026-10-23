@@ -92,6 +92,13 @@ isolated-word baselines are indistinguishable from zero.*
   significant at every size (Cliff's δ = +0.75 to +0.84, all p < 10⁻⁷), with a
   better recognizer narrowing but not closing it — the gap is not an artefact of
   one ASR model (`docs/sensitivity_whisper.md`).
+- **Not a name-length artefact.** African names are marginally longer than the
+  English set (median 6.5 vs 6.0 characters, p = 0.01), but length does not
+  explain the gap: per-name CER does not track length (Spearman ρ = +0.09 overall,
+  −0.16 within African names, both n.s.), and restricting to the overlapping
+  length band (4–9 characters) leaves the disparity intact (English 0.01 vs
+  African 0.37, p ≈ 1×10⁻⁸). The effect is driven by origin/phonology, not string
+  length (`docs/length_confound.md`).
 - **Recognizer noise.** The universal phoneme recognizer is unreliable on short
   single-word clips, so PER is not yet a dependable standalone metric.
 - **Scale and provenance.** Small n; names compiled from general knowledge, not a

@@ -191,6 +191,11 @@ proper (and ethically correct) next step.
   p < 10⁻⁷) — see [docs/sensitivity_whisper.md](docs/sensitivity_whisper.md). A
   better recognizer shrinks the gap but does not close it, so the bias is not an
   artefact of one recognizer.
+- **Not a length effect.** African names are marginally longer, but length does
+  not predict CER (ρ = +0.09 overall, −0.16 within African, both n.s.) and the gap
+  holds at matched lengths (English 0.01 vs African 0.37 in the 4–9-char band,
+  p ≈ 1×10⁻⁸) — see [docs/length_confound.md](docs/length_confound.md). The
+  disparity is about origin/phonology, not string length.
 - Small n (20/language); results are illustrative, not a population claim.
 - Names are a general-knowledge list, **not** native-speaker validated (see
   README ethics). Spellings/diacritics need review.
