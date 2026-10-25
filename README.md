@@ -47,6 +47,7 @@ name-pronunciation-benchmark/
   cross_engine.py       per-name CER agreement between two engines (Spearman)
   length_confound.py    robustness check: is the gap just a name-length effect?
   error_taxonomy.py     how names fail: recovered / English-substitution / garble
+  comparison_charts.py  engine-comparison + carrier-effect bars (from scores)
   outputs*/             per-run scores.csv + manifest.csv (tracked); audio ignored
   requirements.txt
 ```
@@ -119,9 +120,13 @@ brew install espeak-ng          # macOS (needs Homebrew)
 - **The scored tables are committed; the audio is not.** Each run's `scores.csv`
   and `manifest.csv` are small text and are tracked, so every statistic and
   figure regenerates from the repo with just `pip install -r requirements-dev.txt`
-  — no TTS/ASR stack. `tests/test_reproducibility.py` recomputes the headline
-  numbers from those tables and asserts the documented findings, so they can't
-  silently drift. Only the large regenerable `outputs*/audio/` is git-ignored;
+  — no TTS/ASR stack. **`make figures` rebuilds every committed figure and report
+  from those tables** (the one exception is `sensitivity.py`, which re-runs
+  Whisper on the audio). `tests/test_reproducibility.py` recomputes the headline
+  numbers and asserts the documented findings, and `tests/test_pipeline_reproducible.py`
+  runs each analysis end-to-end on the committed data in CI, so neither the
+  numbers nor the figure scripts can silently drift. Only the large regenerable
+  `outputs*/audio/` is git-ignored;
   for a paper, archive a fixed audio snapshot (zipped release, Git LFS, or
   **Zenodo / OSF**) and cite it.
 - **Pinned versions.** `requirements.txt` and `requirements-dev.txt` pin exact

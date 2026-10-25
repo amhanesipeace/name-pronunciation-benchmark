@@ -12,6 +12,8 @@
 #   make length-check     robustness: is the gap just a name-length effect?
 #   make taxonomy         how names fail: recovered / English-sub / garbled
 #   make errors           qualitative error tables from the gTTS run
+#   make figures          regenerate EVERY committed figure/report from the
+#                         committed scores (no TTS/ASR stack; skips sensitivity)
 #   make test             run the unit tests
 #   make all              gtts + gtts-carrier + mms-carrier + errors
 #   make clean            remove all generated outputs
@@ -29,7 +31,8 @@ define pipeline
 endef
 
 .PHONY: setup gtts gtts-carrier espeak mms mms-carrier errors test all clean \
-        sensitivity forest per-language-forest cross-engine length-check taxonomy
+        sensitivity forest per-language-forest cross-engine length-check taxonomy \
+        figures
 
 setup:
 	$(PYTHON) -m pip install -r requirements.txt
@@ -70,6 +73,25 @@ length-check:
 
 taxonomy:
 	$(PYTHON) error_taxonomy.py --run outputs
+
+# Regenerate every committed figure/report straight from the committed score
+# tables (no TTS/ASR stack). analyze.py also writes summary.csv/stats.txt, so its
+# charts go through a tmp dir and only the PNG is kept, leaving docs/ clean.
+figures:
+	$(PYTHON) comparison_charts.py all
+	$(PYTHON) forest_plot.py
+	$(PYTHON) per_language_forest.py --run outputs
+	$(PYTHON) cross_engine.py --run-a outputs_gtts_carrier --run-b outputs_mms_carrier
+	$(PYTHON) error_taxonomy.py --run outputs
+	$(PYTHON) length_confound.py --run outputs
+	$(PYTHON) error_analysis.py --scores outputs/scores.csv --top 5 --out docs/error_analysis_gtts.md
+	$(PYTHON) aggregate_results.py
+	$(PYTHON) analyze.py --scores outputs/scores.csv --out docs/_tmp --title "gtts n=80" && mv docs/_tmp/cer_by_language.png docs/cer_by_language.png
+	$(PYTHON) analyze.py --scores outputs_ext_gtts/scores.csv --out docs/_tmp --title "gtts n=120" && mv docs/_tmp/cer_by_language.png docs/cer_by_language_ext120.png
+	$(PYTHON) analyze.py --scores outputs_ext_gtts_carrier/scores.csv --out docs/_tmp --title "gtts carrier n=120" && mv docs/_tmp/cer_by_language.png docs/cer_gtts_carrier_ext120.png
+	$(PYTHON) analyze.py --scores outputs_ext_mms_carrier/scores.csv --out docs/_tmp --title "mms carrier n=120" && mv docs/_tmp/cer_by_language.png docs/cer_mms_carrier_ext120.png
+	@rm -rf docs/_tmp
+	@echo "All figures regenerated from committed scores (sensitivity needs audio)."
 
 test:
 	$(PYTHON) -m pytest
