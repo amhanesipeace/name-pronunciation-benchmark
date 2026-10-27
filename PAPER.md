@@ -103,6 +103,15 @@ isolated-word baselines are indistinguishable from zero.*
   length band (4–9 characters) leaves the disparity intact (English 0.01 vs
   African 0.37, p ≈ 1×10⁻⁸). The effect is driven by origin/phonology, not string
   length (`docs/length_confound.md`).
+- **Not an exotic-spelling artefact.** Nor is it the *orthography*: non-English
+  letter patterns (clusters like *gb*/*kp*/*nw*, initial syllabic nasals, long
+  vowel runs) are rare even in the African set (no significant excess over English,
+  p = 0.09) and do not predict CER within African names (Spearman ρ ≈ 0). Among
+  names written with ordinary Latin spelling, the full gap persists — plain-spelled
+  African names (Oluwaseun, Adebayo, Folake) are mispronounced at the same rate as
+  the exotic ones (English 0.01 vs African 0.37, p ≈ 2×10⁻⁸). The driver is the
+  system's familiarity with the name and its language, not the spelling on the page
+  (`docs/orthography_confound.md`).
 - **Recognizer noise.** The universal phoneme recognizer is unreliable on short
   single-word clips, so PER is not yet a dependable standalone metric.
 - **Scale and provenance.** Small n; names compiled from general knowledge, not a

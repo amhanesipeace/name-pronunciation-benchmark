@@ -79,6 +79,24 @@ def test_comparison_charts_regenerate(tmp_path):
         assert out.exists()
 
 
+def test_orthography_confound_runs_on_committed_scores():
+    from orthography_confound import load, report, simple_gap, split
+    rows = load(Path("outputs"), Path("data/names.csv"))
+    assert len(rows) == 80
+    _, afr = split(rows)
+    sg = simple_gap(rows)
+    assert sg["african_cer"] > sg["english_cer"]      # gap among plain-spelled names
+    assert "Conclusion" in report(rows)
+
+
+def test_length_confound_runs_on_committed_scores():
+    from length_confound import load, matched_gap, report
+    rows = load(Path("outputs"), Path("data/names.csv"))
+    assert len(rows) == 80
+    assert matched_gap(rows)["african_cer"] > matched_gap(rows)["english_cer"]
+    assert "Conclusion" in report(rows)
+
+
 def test_per_run_cer_chart_renders(tmp_path):
     from ttsbench.analyze import load_scores, plot_cer_by_language, summarize
     summary = summarize(load_scores("outputs/scores.csv"))

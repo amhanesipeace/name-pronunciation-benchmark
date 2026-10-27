@@ -84,6 +84,7 @@ figures:
 	$(PYTHON) cross_engine.py --run-a outputs_gtts_carrier --run-b outputs_mms_carrier
 	$(PYTHON) error_taxonomy.py --run outputs
 	$(PYTHON) length_confound.py --run outputs
+	$(PYTHON) orthography_confound.py --run outputs
 	$(PYTHON) error_analysis.py --scores outputs/scores.csv --top 5 --out docs/error_analysis_gtts.md
 	$(PYTHON) aggregate_results.py
 	$(PYTHON) analyze.py --scores outputs/scores.csv --out docs/_tmp --title "gtts n=80" && mv docs/_tmp/cer_by_language.png docs/cer_by_language.png

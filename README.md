@@ -46,6 +46,7 @@ name-pronunciation-benchmark/
   per_language_forest.py  per-language gap vs English for one run, with CIs
   cross_engine.py       per-name CER agreement between two engines (Spearman)
   length_confound.py    robustness check: is the gap just a name-length effect?
+  orthography_confound.py robustness check: is the gap just exotic spelling?
   error_taxonomy.py     how names fail: recovered / English-substitution / garble
   comparison_charts.py  engine-comparison + carrier-effect bars (from scores)
   outputs*/             per-run scores.csv + manifest.csv (tracked); audio ignored

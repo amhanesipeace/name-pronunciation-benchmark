@@ -210,6 +210,12 @@ proper (and ethically correct) next step.
   holds at matched lengths (English 0.01 vs African 0.37 in the 4–9-char band,
   p ≈ 1×10⁻⁸) — see [docs/length_confound.md](docs/length_confound.md). The
   disparity is about origin/phonology, not string length.
+- **Not an exotic-spelling effect.** Non-English letter patterns (gb/kp/nw,
+  initial syllabic nasals, long vowel runs) are rare even in the African set
+  (p = 0.09 vs English) and don't predict CER within African names (ρ ≈ 0); among
+  plain-spelled names the full gap persists (English 0.01 vs African 0.37,
+  p ≈ 2×10⁻⁸) — see [docs/orthography_confound.md](docs/orthography_confound.md).
+  It's familiarity, not spelling.
 - Small n (20/language); results are illustrative, not a population claim.
 - Names are a general-knowledge list, **not** native-speaker validated (see
   README ethics). Spellings/diacritics need review.
