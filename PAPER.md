@@ -112,6 +112,13 @@ isolated-word baselines are indistinguishable from zero.*
   the exotic ones (English 0.01 vs African 0.37, p ≈ 2×10⁻⁸). The driver is the
   system's familiarity with the name and its language, not the spelling on the page
   (`docs/orthography_confound.md`).
+- **Not a single-outlier artefact.** The gap is stable under resampling of the
+  stimulus set. Leave-one-language-out — dropping Yoruba, Igbo or Hausa in turn —
+  leaves the pooled English-vs-African effect large and significant every time
+  (Cliff's δ = +0.79 to +0.87, p ≤ 1×10⁻⁷), so no one language carries it. A
+  leave-one-name-out jackknife over all 80 names moves δ by at most 0.015 (range
+  [+0.82, +0.84]), so no single name does either. The disparity is a property of
+  the whole sample (`docs/influence.md`).
 - **Recognizer noise.** The universal phoneme recognizer is unreliable on short
   single-word clips, so PER is not yet a dependable standalone metric.
 - **Scale and provenance.** Small n; names compiled from general knowledge, not a

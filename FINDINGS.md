@@ -216,6 +216,11 @@ proper (and ethically correct) next step.
   plain-spelled names the full gap persists (English 0.01 vs African 0.37,
   p ≈ 2×10⁻⁸) — see [docs/orthography_confound.md](docs/orthography_confound.md).
   It's familiarity, not spelling.
+- **Not one outlier.** Leave-one-language-out keeps the pooled gap large and
+  significant whichever African language is removed (Cliff's δ = +0.79 to +0.87,
+  p ≤ 1×10⁻⁷), and a leave-one-name-out jackknife moves δ by at most 0.015 (range
+  [+0.82, +0.84] over all 80 names) — see [docs/influence.md](docs/influence.md).
+  The disparity is a property of the whole sample, not a single language or name.
 - Small n (20/language); results are illustrative, not a population claim.
 - Names are a general-knowledge list, **not** native-speaker validated (see
   README ethics). Spellings/diacritics need review.

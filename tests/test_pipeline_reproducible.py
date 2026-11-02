@@ -97,6 +97,17 @@ def test_length_confound_runs_on_committed_scores():
     assert "Conclusion" in report(rows)
 
 
+def test_influence_check_runs_on_committed_scores():
+    from influence import leave_one_language_out, leave_one_name_out, load, report
+    rows = load(Path("outputs"))
+    assert len(rows) == 80
+    lolo = leave_one_language_out(rows)
+    assert len(lolo) == 3                                 # yoruba, igbo, hausa
+    assert all(r["cliffs_delta"] > 0 for r in lolo)       # gap survives each drop
+    assert leave_one_name_out(rows)["min"] > 0            # no single name flips it
+    assert "Conclusion" in report(rows)
+
+
 def test_per_run_cer_chart_renders(tmp_path):
     from ttsbench.analyze import load_scores, plot_cer_by_language, summarize
     summary = summarize(load_scores("outputs/scores.csv"))
