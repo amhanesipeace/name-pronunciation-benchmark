@@ -11,6 +11,7 @@
 #   make cross-engine     per-name CER agreement between two engines (carrier)
 #   make length-check     robustness: is the gap just a name-length effect?
 #   make influence        robustness: is the gap driven by one language/name?
+#   make power            how small a sample could still detect the gap?
 #   make taxonomy         how names fail: recovered / English-sub / garbled
 #   make errors           qualitative error tables from the gTTS run
 #   make figures          regenerate EVERY committed figure/report from the
@@ -33,7 +34,7 @@ endef
 
 .PHONY: setup gtts gtts-carrier espeak mms mms-carrier errors test all clean \
         sensitivity forest per-language-forest cross-engine length-check influence \
-        taxonomy figures
+        power taxonomy figures
 
 setup:
 	$(PYTHON) -m pip install -r requirements.txt
@@ -75,6 +76,9 @@ length-check:
 influence:
 	$(PYTHON) influence.py --run outputs
 
+power:
+	$(PYTHON) power_analysis.py --run outputs
+
 taxonomy:
 	$(PYTHON) error_taxonomy.py --run outputs
 
@@ -90,6 +94,7 @@ figures:
 	$(PYTHON) length_confound.py --run outputs
 	$(PYTHON) orthography_confound.py --run outputs
 	$(PYTHON) influence.py --run outputs
+	$(PYTHON) power_analysis.py --run outputs
 	$(PYTHON) error_analysis.py --scores outputs/scores.csv --top 5 --out docs/error_analysis_gtts.md
 	$(PYTHON) aggregate_results.py
 	$(PYTHON) analyze.py --scores outputs/scores.csv --out docs/_tmp --title "gtts n=80" && mv docs/_tmp/cer_by_language.png docs/cer_by_language.png

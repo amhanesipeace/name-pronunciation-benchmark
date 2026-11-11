@@ -122,7 +122,12 @@ isolated-word baselines are indistinguishable from zero.*
 - **Recognizer noise.** The universal phoneme recognizer is unreliable on short
   single-word clips, so PER is not yet a dependable standalone metric.
 - **Scale and provenance.** Small n; names compiled from general knowledge, not a
-  cited, validated corpus.
+  cited, validated corpus. A subsampling power analysis (`power_analysis.py`,
+  `docs/power_analysis.md`) shows the effect is large enough that even 5 names per
+  group detects it with ≥90% power, so the sample is *not under-powered*; the
+  20-per-language limit is a question of **representativeness** (whether these
+  names stand in for each language's full name space), not statistical power, and
+  that sampling-frame concern is the real limitation here.
 - **English-voice-only, three engines.** Native-language voices and commercial
   systems (Polly, Azure, Google Cloud, ElevenLabs) are largely untested.
 

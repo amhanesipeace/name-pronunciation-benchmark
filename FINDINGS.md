@@ -221,7 +221,11 @@ proper (and ethically correct) next step.
   p ≤ 1×10⁻⁷), and a leave-one-name-out jackknife moves δ by at most 0.015 (range
   [+0.82, +0.84] over all 80 names) — see [docs/influence.md](docs/influence.md).
   The disparity is a property of the whole sample, not a single language or name.
-- Small n (20/language); results are illustrative, not a population claim.
+- Small n (20/language); results are illustrative, not a population claim. But
+  "small n" here is about **representativeness, not power**: a subsampling power
+  analysis shows even 5 names/group detects the gap with ≥90% power (≈100% by 8),
+  so the study isn't under-powered — whether 20 names represent a language's full
+  name space is the real open question — see [docs/power_analysis.md](docs/power_analysis.md).
 - Names are a general-knowledge list, **not** native-speaker validated (see
   README ethics). Spellings/diacritics need review.
 - One English voice per engine; commercial systems (Polly, Azure, Google Cloud,

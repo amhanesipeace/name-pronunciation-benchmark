@@ -48,6 +48,7 @@ name-pronunciation-benchmark/
   length_confound.py    robustness check: is the gap just a name-length effect?
   orthography_confound.py robustness check: is the gap just exotic spelling?
   influence.py          robustness check: is the gap driven by one language/name?
+  power_analysis.py     subsampling power: how small a sample still detects the gap?
   error_taxonomy.py     how names fail: recovered / English-substitution / garble
   comparison_charts.py  engine-comparison + carrier-effect bars (from scores)
   outputs*/             per-run scores.csv + manifest.csv (tracked); audio ignored

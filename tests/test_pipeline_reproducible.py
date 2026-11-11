@@ -108,6 +108,16 @@ def test_influence_check_runs_on_committed_scores():
     assert "Conclusion" in report(rows)
 
 
+def test_power_analysis_runs_on_committed_scores():
+    from power_analysis import load, power_curve, report
+    rows = load(Path("outputs"))
+    assert len(rows) == 80
+    curve = power_curve(rows, ns=[5, 20], iters=100, seed=0)
+    assert curve[0]["power"] > 0.8        # even 5/group is well-powered
+    assert curve[-1]["power"] > 0.99      # full sample detects it ~always
+    assert "representativeness" in report(rows, iters=50).lower()
+
+
 def test_per_run_cer_chart_renders(tmp_path):
     from ttsbench.analyze import load_scores, plot_cer_by_language, summarize
     summary = summarize(load_scores("outputs/scores.csv"))
