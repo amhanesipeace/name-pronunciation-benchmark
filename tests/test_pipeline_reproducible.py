@@ -118,6 +118,17 @@ def test_power_analysis_runs_on_committed_scores():
     assert "representativeness" in report(rows, iters=50).lower()
 
 
+def test_error_profile_runs_on_committed_scores():
+    from error_profile import load, profile, report
+    rows = load(Path("outputs"))
+    assert len(rows) == 80
+    afr = profile([r for r in rows if r["language"] != "english"])
+    # On the gTTS baseline the gap is substitution-dominated, not deletions.
+    assert afr["sub_share"] > afr["del_share"]
+    assert afr["sub_rate"] + afr["del_rate"] + afr["ins_rate"] == pytest.approx(afr["cer"])
+    assert "CER decomposition" in report(rows)
+
+
 def test_per_run_cer_chart_renders(tmp_path):
     from ttsbench.analyze import load_scores, plot_cer_by_language, summarize
     summary = summarize(load_scores("outputs/scores.csv"))

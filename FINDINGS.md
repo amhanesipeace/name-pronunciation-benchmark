@@ -124,6 +124,17 @@ recovered, 22% replaced by English words, 50% garbled](docs/error_taxonomy.png)
   common* words, that 30% is a conservative lower bound. Full breakdown:
   [`docs/error_taxonomy.md`](docs/error_taxonomy.md).
 
+**What kind of error, at the character level.** The taxonomy classifies whole
+outcomes; decomposing each name's CER into its edit operations
+(`error_profile.py`) shows the *mechanics*. The African-name gap is **65%
+substitutions** (characters heard as different ones) and **29% insertions**
+(extra characters the name never had), with **deletions just 6%**. In other
+words the names are not being *clipped* — they are being confidently
+re-pronounced as something else, which is exactly the character-level signature
+of a name expanding into English words. A deletion-heavy failure would look like
+under-articulation; this looks like mis-identification. Full table:
+[`docs/error_profile.md`](docs/error_profile.md).
+
 ## Replication on the extended set (gTTS, n=120)
 
 Re-running gTTS on the larger 120-name set (`data/names_extended.csv`, 30 per

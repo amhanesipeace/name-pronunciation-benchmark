@@ -34,7 +34,7 @@ endef
 
 .PHONY: setup gtts gtts-carrier espeak mms mms-carrier errors test all clean \
         sensitivity forest per-language-forest cross-engine length-check influence \
-        power taxonomy figures
+        power taxonomy profile figures
 
 setup:
 	$(PYTHON) -m pip install -r requirements.txt
@@ -82,6 +82,9 @@ power:
 taxonomy:
 	$(PYTHON) error_taxonomy.py --run outputs
 
+profile:
+	$(PYTHON) error_profile.py --run outputs
+
 # Regenerate every committed figure/report straight from the committed score
 # tables (no TTS/ASR stack). analyze.py also writes summary.csv/stats.txt, so its
 # charts go through a tmp dir and only the PNG is kept, leaving docs/ clean.
@@ -95,6 +98,7 @@ figures:
 	$(PYTHON) orthography_confound.py --run outputs
 	$(PYTHON) influence.py --run outputs
 	$(PYTHON) power_analysis.py --run outputs
+	$(PYTHON) error_profile.py --run outputs
 	$(PYTHON) error_analysis.py --scores outputs/scores.csv --top 5 --out docs/error_analysis_gtts.md
 	$(PYTHON) aggregate_results.py
 	$(PYTHON) analyze.py --scores outputs/scores.csv --out docs/_tmp --title "gtts n=80" && mv docs/_tmp/cer_by_language.png docs/cer_by_language.png

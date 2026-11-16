@@ -68,6 +68,58 @@ def edit_distance(a: str, b: str) -> int:
     return prev[-1]
 
 
+def edit_ops(reference: str, hypothesis: str) -> dict:
+    """Decompose the edit distance into its operation types.
+
+    `edit_distance` returns a single number; this traces back through the DP
+    table to count *how* `reference` was turned into `hypothesis`:
+
+        substitutions  a character was heard as a different one
+        deletions      a character of the name was dropped
+        insertions     a character not in the name was added
+        matches        a character came through unchanged
+
+    Compares the same normalised strings as `char_error_rate`, and by
+    construction ``substitutions + deletions + insertions`` equals
+    `edit_distance`, so CER = (those three) / len(reference). This lets us ask
+    not just *how wrong* a name is but *what kind* of error it is — e.g. are
+    African names failing by dropped syllables (deletions) or wrong sounds
+    (substitutions)?
+    """
+    ref, hyp = normalize(reference), normalize(hypothesis)
+    m, n = len(ref), len(hyp)
+    # Full DP table (edit_distance keeps only one row; here we need to backtrace).
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(m + 1):
+        dp[i][0] = i
+    for j in range(n + 1):
+        dp[0][j] = j
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            cost = 0 if ref[i - 1] == hyp[j - 1] else 1
+            dp[i][j] = min(dp[i - 1][j] + 1,        # deletion
+                           dp[i][j - 1] + 1,        # insertion
+                           dp[i - 1][j - 1] + cost)  # substitution / match
+    sub = dele = ins = match = 0
+    i, j = m, n
+    while i > 0 or j > 0:
+        if i > 0 and j > 0 and ref[i - 1] == hyp[j - 1] \
+                and dp[i][j] == dp[i - 1][j - 1]:
+            match += 1
+            i, j = i - 1, j - 1
+        elif i > 0 and j > 0 and dp[i][j] == dp[i - 1][j - 1] + 1:
+            sub += 1
+            i, j = i - 1, j - 1
+        elif i > 0 and dp[i][j] == dp[i - 1][j] + 1:
+            dele += 1
+            i -= 1
+        else:  # j > 0
+            ins += 1
+            j -= 1
+    return {"substitutions": sub, "deletions": dele, "insertions": ins,
+            "matches": match, "ref_len": m}
+
+
 def char_error_rate(reference: str, hypothesis: str) -> float:
     """Character Error Rate: edit distance normalised by reference length.
     0.0 = perfect; ~1.0 = completely wrong. Compares normalised strings."""

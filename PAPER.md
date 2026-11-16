@@ -82,6 +82,10 @@ isolated-word baselines are indistinguishable from zero.*
    African failures **at least 30%** are substitutions by ordinary English
    words/phrases rather than novel approximations (a conservative lower bound, as
    only the ~10k most common words count) — see `docs/error_taxonomy.md`.
+   Decomposing each name's CER into edit operations (`error_profile.py`) confirms
+   the mechanism at the character level: the African-name gap is 65%
+   substitutions and 29% insertions but only 6% deletions — names are not clipped
+   or dropped, they are re-pronounced as a different, more familiar word.
 
 ## 4. Limitations
 

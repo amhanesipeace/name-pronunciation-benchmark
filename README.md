@@ -50,6 +50,7 @@ name-pronunciation-benchmark/
   influence.py          robustness check: is the gap driven by one language/name?
   power_analysis.py     subsampling power: how small a sample still detects the gap?
   error_taxonomy.py     how names fail: recovered / English-substitution / garble
+  error_profile.py      decompose CER into substitutions / deletions / insertions
   comparison_charts.py  engine-comparison + carrier-effect bars (from scores)
   outputs*/             per-run scores.csv + manifest.csv (tracked); audio ignored
   requirements.txt
