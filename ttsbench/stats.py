@@ -139,6 +139,55 @@ def english_vs_african_ci(rows: list[dict], **kw) -> dict | None:
     }
 
 
+def permutation_test(african: list[float], english: list[float], *,
+                     n_perm: int = 10000, seed: int = 0) -> dict:
+    """Label-permutation (randomization) test for the African−English mean gap.
+
+    An assumption-light third leg alongside the Mann-Whitney U test and the
+    bootstrap CIs. Under the null that the language label is exchangeable, the
+    pooled CERs are reshuffled between the two groups ``n_perm`` times and we ask
+    how often a permuted mean gap is at least as large as the observed one.
+
+    Why add it: the three approaches lean on different models — MWU tests
+    stochastic dominance through ranks, the bootstrap quantifies the estimate's
+    uncertainty, and this tests the *mean* gap directly with no distributional
+    assumption at all. Agreement across all three is evidence the result is a
+    property of the data, not an artefact of one test's assumptions.
+
+    One-sided (African > English). The p-value uses the standard ``(b+1)/(m+1)``
+    correction so it can never be reported as exactly zero. Seeded → reproducible.
+    """
+    obs = mean(african) - mean(english) if african and english else 0.0
+    if not african or not english:
+        return {"observed_gap": obs, "p": 1.0, "n_perm": 0}
+    pool = list(african) + list(english)
+    n_a = len(african)
+    rng = random.Random(seed)
+    at_least = 0
+    for _ in range(n_perm):
+        rng.shuffle(pool)
+        if mean(pool[:n_a]) - mean(pool[n_a:]) >= obs:
+            at_least += 1
+    return {"observed_gap": obs, "p": (at_least + 1) / (n_perm + 1),
+            "n_perm": n_perm}
+
+
+def english_vs_african_permutation(rows: list[dict], **kw) -> dict | None:
+    """Permutation test for the pooled African-vs-English mean-CER gap.
+
+    Companion to :func:`english_vs_african` (rank test) and
+    :func:`english_vs_african_ci` (bootstrap interval): same pooled comparison,
+    a different and assumption-light inferential route. Returns None when either
+    group is empty.
+    """
+    by = cers_by_language(rows)
+    eng = by.get("english", [])
+    afr = [c for lang, cers in by.items() if lang != "english" for c in cers]
+    if not eng or not afr:
+        return None
+    return permutation_test(afr, eng, **kw)
+
+
 def per_language_vs_english(rows: list[dict], *, ci: bool = True,
                             **boot_kw) -> list[dict]:
     """Each African language vs English, with Holm-Bonferroni corrected p.

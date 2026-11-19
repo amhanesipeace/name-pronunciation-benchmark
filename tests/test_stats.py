@@ -1,6 +1,9 @@
 """Tests for the statistics helpers."""
+import pytest
+
 from ttsbench.stats import (cliffs_delta, effect_label, cers_by_language,
-                            english_vs_african)
+                            english_vs_african, english_vs_african_permutation,
+                            permutation_test)
 
 
 def test_cliffs_delta_extremes():
@@ -42,3 +45,45 @@ def test_english_vs_african_detects_gap():
 def test_english_vs_african_needs_both_groups():
     rows = [{"language": "english", "cer": "0.0"}]
     assert english_vs_african(rows) is None
+
+
+# --- permutation_test -------------------------------------------------------
+
+def test_permutation_test_detects_clear_separation():
+    afr = [0.5, 0.6, 0.7, 0.55, 0.65]
+    eng = [0.0, 0.01, 0.02, 0.0, 0.03]
+    res = permutation_test(afr, eng, n_perm=2000, seed=0)
+    assert res["observed_gap"] > 0.5
+    assert res["p"] < 0.01                    # no reshuffle rivals a clean gap
+    assert res["n_perm"] == 2000
+
+
+def test_permutation_test_null_when_groups_identical():
+    same = [0.2, 0.3, 0.4, 0.5]
+    res = permutation_test(same, list(same), n_perm=1000, seed=0)
+    assert res["observed_gap"] == 0.0
+    assert res["p"] > 0.2                      # no real gap -> not significant
+
+
+def test_permutation_p_never_zero_and_is_seeded():
+    afr, eng = [1.0, 1.0, 1.0], [0.0, 0.0, 0.0]
+    a = permutation_test(afr, eng, n_perm=500, seed=7)
+    b = permutation_test(afr, eng, n_perm=500, seed=7)
+    assert a["p"] == b["p"]                     # reproducible for a fixed seed
+    assert a["p"] >= 1 / (500 + 1)             # (b+1)/(m+1): never exactly 0
+    assert a["p"] <= 1.0
+    # A different seed draws different permutations (sanity: still a valid p).
+    assert 0 < permutation_test(afr, eng, n_perm=500, seed=8)["p"] <= 1.0
+
+
+def test_permutation_empty_group_is_safe():
+    assert permutation_test([], [0.1], n_perm=10)["p"] == 1.0
+    assert english_vs_african_permutation(
+        [{"language": "english", "cer": "0.0"}]) is None
+
+
+def test_english_vs_african_permutation_agrees_with_rank_test():
+    rows = ([{"language": "english", "cer": "0.0"} for _ in range(10)] +
+            [{"language": "yoruba", "cer": "0.6"} for _ in range(10)])
+    perm = english_vs_african_permutation(rows, n_perm=2000, seed=0)
+    assert perm["p"] < 0.01                    # same verdict as the MWU test

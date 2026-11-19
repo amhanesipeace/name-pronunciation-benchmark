@@ -252,6 +252,14 @@ Across every run the gap CI stays clear of zero except for the two saturated
 isolated-word baselines — the interval estimates independently confirm which
 gaps are real (see the `gap 95% CI` column in [RESULTS.md](RESULTS.md)).
 
+As a third, assumption-light check, a **label-permutation test** shuffles the
+language labels 10,000 times and asks how often chance alone reproduces the
+observed mean gap: it never does (**p < 1×10⁻⁴**). The three approaches lean on
+different models — Mann-Whitney U on ranks, the bootstrap on the estimate's
+spread, and the permutation test on the mean gap with no distributional
+assumption at all — so their agreement is evidence the result is a property of
+the data, not an artefact of one test (reported in `stats.txt`).
+
 The forest plot below shows this across every run at a glance — each engine ×
 condition as a gap estimate with its 95% CI. Blue intervals clear zero (a real
 gap); the two grey ones that straddle zero are exactly the metric-saturated

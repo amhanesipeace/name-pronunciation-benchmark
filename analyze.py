@@ -14,6 +14,7 @@ from pathlib import Path
 
 from ttsbench.analyze import load_scores, summarize, plot_cer_by_language
 from ttsbench.stats import (english_vs_african, english_vs_african_ci,
+                            english_vs_african_permutation,
                             per_language_vs_english)
 
 
@@ -65,6 +66,14 @@ def main():
                 f"(bootstrap, {g['n_boot']} resamples)",
                 f"Cliff's delta 95% CI [{d['lo']:+.3f}, {d['hi']:+.3f}]",
             ]
+        perm = english_vs_african_permutation(rows)
+        if perm and perm["n_perm"]:
+            floor = perm["p"] <= 1.5 / (perm["n_perm"] + 1)
+            p_txt = (f"< {1 / perm['n_perm']:.0e}" if floor
+                     else f"= {perm['p']:.2e}")
+            lines.append(
+                f"Permutation test (label shuffle, {perm['n_perm']} resamples): "
+                f"p {p_txt} for the mean gap")
         lines += [
             "",
             "Per-language vs English (Holm-corrected):",

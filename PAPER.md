@@ -53,7 +53,12 @@ tracked and acted on.
   bootstrap confidence intervals** (2,000 seeded resamples) for the mean-CER gap
   and for Cliff's delta, so each effect is reported with its uncertainty rather
   than a point estimate alone; an interval clear of zero is the interval-based
-  counterpart to a significant one-sided test.
+  counterpart to a significant one-sided test. As an assumption-light third leg
+  we add a **label-permutation test** (10,000 reshuffles of the language label)
+  on the mean gap: no permutation reaches the observed gap (p < 10⁻⁴). The three
+  routes make different modelling commitments — ranks, resampling the estimate,
+  and an exact randomization null — so their agreement guards against the result
+  being an artefact of any one test's assumptions.
 
 ## 3. Results
 

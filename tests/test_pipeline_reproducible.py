@@ -129,6 +129,18 @@ def test_error_profile_runs_on_committed_scores():
     assert "CER decomposition" in report(rows)
 
 
+def test_permutation_test_confirms_gap_on_committed_scores():
+    import csv
+    from ttsbench.stats import english_vs_african, english_vs_african_permutation
+    rows = list(csv.DictReader(open("outputs/scores.csv", encoding="utf-8")))
+    perm = english_vs_african_permutation(rows, n_perm=2000, seed=0)
+    # Third inferential leg agrees with the Mann-Whitney result: no label
+    # reshuffle of 2000 reaches the observed gap, so p sits at the floor.
+    assert perm["p"] == pytest.approx(1 / (2000 + 1))
+    assert perm["observed_gap"] == pytest.approx(0.363, abs=0.01)
+    assert english_vs_african(rows)["p"] < 1e-6      # and so does MWU
+
+
 def test_per_run_cer_chart_renders(tmp_path):
     from ttsbench.analyze import load_scores, plot_cer_by_language, summarize
     summary = summarize(load_scores("outputs/scores.csv"))
