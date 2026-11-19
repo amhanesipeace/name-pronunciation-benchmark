@@ -82,3 +82,13 @@ def test_report_has_table_and_conclusion():
     assert "CER decomposition" in text
     assert "error mix (S/D/I)" in text
     assert "Why it matters" in text
+    assert "error_profile.png" in text          # figure is embedded
+
+
+def test_render_figure_writes_png(tmp_path):
+    rows = [_row("english", "james", "james"),
+            _row("yoruba", "emeka", "america"),
+            _row("igbo", "ngozi", "nausea"),
+            _row("hausa", "aliyu", "ill leave you")]
+    out = error_profile.render_figure(rows, tmp_path / "profile.png")
+    assert out.exists() and out.read_bytes()[:8] == b"\x89PNG\r\n\x1a\n"

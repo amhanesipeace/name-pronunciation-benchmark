@@ -126,7 +126,12 @@ recovered, 22% replaced by English words, 50% garbled](docs/error_taxonomy.png)
 
 **What kind of error, at the character level.** The taxonomy classifies whole
 outcomes; decomposing each name's CER into its edit operations
-(`error_profile.py`) shows the *mechanics*. The African-name gap is **65%
+(`error_profile.py`) shows the *mechanics*.
+
+![Each group's CER split into substitution, deletion and insertion rates:
+English is a near-zero sliver while the African languages are dominated by
+substitutions, with insertions second and deletions barely present](docs/error_profile.png)
+ The African-name gap is **65%
 substitutions** (characters heard as different ones) and **29% insertions**
 (extra characters the name never had), with **deletions just 6%**. In other
 words the names are not being *clipped* — they are being confidently

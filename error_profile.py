@@ -25,6 +25,20 @@ from pathlib import Path
 
 from ttsbench.scoring import edit_ops
 
+# Edit-operation colours, in fixed categorical order (dataviz theme slots 1–3):
+# substitution = blue, deletion = orange, insertion = aqua. Validated for CVD
+# separation (worst adjacent ΔE 9.2) against the light surface; the aqua's sub-3:1
+# surface contrast is relieved by the in-segment labels and the markdown table.
+OP_ORDER = ("substitutions", "deletions", "insertions")
+OP_COLOURS = {"substitutions": "#2a78d6", "deletions": "#eb6834",
+              "insertions": "#1baf7a"}
+OP_LABELS = {"substitutions": "Substitution (heard as a different character)",
+             "deletions": "Deletion (a character dropped)",
+             "insertions": "Insertion (a character added)"}
+# The three per-op rates (op count / reference chars) that sum to each group's CER.
+_RATE = {"substitutions": "sub_rate", "deletions": "del_rate",
+         "insertions": "ins_rate"}
+
 
 def load(run_dir: Path) -> list[dict]:
     """Scored rows; each carries the intended name and its ASR transcription."""
@@ -64,6 +78,59 @@ def profile(rows: list[dict]) -> dict:
     }
 
 
+def render_figure(rows: list[dict],
+                  out_path: str | Path = "docs/error_profile.png") -> Path:
+    """Stacked horizontal bars: each group's CER split into its edit operations.
+
+    Bar length is the group's (micro-averaged) CER; the segments are the
+    substitution / deletion / insertion rates, which sum to it — so one figure
+    carries both *how wrong* each group is and *what kind* of error it is. The
+    near-zero English bar beside the long African ones is the asymmetry itself.
+    """
+    from matplotlib.figure import Figure
+    from matplotlib.patches import Patch
+
+    groups = [("English", "english"), ("Yoruba", "yoruba"),
+              ("Igbo", "igbo"), ("Hausa", "hausa")]
+    profiles = [(label, profile([r for r in rows if r["language"] == lang]))
+                for label, lang in groups]
+
+    fig = Figure(figsize=(8.0, 3.2), dpi=120)
+    ax = fig.add_subplot(111)
+    ys = range(len(profiles))
+    for yi, (_, p) in zip(ys, profiles):
+        left = 0.0
+        for op in OP_ORDER:
+            w = p[_RATE[op]]
+            if w <= 0:
+                continue
+            ax.barh(yi, w, left=left, color=OP_COLOURS[op], height=0.62,
+                    edgecolor="white", linewidth=1.5)
+            if w >= 0.035:                         # label only segments with room
+                ax.text(left + w / 2, yi, f"{w:.2f}", va="center", ha="center",
+                        fontsize=8, color="white", fontweight="bold")
+            left += w
+    ax.set_yticks(list(ys))
+    ax.set_yticklabels([f"{label}\n(n={p['n']})" for label, p in profiles],
+                       fontsize=9)
+    ax.invert_yaxis()                              # English at the top
+    ax.set_xlim(0, max(0.05, max(p["cer"] for _, p in profiles) * 1.12))
+    ax.set_xlabel("character error rate  (segments sum to CER)")
+    ax.set_title("What kind of error: CER split into edit operations", fontsize=12)
+    for s in ("top", "right", "left"):
+        ax.spines[s].set_visible(False)
+    ax.tick_params(length=0)
+    ax.legend(handles=[Patch(color=OP_COLOURS[op], label=OP_LABELS[op])
+                       for op in OP_ORDER],
+              fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.22),
+              ncol=1, frameon=False)
+    fig.tight_layout()
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path, bbox_inches="tight")
+    return out_path
+
+
 def _mix(p: dict) -> str:
     return (f"{p['sub_share']:.0%} substitution / "
             f"{p['del_share']:.0%} deletion / {p['ins_share']:.0%} insertion")
@@ -88,6 +155,10 @@ def report(rows: list[dict]) -> str:
         "heard as a different one), deletions (a character of the name dropped), "
         "and insertions (a character not in the name added). The three *rates* "
         "sum to the group's character error rate.",
+        "",
+        "![Stacked bars of each group's CER split into substitution, deletion and "
+        "insertion rates: English is near-zero while the African languages are "
+        "dominated by substitutions, then insertions](error_profile.png)",
         "",
         "| Group | n | CER | sub rate | del rate | ins rate | error mix (S/D/I) |",
         "| --- | --: | --: | --: | --: | --: | --- |",
@@ -135,6 +206,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--run", default="outputs")
     ap.add_argument("--out", default="docs/error_profile.md")
+    ap.add_argument("--figure", default="docs/error_profile.png")
     args = ap.parse_args()
 
     rows = load(Path(args.run))
@@ -145,8 +217,9 @@ def main():
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(text + "\n", encoding="utf-8")
+    fig_path = render_figure(rows, args.figure)
     print(text)
-    print(f"Written to {out}")
+    print(f"Written to {out} and {fig_path}")
 
 
 if __name__ == "__main__":

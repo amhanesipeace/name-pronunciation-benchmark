@@ -118,8 +118,8 @@ def test_power_analysis_runs_on_committed_scores():
     assert "representativeness" in report(rows, iters=50).lower()
 
 
-def test_error_profile_runs_on_committed_scores():
-    from error_profile import load, profile, report
+def test_error_profile_runs_on_committed_scores(tmp_path):
+    from error_profile import load, profile, render_figure, report
     rows = load(Path("outputs"))
     assert len(rows) == 80
     afr = profile([r for r in rows if r["language"] != "english"])
@@ -127,6 +127,7 @@ def test_error_profile_runs_on_committed_scores():
     assert afr["sub_share"] > afr["del_share"]
     assert afr["sub_rate"] + afr["del_rate"] + afr["ins_rate"] == pytest.approx(afr["cer"])
     assert "CER decomposition" in report(rows)
+    assert render_figure(rows, tmp_path / "ep.png").exists()
 
 
 def test_permutation_test_confirms_gap_on_committed_scores():
