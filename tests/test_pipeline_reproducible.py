@@ -142,6 +142,21 @@ def test_permutation_test_confirms_gap_on_committed_scores():
     assert english_vs_african(rows)["p"] < 1e-6      # and so does MWU
 
 
+def test_hardest_names_runs_on_committed_engine_runs():
+    import hardest_names as hn
+    for d in hn.DEFAULT_RUNS.values():
+        if not (ROOT / d / "scores.csv").exists():
+            pytest.skip(f"committed run {d} not present")
+    runs = {e: hn.load_run(ROOT / d) for e, d in hn.DEFAULT_RUNS.items()}
+    s = hn.summarise(runs)
+    assert s["n_african"] == 60
+    # African names rank harder across the three independent engines than English.
+    assert s["african_mean"] > s["english_mean"]
+    # Partly-intrinsic: some broadly hard, but not a universal set.
+    assert 0 <= s["hard_in_all"] < s["hard_in_two_plus"] <= 60
+    assert "cross-engine consensus" in hn.report(runs)
+
+
 def test_per_run_cer_chart_renders(tmp_path):
     from ttsbench.analyze import load_scores, plot_cer_by_language, summarize
     summary = summarize(load_scores("outputs/scores.csv"))

@@ -205,6 +205,17 @@ yet the drop from 0.54 to 0.39 shows **engine-specific factors also matter** —
 two systems don't rank the African names identically. The bias is systemic, not
 anecdotal, but it is not fully explained by the names alone.
 
+**Which names, concretely.** `hardest_names.py` makes this per-name: it ranks
+each name *within* each of three independent engines (gTTS, espeak-ng, MMS) as a
+percentile — immune to the metric saturation that inflates espeak/MMS CERs — then
+averages the ranks. African names rank harder across all three (mean consensus
+percentile **0.52 vs 0.27** for English), confirming a cross-system effect. But
+only a handful sit in the top third of *every* engine while ~12/60 do so in at
+least two — so there is **no fixed set of "unpronounceable" names**; the bias is a
+population-level property, not a short blocklist. The hardest by consensus
+(Obiageli, Aliyu, Hauwa, Zainab, Maryam…) and the full per-engine table are in
+[`docs/hardest_names.md`](docs/hardest_names.md).
+
 ## Native-voice observation (qualitative)
 
 MMS ships per-language voices (`mms-tts-yor`, `mms-tts-hau`; **no** `mms-tts-ibo`).
