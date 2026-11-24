@@ -3,7 +3,21 @@ import pytest
 
 from ttsbench.stats import (cliffs_delta, effect_label, cers_by_language,
                             english_vs_african, english_vs_african_permutation,
-                            permutation_test)
+                            permutation_test, bootstrap_ci)
+
+
+def test_bootstrap_ci_reports_a_reproducible_se():
+    a = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+    r1 = bootstrap_ci(lambda x: sum(x) / len(x), (a,), n_boot=500, seed=0)
+    r2 = bootstrap_ci(lambda x: sum(x) / len(x), (a,), n_boot=500, seed=0)
+    assert r1["se"] > 0                       # a varying statistic has spread
+    assert r1["se"] == r2["se"]               # seeded -> reproducible
+    assert r1["lo"] <= r1["point"] <= r1["hi"]
+
+
+def test_bootstrap_ci_empty_sample_has_zero_se():
+    r = bootstrap_ci(lambda x: sum(x) / len(x) if x else 0.0, ([],), n_boot=100)
+    assert r["se"] == 0.0 and r["n_boot"] == 0
 
 
 def test_cliffs_delta_extremes():

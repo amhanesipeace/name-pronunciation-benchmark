@@ -46,6 +46,7 @@ name-pronunciation-benchmark/
   per_language_forest.py  per-language gap vs English for one run, with CIs
   cross_engine.py       per-name CER agreement between two engines (Spearman)
   hardest_names.py      which names are hard across 3 engines (rank consensus)
+  meta_analysis.py      random-effects pool of the gap across the 3 engines
   length_confound.py    robustness check: is the gap just a name-length effect?
   orthography_confound.py robustness check: is the gap just exotic spelling?
   influence.py          robustness check: is the gap driven by one language/name?

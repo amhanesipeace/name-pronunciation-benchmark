@@ -216,6 +216,39 @@ population-level property, not a short blocklist. The hardest by consensus
 (Obiageli, Aliyu, Hauwa, Zainab, Maryam…) and the full per-engine table are in
 [`docs/hardest_names.md`](docs/hardest_names.md).
 
+## Pooling the engines: one estimate, honest heterogeneity
+
+The per-name view above asks whether the *names* agree across systems; the
+complementary question is whether the *engines* agree on the size of the bias.
+`meta_analysis.py` combines the three independent systems with a
+DerSimonian-Laird **random-effects meta-analysis**, pooling **Cliff's δ**
+(rank-based, so it is comparable across engines even where absolute CER is not):
+
+| engine | Cliff's δ (African vs English) | 95% CI | effect |
+|--------|-------------------------------:|--------|--------|
+| gTTS   | +0.82 | [+0.72, +0.92] | large |
+| eSpeak | +0.28 | [−0.05, +0.56] | small |
+| MMS    | +0.12 | [−0.22, +0.44] | negligible |
+| **pooled (random-effects)** | **+0.43** | **[−0.07, +0.92]** | medium |
+
+The honest reading is **a consistent direction with engine-dependent magnitude**,
+not a single universal effect size:
+
+- **All three engines point the same way** (δ > 0), and the pooled estimate is a
+  medium positive effect.
+- **But heterogeneity is high** — Q = 24.8 on 2 df (p < 0.001), **I² = 92%** — so
+  the engines are *not* estimating one common number, and the pooled interval
+  therefore crosses zero. This is expected, and is exactly why a random-effects
+  model (which allows a true between-engine spread) is the right tool: magnitude
+  tracks **baseline quality** — a clean-baseline engine (gTTS) shows a large
+  effect, a metric-saturated one (MMS) a small one. The pooled number should be
+  read *alongside* the clean-baseline engine, never as a substitute for it. Full
+  write-up: [`docs/meta_analysis.md`](docs/meta_analysis.md).
+
+This is the inferential counterpart to the methodological lesson above: averaging
+engines without modelling their heterogeneity would manufacture a tidy — and
+misleading — single figure, understating gTTS's real bias and overstating MMS's.
+
 ## Native-voice observation (qualitative)
 
 MMS ships per-language voices (`mms-tts-yor`, `mms-tts-hau`; **no** `mms-tts-ibo`).

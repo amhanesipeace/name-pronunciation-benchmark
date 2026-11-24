@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import random
 from collections import defaultdict
-from statistics import mean, median
+from statistics import mean, median, stdev
 
 from scipy.stats import mannwhitneyu
 
@@ -86,12 +86,14 @@ def bootstrap_ci(fn, samples: tuple[list[float], ...], *, n_boot: int = 2000,
     Resamples each input sample independently with replacement ``n_boot`` times,
     recomputes ``fn(*resamples)`` each time, and reports the ``confidence``
     central interval of that distribution. The RNG is seeded, so the interval is
-    reproducible. ``point`` is the statistic on the observed data.
+    reproducible. ``point`` is the statistic on the observed data, and ``se`` is
+    the bootstrap standard error (the standard deviation of the replicates),
+    which downstream meta-analysis uses to weight the estimate.
     """
     pools = [list(s) for s in samples]
     point = fn(*pools)
     if any(len(p) == 0 for p in pools):
-        return {"point": point, "lo": point, "hi": point,
+        return {"point": point, "lo": point, "hi": point, "se": 0.0,
                 "confidence": confidence, "n_boot": 0}
 
     rng = random.Random(seed)
@@ -99,12 +101,14 @@ def bootstrap_ci(fn, samples: tuple[list[float], ...], *, n_boot: int = 2000,
     for _ in range(n_boot):
         resamples = [[pool[rng.randrange(len(pool))] for _ in pool] for pool in pools]
         stats.append(fn(*resamples))
+    se = stdev(stats) if len(stats) >= 2 else 0.0
     stats.sort()
     alpha = (1 - confidence) / 2
     return {
         "point": point,
         "lo": _percentile(stats, alpha),
         "hi": _percentile(stats, 1 - alpha),
+        "se": se,
         "confidence": confidence,
         "n_boot": n_boot,
     }

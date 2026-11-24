@@ -9,6 +9,7 @@
 #   make forest           forest plot of the gap (all runs, 95% CIs)
 #   make per-language-forest   per-language gap vs English for the gTTS run
 #   make cross-engine     per-name CER agreement between two engines (carrier)
+#   make meta             random-effects pool of the gap across the 3 engines
 #   make length-check     robustness: is the gap just a name-length effect?
 #   make influence        robustness: is the gap driven by one language/name?
 #   make power            how small a sample could still detect the gap?
@@ -34,7 +35,7 @@ endef
 
 .PHONY: setup gtts gtts-carrier espeak mms mms-carrier errors test all clean \
         sensitivity forest per-language-forest cross-engine length-check influence \
-        power taxonomy profile hardest figures
+        power taxonomy profile hardest meta figures
 
 setup:
 	$(PYTHON) -m pip install -r requirements.txt
@@ -88,6 +89,9 @@ profile:
 hardest:
 	$(PYTHON) hardest_names.py
 
+meta:
+	$(PYTHON) meta_analysis.py
+
 # Regenerate every committed figure/report straight from the committed score
 # tables (no TTS/ASR stack). analyze.py also writes summary.csv/stats.txt, so its
 # charts go through a tmp dir and only the PNG is kept, leaving docs/ clean.
@@ -103,6 +107,7 @@ figures:
 	$(PYTHON) power_analysis.py --run outputs
 	$(PYTHON) error_profile.py --run outputs
 	$(PYTHON) hardest_names.py
+	$(PYTHON) meta_analysis.py
 	$(PYTHON) error_analysis.py --scores outputs/scores.csv --top 5 --out docs/error_analysis_gtts.md
 	$(PYTHON) aggregate_results.py
 	$(PYTHON) analyze.py --scores outputs/scores.csv --out docs/_tmp --title "gtts n=80" && mv docs/_tmp/cer_by_language.png docs/cer_by_language.png

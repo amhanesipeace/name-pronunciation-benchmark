@@ -157,6 +157,25 @@ def test_hardest_names_runs_on_committed_engine_runs():
     assert "cross-engine consensus" in hn.report(runs)
 
 
+def test_meta_analysis_pools_committed_engine_runs():
+    import meta_analysis as ma
+    for d in ma.DEFAULT_RUNS.values():
+        if not (ROOT / d / "scores.csv").exists():
+            pytest.skip(f"committed run {d} not present")
+    runs = {label: ma.load_run(ROOT / d) for label, d in ma.DEFAULT_RUNS.items()}
+    res = ma.meta_analyze(runs, n_boot=400, seed=0)
+    assert len(res["studies"]) == 3
+    # Every engine points the same direction (positive gap).
+    assert all(s["delta"] > 0 for s in res["studies"])
+    pooled = res["pooled"]
+    assert pooled["k"] == 3
+    assert pooled["pooled_delta"] > 0
+    # Baseline saturation makes the engines genuinely heterogeneous — the pool
+    # must surface that rather than claim one universal effect.
+    assert pooled["I2"] > 50
+    assert "random-effects" in ma.report(runs, n_boot=400)
+
+
 def test_per_run_cer_chart_renders(tmp_path):
     from ttsbench.analyze import load_scores, plot_cer_by_language, summarize
     summary = summarize(load_scores("outputs/scores.csv"))

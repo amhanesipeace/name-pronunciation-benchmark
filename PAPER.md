@@ -91,6 +91,15 @@ isolated-word baselines are indistinguishable from zero.*
    the mechanism at the character level: the African-name gap is 65%
    substitutions and 29% insertions but only 6% deletions — names are not clipped
    or dropped, they are re-pronounced as a different, more familiar word.
+5. **Pooling the engines, honestly.** A DerSimonian-Laird random-effects
+   meta-analysis of Cliff's δ across the three independent engines
+   (`meta_analysis.py`) gives a pooled medium effect (δ = +0.43, 95% CI
+   [−0.07, +0.92]) with every engine pointing the same direction, but very high
+   heterogeneity (Q = 24.8, df = 2, p < 0.001; I² = 92%). The engines are not
+   estimating one common number: effect magnitude tracks English-baseline
+   quality, so the pooled figure is reported *with* its heterogeneity and read
+   alongside the clean-baseline engine, never as a single universal number —
+   see `docs/meta_analysis.md`.
 
 ## 4. Limitations
 
