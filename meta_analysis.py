@@ -34,9 +34,21 @@ import csv
 import math
 from pathlib import Path
 
+import matplotlib
+matplotlib.use("Agg")            # headless: render straight to a file
+from matplotlib.figure import Figure
+from matplotlib.lines import Line2D
+from matplotlib.patches import Polygon
 from scipy.stats import chi2
 
 from ttsbench.stats import (cers_by_language, cliffs_delta_ci, effect_label)
+
+# Status colours (not a series palette): significance is a state. Reused from
+# forest_plot.py so the two figures read as one system, already palette-validated.
+SIG = "#2f6fed"        # CI excludes 0 -> a real gap
+NSIG = "#9aa5b1"       # CI includes 0 -> not distinguishable from zero
+POOLED = "#111827"     # the random-effects summary diamond (its own dark ink)
+ZERO = "#b0b0b0"
 
 # The three distinct engines at n=80, isolated-word condition — genuinely
 # independent systems (two commercial/neural, one formant synthesiser).
@@ -148,6 +160,89 @@ def meta_analyze(runs: dict[str, list[dict]], *, n_boot: int = 2000,
     return {"studies": studies, "pooled": random_effects(studies)}
 
 
+def render_figure(studies: list[dict], pooled: dict | None,
+                  out_path: str | Path = "docs/meta_analysis.png") -> Path:
+    """Classic meta-analysis forest plot: per-engine effects + a pooled diamond.
+
+    Each engine is a dot at its Cliff's delta with a 95% CI whisker, coloured by
+    whether that CI clears zero; the random-effects summary is drawn as the
+    conventional diamond at the bottom, its width the pooled 95% CI. A dashed zero
+    line and a heterogeneity annotation (I-squared) make the honest reading — a
+    consistent direction but heterogeneous magnitude — legible at a glance.
+    """
+    if not studies:
+        raise ValueError("no studies to plot")
+    rows = list(studies)
+    n = len(rows) + (1 if pooled else 0)
+
+    # Engines top-to-bottom, pooled diamond on the bottom row (y=0).
+    ys = list(range(n - 1, (1 if pooled else 0) - 1, -1))
+    his = [s["hi"] for s in rows] + ([pooled["hi"]] if pooled else [])
+    los = [s["lo"] for s in rows] + ([pooled["lo"]] if pooled else [])
+    delta_x = max(his) + 0.06
+
+    fig = Figure(figsize=(8.0, 0.52 * n + 1.7), dpi=120)
+    ax = fig.add_subplot(111)
+    ax.axvline(0, color=ZERO, lw=1.0, ls="--", zorder=1)
+
+    for y, s in zip(ys, rows):
+        c = SIG if s["lo"] > 0 else NSIG
+        ax.plot([s["lo"], s["hi"]], [y, y], color=c, lw=2.5,
+                solid_capstyle="round", zorder=2)
+        ax.plot(s["delta"], y, "o", color=c, ms=7,
+                markeredgecolor="white", markeredgewidth=1.0, zorder=3)
+        ax.text(delta_x, y, f"{s['delta']:+.2f}", va="center", ha="left",
+                fontsize=8, color="#444")
+
+    labels = [s["label"] for s in rows]
+    if pooled:
+        # The summary diamond: centre at the pooled estimate, span = 95% CI.
+        cx, lo, hi = pooled["pooled_delta"], pooled["lo"], pooled["hi"]
+        h = 0.3
+        ax.add_patch(Polygon([(lo, 0), (cx, h), (hi, 0), (cx, -h)],
+                             closed=True, facecolor=POOLED, edgecolor="white",
+                             linewidth=1.0, zorder=3))
+        ax.text(delta_x, 0, f"{cx:+.2f}", va="center", ha="left",
+                fontsize=8, color="#111", fontweight="bold")
+        labels = labels + ["Pooled (RE)"]
+        ax.text(min(los + [0]) - 0.04, 0 - 0.62,
+                f"Heterogeneity: I² = {pooled['I2']:.0f}%  "
+                f"(Q = {pooled['Q']:.1f}, p {_p_txt(pooled['p_heterogeneity'])})",
+                va="center", ha="left", fontsize=7.5, color="#666", style="italic")
+
+    ax.text(delta_x, ys[0] + 0.8, "δ", va="center", ha="left",
+            fontsize=8, color="#444", fontweight="bold")
+    yticks = ys + ([0] if pooled else [])
+    ax.set_yticks(yticks)
+    ax.set_yticklabels(labels, fontsize=9)
+    ax.set_ylim(-1.1, n - 0.2 + 0.9)
+    ax.set_xlim(min(los + [0]) - 0.08, delta_x + 0.14)
+    ax.set_xlabel("Cliff's δ (African vs English CER)   "
+                  "(→ African names pronounced worse)")
+    ax.set_title("Pooling the bias across engines (random-effects meta-analysis)",
+                 fontsize=12)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.tick_params(length=0)
+
+    ax.legend(
+        handles=[
+            Line2D([0], [0], color=SIG, marker="o", lw=2.5, markeredgecolor="white",
+                   label="engine: 95% CI excludes 0"),
+            Line2D([0], [0], color=NSIG, marker="o", lw=2.5, markeredgecolor="white",
+                   label="engine: 95% CI includes 0 (saturated)"),
+            Line2D([0], [0], color=POOLED, marker="D", lw=0, markersize=8,
+                   markeredgecolor="white", label="pooled random-effects estimate"),
+        ],
+        fontsize=8, loc="upper left", frameon=False)
+
+    fig.tight_layout()
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_path)
+    return out_path
+
+
 def _p_txt(p: float) -> str:
     if p != p:  # nan
         return "n/a"
@@ -231,6 +326,7 @@ def main():
     ap.add_argument("--n-boot", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default="docs/meta_analysis.md")
+    ap.add_argument("--figure", default="docs/meta_analysis.png")
     args = ap.parse_args()
 
     spec = DEFAULT_RUNS
@@ -247,6 +343,11 @@ def main():
     out.write_text(text + "\n", encoding="utf-8")
     print(text)
     print(f"Written to {out}")
+
+    res = meta_analyze(runs, n_boot=args.n_boot, seed=args.seed)
+    if res["studies"]:
+        fig = render_figure(res["studies"], res["pooled"], args.figure)
+        print(f"Figure written to {fig}")
 
 
 if __name__ == "__main__":

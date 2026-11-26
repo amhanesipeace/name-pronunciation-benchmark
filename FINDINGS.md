@@ -224,6 +224,11 @@ complementary question is whether the *engines* agree on the size of the bias.
 DerSimonian-Laird **random-effects meta-analysis**, pooling **Cliff's δ**
 (rank-based, so it is comparable across engines even where absolute CER is not):
 
+![Forest plot: each engine's Cliff's δ (African vs English) with a 95% CI —
+gTTS large and clear of zero, espeak and MMS small with CIs crossing zero — and
+the random-effects pooled estimate as a diamond at δ=+0.43 whose width crosses
+zero, annotated with I²=92% heterogeneity.](docs/meta_analysis.png)
+
 | engine | Cliff's δ (African vs English) | 95% CI | effect |
 |--------|-------------------------------:|--------|--------|
 | gTTS   | +0.82 | [+0.72, +0.92] | large |

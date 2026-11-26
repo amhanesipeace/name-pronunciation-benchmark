@@ -95,3 +95,28 @@ def test_report_mentions_pooled_and_heterogeneity():
     assert "random-effects" in text
     assert "Combined Cliff" in text
     assert "I²" in text
+
+
+# --- render_figure ----------------------------------------------------------
+
+def test_render_figure_writes_a_png(tmp_path):
+    studies = [
+        {"label": "A", "delta": 0.8, "lo": 0.7, "hi": 0.9, "se": 0.05},
+        {"label": "B", "delta": 0.2, "lo": -0.1, "hi": 0.5, "se": 0.15},
+    ]
+    pooled = ma.random_effects(studies)
+    out = ma.render_figure(studies, pooled, tmp_path / "meta.png")
+    assert out.exists() and out.stat().st_size > 0
+
+
+def test_render_figure_works_without_a_pool(tmp_path):
+    # A single engine can't be pooled (random_effects -> None); the figure should
+    # still draw the one row rather than crash.
+    studies = [{"label": "A", "delta": 0.8, "lo": 0.7, "hi": 0.9, "se": 0.05}]
+    out = ma.render_figure(studies, None, tmp_path / "solo.png")
+    assert out.exists()
+
+
+def test_render_figure_rejects_empty(tmp_path):
+    with pytest.raises(ValueError):
+        ma.render_figure([], None, tmp_path / "x.png")
