@@ -49,6 +49,28 @@ def effect_label(delta: float) -> str:
     return "large"
 
 
+def probability_of_superiority(a: list[float], b: list[float]) -> float:
+    """P(a randomly drawn value from ``a`` exceeds one from ``b``), ties at 0.5.
+
+    The "common-language effect size" (McGraw & Wong, 1992): a single, plainly
+    interpretable number in [0, 1] — here, the probability that a random African
+    name's CER is worse than a random English name's. It is a monotone transform
+    of Cliff's delta (PS = (delta + 1) / 2 when there are no ties) but far easier
+    to communicate: 0.5 is no difference, 1.0 means every African name scores
+    worse than every English one. Ties count as half, so it is exact even with the
+    many zero-CER English names.
+    """
+    gt = eq = 0
+    for x in a:
+        for y in b:
+            if x > y:
+                gt += 1
+            elif x == y:
+                eq += 1
+    n = len(a) * len(b)
+    return (gt + 0.5 * eq) / n if n else 0.5
+
+
 def english_vs_african(rows: list[dict]) -> dict | None:
     """Pool all non-English names and test African CER > English CER."""
     by = cers_by_language(rows)
@@ -63,6 +85,7 @@ def english_vs_african(rows: list[dict]) -> dict | None:
         "african_n": len(afr), "african_median": median(afr),
         "U": float(u), "p": float(p),
         "cliffs_delta": delta, "effect": effect_label(delta),
+        "prob_superiority": probability_of_superiority(afr, eng),
     }
 
 

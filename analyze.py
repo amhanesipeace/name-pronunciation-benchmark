@@ -56,6 +56,9 @@ def main():
             f"African:  n={overall['african_n']:>3}  median CER={overall['african_median']:.3f}",
             f"Mann-Whitney U={overall['U']:.0f}  p={overall['p']:.2e}",
             f"Cliff's delta={overall['cliffs_delta']:+.3f} ({overall['effect']} effect)",
+            f"Probability of superiority={overall['prob_superiority']:.3f} "
+            f"(an African name scores worse than a given English name "
+            f"{overall['prob_superiority'] * 100:.0f}% of the time)",
         ]
         ci = english_vs_african_ci(rows)
         if ci:

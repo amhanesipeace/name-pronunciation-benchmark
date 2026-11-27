@@ -3,7 +3,8 @@ import pytest
 
 from ttsbench.stats import (cliffs_delta, effect_label, cers_by_language,
                             english_vs_african, english_vs_african_permutation,
-                            permutation_test, bootstrap_ci)
+                            permutation_test, bootstrap_ci,
+                            probability_of_superiority)
 
 
 def test_bootstrap_ci_reports_a_reproducible_se():
@@ -34,6 +35,31 @@ def test_effect_label_thresholds():
     assert effect_label(0.2) == "small"
     assert effect_label(0.4) == "medium"
     assert effect_label(0.8) == "large"
+
+
+def test_probability_of_superiority_extremes_and_ties():
+    # every a > every b -> PS = 1
+    assert probability_of_superiority([5, 6, 7], [1, 2, 3]) == 1.0
+    # every a < every b -> PS = 0
+    assert probability_of_superiority([1, 2], [5, 6]) == 0.0
+    # identical values -> all ties -> PS = 0.5
+    assert probability_of_superiority([1, 2, 3], [1, 2, 3]) == 0.5
+    # empty -> defined as 0.5 (no information)
+    assert probability_of_superiority([], [1, 2]) == 0.5
+
+
+def test_probability_of_superiority_matches_cliffs_delta_without_ties():
+    a, b = [0.3, 0.6, 0.9, 0.5], [0.0, 0.1, 0.2, 0.05]
+    ps = probability_of_superiority(a, b)
+    # PS = (delta + 1) / 2 exactly when there are no ties.
+    assert ps == pytest.approx((cliffs_delta(a, b) + 1) / 2)
+
+
+def test_english_vs_african_reports_probability_of_superiority():
+    rows = ([{"language": "english", "cer": "0.0"} for _ in range(10)] +
+            [{"language": "yoruba", "cer": "0.6"} for _ in range(10)])
+    st = english_vs_african(rows)
+    assert st["prob_superiority"] == pytest.approx(1.0)   # all African worse
 
 
 def test_cers_by_language_groups():
