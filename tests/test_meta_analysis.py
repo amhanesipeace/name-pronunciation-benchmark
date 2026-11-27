@@ -97,6 +97,44 @@ def test_report_mentions_pooled_and_heterogeneity():
     assert "I²" in text
 
 
+# --- leave_one_out ----------------------------------------------------------
+
+def test_leave_one_out_drops_each_engine():
+    studies = [_study("A", 0.8, 0.1), _study("B", 0.2, 0.1), _study("C", 0.1, 0.1)]
+    loo = ma.leave_one_out(studies)
+    assert [r["dropped"] for r in loo] == ["A", "B", "C"]
+    # Each remaining pool is over the other two engines.
+    for r in loo:
+        assert r["pooled"]["k"] == 2
+
+
+def test_leave_one_out_none_when_one_engine_remains():
+    loo = ma.leave_one_out([_study("A", 0.8, 0.1), _study("B", 0.2, 0.1)])
+    # Removing either leaves a single engine -> cannot pool.
+    assert all(r["pooled"] is None for r in loo)
+
+
+def test_leave_one_out_identifies_the_driving_engine():
+    # A is a large, precise effect; B and C are small. Dropping A should give the
+    # lowest remaining pooled estimate.
+    studies = [_study("A", 0.9, 0.05), _study("B", 0.1, 0.1), _study("C", 0.15, 0.1)]
+    loo = {r["dropped"]: r["pooled"] for r in ma.leave_one_out(studies)}
+    without_a = loo["A"]["pooled_delta"]
+    without_b = loo["B"]["pooled_delta"]
+    assert without_a < without_b
+
+
+def test_report_includes_leave_one_out_section():
+    runs = {
+        "clean": _rows([0.8, 0.9, 1.0, 0.7], [0.0, 0.0, 0.1, 0.0]),
+        "mid": _rows([0.5, 0.6, 0.55, 0.5], [0.2, 0.25, 0.2, 0.3]),
+        "saturated": _rows([0.5, 0.45, 0.55, 0.5], [0.5, 0.5, 0.45, 0.5]),
+    }
+    text = ma.report(runs, n_boot=200, seed=0)
+    assert "Leave-one-engine-out sensitivity" in text
+    assert "depends most on" in text
+
+
 # --- render_figure ----------------------------------------------------------
 
 def test_render_figure_writes_a_png(tmp_path):

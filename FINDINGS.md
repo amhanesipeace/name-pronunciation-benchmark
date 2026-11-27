@@ -251,6 +251,12 @@ not a single universal effect size:
   effect, a metric-saturated one (MMS) a small one. The pooled number should be
   read *alongside* the clean-baseline engine, never as a substitute for it. Full
   write-up: [`docs/meta_analysis.md`](docs/meta_analysis.md).
+- **A leave-one-engine-out sensitivity makes that dependence concrete.** Re-pooling
+  with each engine removed in turn, the combined effect leans on gTTS: drop it and
+  the remaining (saturated) engines pool to just δ = +0.20 (95% CI [−0.02, +0.42]),
+  whereas dropping a saturated engine *raises* the estimate. The saturated engines
+  cannot carry the pool on their own — a quantitative restatement of "read the
+  clean baseline directly."
 
 This is the inferential counterpart to the methodological lesson above: averaging
 engines without modelling their heterogeneity would manufacture a tidy — and

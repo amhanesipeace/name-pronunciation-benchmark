@@ -175,6 +175,15 @@ def test_meta_analysis_pools_committed_engine_runs():
     assert pooled["I2"] > 50
     assert "random-effects" in ma.report(runs, n_boot=400)
 
+    # Leave-one-engine-out: the pool leans on the clean-baseline engine (gTTS).
+    # Dropping it should leave the lowest remaining pooled estimate, below the
+    # full-pool value — the honest "read alongside the clean baseline" caveat.
+    loo = {r["dropped"]: r["pooled"] for r in ma.leave_one_out(res["studies"])
+           if r["pooled"]}
+    lowest = min(loo, key=lambda k: loo[k]["pooled_delta"])
+    assert lowest == "gTTS"
+    assert loo["gTTS"]["pooled_delta"] < pooled["pooled_delta"]
+
 
 def test_per_run_cer_chart_renders(tmp_path):
     from ttsbench.analyze import load_scores, plot_cer_by_language, summarize

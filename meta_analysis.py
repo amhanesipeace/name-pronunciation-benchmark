@@ -160,6 +160,22 @@ def meta_analyze(runs: dict[str, list[dict]], *, n_boot: int = 2000,
     return {"studies": studies, "pooled": random_effects(studies)}
 
 
+def leave_one_out(studies: list[dict]) -> list[dict]:
+    """Re-pool with each engine removed in turn — meta-analysis sensitivity.
+
+    A standard robustness check: does the combined estimate hinge on any single
+    engine? Returns one ``{dropped, pooled}`` per engine, where ``pooled`` is the
+    random-effects result on the *remaining* engines (``None`` if fewer than two
+    remain). With a clean-baseline engine and metric-saturated ones, this makes
+    the dependence explicit — dropping the clean engine should collapse the pool.
+    """
+    out = []
+    for i, s in enumerate(studies):
+        rest = studies[:i] + studies[i + 1:]
+        out.append({"dropped": s["label"], "pooled": random_effects(rest)})
+    return out
+
+
 def render_figure(studies: list[dict], pooled: dict | None,
                   out_path: str | Path = "docs/meta_analysis.png") -> Path:
     """Classic meta-analysis forest plot: per-engine effects + a pooled diamond.
@@ -316,6 +332,43 @@ def report(runs: dict[str, list[dict]], *, n_boot: int = 2000,
             "honest reading is a consistent *direction* with engine-dependent "
             "*magnitude*, not a single universal effect size.")
     lines += [" ".join(interp), ""]
+
+    # Leave-one-engine-out sensitivity: does the pool hinge on one engine?
+    loo = leave_one_out(studies)
+    if any(r["pooled"] for r in loo):
+        lines += [
+            "## Leave-one-engine-out sensitivity",
+            "",
+            "Re-pooling with each engine removed shows how much the combined "
+            "estimate depends on any single system.",
+            "",
+            "| Engine removed | Pooled δ (remaining) | 95% CI | I² |",
+            "| --- | --: | --- | --: |",
+        ]
+        for r in loo:
+            p = r["pooled"]
+            if p is None:
+                lines.append(f"| {r['dropped']} | _n/a (one engine left)_ | | |")
+            else:
+                lines.append(
+                    f"| {r['dropped']} | {p['pooled_delta']:+.3f} | "
+                    f"[{p['lo']:+.3f}, {p['hi']:+.3f}] | {p['I2']:.0f}% |")
+        lines.append("")
+        # Honest headline: find the drop that moves the pool furthest down.
+        drops = [r for r in loo if r["pooled"]]
+        if drops:
+            worst = min(drops, key=lambda r: r["pooled"]["pooled_delta"])
+            lines += [
+                f"The pool depends most on **{worst['dropped']}**: removing it "
+                f"leaves δ = {worst['pooled']['pooled_delta']:+.3f} "
+                f"(95% CI [{worst['pooled']['lo']:+.3f}, "
+                f"{worst['pooled']['hi']:+.3f}]). This is the quantitative form of "
+                "the caveat above — the combined effect leans on the clean-baseline "
+                "engine, and the saturated engines alone cannot carry it. The pool "
+                "summarises the engines; it does not replace reading the clean "
+                "baseline on its own.",
+                "",
+            ]
     return "\n".join(lines)
 
 
