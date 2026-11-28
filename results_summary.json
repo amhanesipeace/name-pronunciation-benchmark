@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "generated_from": "committed outputs*/scores.csv (no TTS/ASR stack)",
+  "bootstrap": {
+    "n_boot": 2000,
+    "seed": 0
+  },
+  "engines": {
+    "gTTS": {
+      "n_english": 20,
+      "n_african": 60,
+      "english_median_cer": 0.0,
+      "african_median_cer": 0.333,
+      "cliffs_delta": 0.8242,
+      "effect": "large",
+      "prob_superiority": 0.9121,
+      "mannwhitney_p": 9.168261217785227e-09,
+      "mean_gap_ci": {
+        "point": 0.363,
+        "lo": 0.2836,
+        "hi": 0.4514
+      },
+      "cliffs_delta_ci": {
+        "point": 0.8242,
+        "lo": 0.72,
+        "hi": 0.9208
+      },
+      "prob_superiority_ci": {
+        "point": 0.9121,
+        "lo": 0.86,
+        "hi": 0.9604
+      }
+    },
+    "eSpeak": {
+      "n_english": 20,
+      "n_african": 60,
+      "english_median_cer": 0.7225,
+      "african_median_cer": 0.857,
+      "cliffs_delta": 0.2817,
+      "effect": "small",
+      "prob_superiority": 0.6408,
+      "mannwhitney_p": 0.03016647931853965,
+      "mean_gap_ci": {
+        "point": 0.2599,
+        "lo": -0.0451,
+        "hi": 0.5183
+      },
+      "cliffs_delta_ci": {
+        "point": 0.2817,
+        "lo": -0.045,
+        "hi": 0.5634
+      },
+      "prob_superiority_ci": {
+        "point": 0.6408,
+        "lo": 0.4775,
+        "hi": 0.7817
+      }
+    },
+    "MMS": {
+      "n_english": 20,
+      "n_african": 60,
+      "english_median_cer": 0.775,
+      "african_median_cer": 0.857,
+      "cliffs_delta": 0.1175,
+      "effect": "negligible",
+      "prob_superiority": 0.5587,
+      "mannwhitney_p": 0.21776098212565836,
+      "mean_gap_ci": {
+        "point": 0.0371,
+        "lo": -0.2371,
+        "hi": 0.281
+      },
+      "cliffs_delta_ci": {
+        "point": 0.1175,
+        "lo": -0.2175,
+        "hi": 0.4358
+      },
+      "prob_superiority_ci": {
+        "point": 0.5587,
+        "lo": 0.3912,
+        "hi": 0.7179
+      }
+    }
+  },
+  "pooled_meta_analysis": {
+    "k_engines": 3,
+    "pooled_cliffs_delta": 0.4262,
+    "ci": {
+      "lo": -0.0678,
+      "hi": 0.9202
+    },
+    "effect": "medium",
+    "I2_percent": 91.9,
+    "Q": 24.768,
+    "tau2": 0.1726,
+    "p_heterogeneity": 4.184743280161383e-06
+  },
+  "recovery_rates": {
+    "english": {
+      "n": 20,
+      "recovered_rate": 1.0,
+      "recovered_ci": {
+        "lo": 0.8389,
+        "hi": 1.0
+      }
+    },
+    "african": {
+      "n": 60,
+      "recovered_rate": 0.2833,
+      "recovered_ci": {
+        "lo": 0.1851,
+        "hi": 0.4077
+      }
+    }
+  }
+}
