@@ -11,6 +11,7 @@ Why these choices:
 """
 from __future__ import annotations
 
+import math
 import random
 from collections import defaultdict
 from statistics import mean, median, stdev
@@ -47,6 +48,26 @@ def effect_label(delta: float) -> str:
     if d < 0.474:
         return "medium"
     return "large"
+
+
+def wilson_ci(successes: int, n: int, *, z: float = 1.96) -> dict:
+    """Wilson score confidence interval for a binomial proportion.
+
+    The recovery/exact-match rates are proportions, and the usual normal
+    approximation (p ± z·sqrt(p(1-p)/n)) behaves badly exactly where our data
+    sit — near 0 and 1 (e.g. English recovered 100%) and at small n. The Wilson
+    score interval stays inside [0, 1] and is reliable in those corners, so it is
+    the right CI for "X% of names were recovered". Returns ``{p, lo, hi, n}``.
+    """
+    if n <= 0:
+        return {"p": 0.0, "lo": 0.0, "hi": 0.0, "n": 0}
+    p = successes / n
+    z2 = z * z
+    denom = 1 + z2 / n
+    centre = (p + z2 / (2 * n)) / denom
+    half = (z * math.sqrt(p * (1 - p) / n + z2 / (4 * n * n))) / denom
+    return {"p": p, "lo": max(0.0, centre - half),
+            "hi": min(1.0, centre + half), "n": n}
 
 
 def probability_of_superiority(a: list[float], b: list[float]) -> float:

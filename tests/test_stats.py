@@ -4,7 +4,25 @@ import pytest
 from ttsbench.stats import (cliffs_delta, effect_label, cers_by_language,
                             english_vs_african, english_vs_african_permutation,
                             permutation_test, bootstrap_ci,
-                            probability_of_superiority)
+                            probability_of_superiority, wilson_ci)
+
+
+def test_wilson_ci_keeps_extremes_inside_unit_interval():
+    # 20/20 successes: the normal approx gives the degenerate [1, 1]; Wilson gives
+    # a lower bound strictly below 1 (and never exceeds 1).
+    r = wilson_ci(20, 20)
+    assert r["p"] == 1.0 and r["n"] == 20
+    assert 0.0 < r["lo"] < 1.0 and r["hi"] == 1.0
+    # 0/20: upper bound strictly above 0, lower bound pinned at 0.
+    r0 = wilson_ci(0, 20)
+    assert r0["p"] == 0.0 and r0["lo"] == 0.0 and 0.0 < r0["hi"] < 1.0
+
+
+def test_wilson_ci_brackets_the_point_and_handles_empty():
+    r = wilson_ci(14, 50)
+    assert r["lo"] < r["p"] < r["hi"]
+    assert 0.0 <= r["lo"] and r["hi"] <= 1.0
+    assert wilson_ci(0, 0) == {"p": 0.0, "lo": 0.0, "hi": 0.0, "n": 0}
 
 
 def test_bootstrap_ci_reports_a_reproducible_se():

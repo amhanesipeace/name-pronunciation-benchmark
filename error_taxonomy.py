@@ -28,6 +28,8 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from ttsbench.stats import wilson_ci
+
 import matplotlib
 matplotlib.use("Agg")            # headless: render straight to a file
 from matplotlib.figure import Figure
@@ -86,6 +88,7 @@ def summarise(rows: list[dict], lexicon: set[str]) -> dict:
         out[grp] = {
             "n": n, "counts": c,
             "recovered_rate": c["recovered"] / n if n else 0.0,
+            "recovered_ci": wilson_ci(c["recovered"], n),
             "english_sub_of_errors": c["english_sub"] / errors if errors else 0.0,
         }
     return out
@@ -167,10 +170,16 @@ def render_markdown(summary: dict, exs: dict) -> str:
         en_n, af_n = en.get("n", 0) or 1, af.get("n", 0) or 1
         lines.append(f"| {LABELS[cat]} | {ec} ({100*ec/en_n:.0f}%) "
                      f"| {ac} ({100*ac/af_n:.0f}%) |")
+    en_ci = en.get("recovered_ci", {})
+    af_ci = af.get("recovered_ci", {})
     lines += [
         "",
         f"- **English names are recovered {100*en.get('recovered_rate',0):.0f}% "
-        f"of the time; African names only {100*af.get('recovered_rate',0):.0f}%.**",
+        f"of the time (95% CI {100*en_ci.get('lo',0):.0f}–"
+        f"{100*en_ci.get('hi',0):.0f}%, n={en_ci.get('n',0)}); African names only "
+        f"{100*af.get('recovered_rate',0):.0f}% ({100*af_ci.get('lo',0):.0f}–"
+        f"{100*af_ci.get('hi',0):.0f}%, n={af_ci.get('n',0)}).** The intervals do "
+        "not overlap, so the recovery gap is not a small-sample fluke.",
         f"- Of the African names that were *not* recovered, at least "
         f"**{100*af.get('english_sub_of_errors',0):.0f}%** were replaced by "
         f"ordinary English words/phrases rather than a novel approximation.",

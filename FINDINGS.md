@@ -118,7 +118,9 @@ The failure mode is consistent: rather than attempt the name, the English voice
 ![How the recognizer renders each name: English 100% recovered; African 28%
 recovered, 22% replaced by English words, 50% garbled](docs/error_taxonomy.png)
 
-- **English names are recovered 100% of the time; African names only 28%.**
+- **English names are recovered 100% of the time (95% Wilson CI 84–100%, n=20);
+  African names only 28% (19–41%, n=60).** The intervals do not overlap, so the
+  recovery gap is not a small-sample fluke.
 - Of the African names that were *not* recovered, **at least 30%** were replaced
   by ordinary English words/phrases (*Adebayo* → "At a bail", *Folake* → "For
   Locker", *Olumide* → "All you might", *Segun* → "second") rather than a novel

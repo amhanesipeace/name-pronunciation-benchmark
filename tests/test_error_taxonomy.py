@@ -56,6 +56,20 @@ def test_summarise_rates():
     assert s["african"]["english_sub_of_errors"] == pytest.approx(0.5)
 
 
+def test_summarise_attaches_wilson_ci():
+    rows = [{"name": "A", "language": "english", "cer": "0.0", "exact_match": "1",
+             "transcription": "A"} for _ in range(5)]
+    rows += [{"name": "X", "language": "yoruba", "cer": "0.9", "exact_match": "0",
+              "transcription": "zzz"} for _ in range(5)]
+    s = summarise(rows, LEX)
+    en = s["english"]["recovered_ci"]
+    assert en["n"] == 5 and en["p"] == 1.0
+    # Wilson keeps a 5/5 interval strictly inside [0, 1] (not the degenerate 1–1).
+    assert 0.0 < en["lo"] < 1.0 and en["hi"] == 1.0
+    af = s["african"]["recovered_ci"]
+    assert af["p"] == 0.0 and af["lo"] == 0.0 and 0.0 < af["hi"] < 1.0
+
+
 def test_render_figure_writes_png(tmp_path):
     rows = [{"name": "A", "language": "english", "cer": "0.0", "exact_match": "1",
              "transcription": "A"},
