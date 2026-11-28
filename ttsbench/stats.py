@@ -168,6 +168,17 @@ def cliffs_delta_ci(african: list[float], english: list[float], **kw) -> dict:
     return bootstrap_ci(lambda a, e: cliffs_delta(a, e), (african, english), **kw)
 
 
+def prob_superiority_ci(african: list[float], english: list[float], **kw) -> dict:
+    """Bootstrap CI for the probability of superiority (African vs English).
+
+    The companion interval for :func:`probability_of_superiority`, so the
+    plain-language "worse X% of the time" headline carries its uncertainty like
+    the mean gap and Cliff's delta already do.
+    """
+    return bootstrap_ci(lambda a, e: probability_of_superiority(a, e),
+                        (african, english), **kw)
+
+
 def english_vs_african_ci(rows: list[dict], **kw) -> dict | None:
     """Mean-gap and Cliff's-delta bootstrap CIs for the pooled comparison.
 
@@ -184,6 +195,7 @@ def english_vs_african_ci(rows: list[dict], **kw) -> dict | None:
     return {
         "gap_ci": mean_gap_ci(afr, eng, **kw),
         "cliffs_delta_ci": cliffs_delta_ci(afr, eng, **kw),
+        "prob_superiority_ci": prob_superiority_ci(afr, eng, **kw),
     }
 
 

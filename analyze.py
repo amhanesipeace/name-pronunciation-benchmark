@@ -63,11 +63,14 @@ def main():
         ci = english_vs_african_ci(rows)
         if ci:
             g, d = ci["gap_ci"], ci["cliffs_delta_ci"]
+            ps = ci["prob_superiority_ci"]
             lines += [
                 f"Mean-CER gap={g['point']:+.3f}  "
                 f"95% CI [{g['lo']:+.3f}, {g['hi']:+.3f}] "
                 f"(bootstrap, {g['n_boot']} resamples)",
                 f"Cliff's delta 95% CI [{d['lo']:+.3f}, {d['hi']:+.3f}]",
+                f"Probability of superiority 95% CI "
+                f"[{ps['lo']:.3f}, {ps['hi']:.3f}]",
             ]
         perm = english_vs_african_permutation(rows)
         if perm and perm["n_perm"]:

@@ -1,6 +1,8 @@
 """Tests for the bootstrap confidence intervals in ttsbench.stats."""
 from statistics import mean
 
+import pytest
+
 from ttsbench.stats import (_percentile, bootstrap_ci, cliffs_delta_ci,
                             english_vs_african_ci, mean_gap_ci,
                             per_language_vs_english)
@@ -72,6 +74,11 @@ def test_english_vs_african_ci_from_rows():
     assert ci is not None
     assert ci["gap_ci"]["lo"] > 0.0
     assert "cliffs_delta_ci" in ci
+    # The probability-of-superiority CI is present and sits inside [0, 1];
+    # with every African CER above every English one it is pinned near 1.
+    ps = ci["prob_superiority_ci"]
+    assert 0.0 <= ps["lo"] <= ps["hi"] <= 1.0
+    assert ps["point"] == pytest.approx(1.0)
 
 
 def test_english_vs_african_ci_needs_both_groups():

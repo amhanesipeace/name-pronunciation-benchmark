@@ -11,7 +11,7 @@ scored by Whisper back-transcription. Preliminary — one ASR scorer, small n.*
    (0.37) — a gap that is **statistically significant and large**
    (Mann-Whitney p ≈ 9×10⁻⁹, Cliff's δ = +0.82). Put plainly, a gTTS English
    name is pronounced better than a given African name **91% of the time**
-   (probability of superiority 0.91).
+   (probability of superiority 0.91, 95% bootstrap CI [0.86, 0.96]).
 2. **"Newer/neural" does not mean "fairer" — and naive benchmarking hides that.**
    Meta's neural MMS model scored *badly on everything*, including English
    (0.87), so its gap looks tiny (+0.04, not significant). That is a **metric
